@@ -17,7 +17,8 @@ ROBOT_LIBRARY_DOC_FORMAT = 'reST'
 
 class MyFirstDjangoLibrary:
 
-    django_process_pid = None
+    django_pid = None
+    selenium_pid = None
 
     # TEST CASE => New instance is created for every test case.
     # TEST SUITE => New instance is created for every test suite.
@@ -36,15 +37,34 @@ class MyFirstDjangoLibrary:
             '--noreload',
         ]
         self.app = subprocess.Popen(args)
-        self.django_process_pid = self.app.pid
+        self.django_pid = self.app.pid
         logger.info(
             "Django started (PID: %s)" % self.app.pid,
             also_console=True
         )
 
     def stop_django(self):
-        os.kill(self.django_process_pid, signal.SIGKILL)
+        os.kill(self.django_pid, signal.SIGKILL)
         logger.info(
-            "Django stopped (PID: %s)" % self.django_process_pid,
+            "Django stopped (PID: %s)" % self.django_pid,
+            also_console=True
+        )
+
+    def start_selenium(self):
+        args = [
+            'java',
+            '-jar',
+            '.env/lib/python2.7/site-packages/SeleniumLibrary/lib/selenium-server.jar',
+        ]
+        self.selenium_pid = subprocess.Popen(args).pid
+        logger.info(
+            "Selenium started (PID: %s)" % self.selenium_pid,
+            also_console=True
+        )
+
+    def stop_selenium(self):
+        os.kill(self.selenium_pid, signal.SIGKILL)
+        logger.info(
+            "Selenium stopped (PID: %s)" % self.selenium_pid,
             also_console=True
         )
