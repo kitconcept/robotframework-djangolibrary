@@ -1,6 +1,6 @@
 *** Variables ***
 
-${SERVER}               http://localhost:8000/
+${SERVER}               http://localhost:55001/
 ${BROWSER}              firefox
 
 
@@ -8,7 +8,7 @@ ${BROWSER}              firefox
 
 Documentation   Django Robot Tests
 Library         Selenium2Library  timeout=10  implicit_wait=0.5
-Library         MyFirstDjangoLibrary
+Library         MyFirstDjangoLibrary  127.0.0.1  55001
 Suite Setup     Start Django and Open Browser
 Suite Teardown  Stop Django and Close Browser
 

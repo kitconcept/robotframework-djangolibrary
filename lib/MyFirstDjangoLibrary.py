@@ -1,9 +1,4 @@
-"""A library for *documentation format* demonstration purposes.
-
-This documentation is created using reStructuredText__. Here is a link
-to the only \\`Keyword\\`.
-
-__ http://docutils.sourceforge.net
+"""A library for testing Django with Robot Framework.
 """
 
 from robot.api import logger
@@ -27,12 +22,15 @@ class MyFirstDjangoLibrary:
 
     def __init__(self, host="127.0.0.1", port=8000):
         logger.info("INIT", also_console=True)
+        self.host = host
+        self.port = port
 
     def start_django(self):
         args = [
             'python',
             'mysite/manage.py',
             'runserver',
+            '%s:%s' % (self.host, self.port),
             '--nothreading',
             '--noreload',
         ]
@@ -40,14 +38,12 @@ class MyFirstDjangoLibrary:
         self.django_pid = self.app.pid
         logger.info(
             "Django started (PID: %s)" % self.app.pid,
-            also_console=True
         )
 
     def stop_django(self):
         os.kill(self.django_pid, signal.SIGKILL)
         logger.info(
             "Django stopped (PID: %s)" % self.django_pid,
-            also_console=True
         )
 
     def start_selenium(self):
@@ -59,12 +55,10 @@ class MyFirstDjangoLibrary:
         self.selenium_pid = subprocess.Popen(args).pid
         logger.info(
             "Selenium started (PID: %s)" % self.selenium_pid,
-            also_console=True
         )
 
     def stop_selenium(self):
         os.kill(self.selenium_pid, signal.SIGKILL)
         logger.info(
             "Selenium stopped (PID: %s)" % self.selenium_pid,
-            also_console=True
         )
