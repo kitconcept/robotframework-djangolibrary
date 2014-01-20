@@ -10,7 +10,7 @@ import subprocess
 ROBOT_LIBRARY_DOC_FORMAT = 'reST'
 
 
-class MyFirstDjangoLibrary:
+class DjangoLibrary:
 
     django_pid = None
     selenium_pid = None
