@@ -1,6 +1,3 @@
-"""A library for testing Django with Robot Framework.
-"""
-
 from robot.api import logger
 
 import os
@@ -11,6 +8,8 @@ ROBOT_LIBRARY_DOC_FORMAT = 'reST'
 
 
 class DjangoLibrary:
+    """A library for testing Django with Robot Framework.
+    """
 
     django_pid = None
     selenium_pid = None
@@ -42,21 +41,4 @@ class DjangoLibrary:
         os.kill(self.django_pid, signal.SIGKILL)
         logger.console(
             "Django stopped (PID: %s)" % self.django_pid,
-        )
-
-    def start_selenium(self):
-        args = [
-            'java',
-            '-jar',
-            '.env/lib/python2.7/site-packages/SeleniumLibrary/lib/selenium-server.jar',
-        ]
-        self.selenium_pid = subprocess.Popen(args).pid
-        logger.console(
-            "Selenium started (PID: %s)" % self.selenium_pid,
-        )
-
-    def stop_selenium(self):
-        os.kill(self.selenium_pid, signal.SIGKILL)
-        logger.console(
-            "Selenium stopped (PID: %s)" % self.selenium_pid,
         )

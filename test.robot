@@ -16,13 +16,11 @@ Suite Teardown  Stop Django and Close Browser
 *** Keywords ***
 
 Start Django and open Browser
-  Start Selenium
   Start Django
   Open Browser  ${SERVER}  ${BROWSER}
 
 Stop Django and close browser
   Close Browser
-  Stop Selenium
   Stop Django
 
 
