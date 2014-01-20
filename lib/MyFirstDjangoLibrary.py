@@ -21,7 +21,6 @@ class MyFirstDjangoLibrary:
     ROBOT_LIBRARY_SCOPE = 'TEST SUITE'
 
     def __init__(self, host="127.0.0.1", port=8000):
-        logger.info("INIT", also_console=True)
         self.host = host
         self.port = port
 
@@ -34,15 +33,14 @@ class MyFirstDjangoLibrary:
             '--nothreading',
             '--noreload',
         ]
-        self.app = subprocess.Popen(args)
-        self.django_pid = self.app.pid
-        logger.info(
-            "Django started (PID: %s)" % self.app.pid,
+        self.django_pid = subprocess.Popen(args).pid
+        logger.console(
+            "Django started (PID: %s)" % self.django_pid,
         )
 
     def stop_django(self):
         os.kill(self.django_pid, signal.SIGKILL)
-        logger.info(
+        logger.console(
             "Django stopped (PID: %s)" % self.django_pid,
         )
 
@@ -53,12 +51,12 @@ class MyFirstDjangoLibrary:
             '.env/lib/python2.7/site-packages/SeleniumLibrary/lib/selenium-server.jar',
         ]
         self.selenium_pid = subprocess.Popen(args).pid
-        logger.info(
+        logger.console(
             "Selenium started (PID: %s)" % self.selenium_pid,
         )
 
     def stop_selenium(self):
         os.kill(self.selenium_pid, signal.SIGKILL)
-        logger.info(
+        logger.console(
             "Selenium stopped (PID: %s)" % self.selenium_pid,
         )
