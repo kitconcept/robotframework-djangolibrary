@@ -1,6 +1,6 @@
 *** Variables ***
 
-${SERVER}               http://localhost:55001/
+${SERVER}               http://localhost:55001
 ${BROWSER}              firefox
 
 
@@ -23,6 +23,10 @@ Stop Django and close browser
   Close Browser
   Stop Django
 
+Pause
+  Import library  Dialogs
+  Pause execution
+
 
 *** Test Cases ***
 
@@ -31,3 +35,10 @@ Scenario: As a visitor I can visit the django default page
   Wait until page contains element  id=explanation
   Page Should Contain  It worked!
   Page Should Contain  Congratulations on your first Django-powered page.
+
+Scenario: As a visitor I can visit the django admin login page
+  Go To  ${SERVER}/admin
+  Wait until page contains  Django administration
+  Page Should Contain  Django administration
+  Page Should Contain Element  name=username
+  Page Should Contain Element  name=password
