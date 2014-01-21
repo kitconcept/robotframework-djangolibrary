@@ -71,12 +71,6 @@ Start Django
   $ python manage.py runserver
 
 
-Start Selenium Server
----------------------
-
-  $ java -jar .env/lib/python2.7/site-packages/SeleniumLibrary/lib/selenium-server.jar
-
-
 Run Robot Tests
 ---------------
 
