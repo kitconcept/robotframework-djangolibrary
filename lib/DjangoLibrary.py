@@ -1,3 +1,6 @@
+# -*- coding: utf-8 -*-
+__version__ = '0.1'
+
 from robot.api import logger
 
 import os
@@ -24,6 +27,7 @@ class DjangoLibrary:
         self.port = port
 
     def start_django(self):
+        """Start the Django server."""
         args = [
             'python',
             'mysite/manage.py',
@@ -38,6 +42,7 @@ class DjangoLibrary:
         )
 
     def stop_django(self):
+        """Stop Django server."""
         os.kill(self.django_pid, signal.SIGKILL)
         logger.console(
             "Django stopped (PID: %s)" % self.django_pid,
