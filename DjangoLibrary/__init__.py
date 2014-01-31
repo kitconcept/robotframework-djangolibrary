@@ -58,11 +58,14 @@ class DjangoLibrary:
             password='admin'
         )
         user.save()
+        logger.console("-" * 79)
         logger.console("Create User: %s" % username)
 
     def start_django(self):
         """Start the Django server."""
         self.clear_db()
+        logger.console("-" * 79)
+        logger.console("Start Django")
         args = [
             'python',
             'mysite/manage.py',
@@ -80,6 +83,7 @@ class DjangoLibrary:
     def stop_django(self):
         """Stop Django server."""
         os.kill(self.django_pid, signal.SIGKILL)
+        logger.console("-" * 79)
         logger.console(
             "Django stopped (PID: %s)" % self.django_pid,
         )
