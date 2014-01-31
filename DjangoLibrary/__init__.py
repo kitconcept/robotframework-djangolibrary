@@ -39,16 +39,16 @@ class DjangoLibrary:
             'rm',
             'mysite/db.sqlite3',
         ]
-        subprocess.Popen(args)
+        subprocess.call(args)
         args = [
             'python',
-           'mysite/manage.py',
+            'mysite/manage.py',
             'syncdb',
             '--noinput',
         ]
-        subprocess.Popen(args)
+        subprocess.call(args)
 
-    def create_user(self, username, email, password):
+    def create_superuser(self, username, email, password):
         sys.path.append(os.path.dirname(os.path.realpath('mysite/mysite')))
         os.environ.setdefault("DJANGO_SETTINGS_MODULE", "mysite.settings")
         from django.contrib.auth.models import User
@@ -58,7 +58,7 @@ class DjangoLibrary:
             password='admin'
         )
         user.save()
-        logger.console("Create User")
+        logger.console("Create User: %s" % username)
 
     def start_django(self):
         """Start the Django server."""
@@ -75,10 +75,7 @@ class DjangoLibrary:
         logger.console(
             "Django started (PID: %s)" % self.django_pid,
         )
-        # XXX: This is ugly as hell and needs to be refactored!!!
-        from time import sleep
-        sleep(10)
-        self.create_user("admin", "admin@admin.com", "admin")
+        self.create_superuser("admin", "admin@admin.com", "admin")
 
     def stop_django(self):
         """Stop Django server."""
