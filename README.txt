@@ -92,6 +92,13 @@ Output::
   Report:  /home/timo/workspace/prounix/robot-testing/report.html
 
 
+
+Generate Documentation
+----------------------
+
+python -m robot.libdoc tests/robot-lib/DjangoLibrary.py DjangoLibrary.html
+
+
 Further Reading
 ---------------
 
