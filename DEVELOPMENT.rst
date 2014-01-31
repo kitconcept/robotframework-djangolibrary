@@ -2,6 +2,25 @@
 Development Documentation
 ==============================================================================
 
+Set up development environment
+------------------------------
+
+  $ virtualenv .env
+  $ source .env/bin/activate
+  $ python setup.py develop
+
+MySite::
+
+  $ pip install Django
+  $ python mysite/manage.py syncdb
+  $ python mysite/manage.py runserver
+
+DjangoLibrary::
+
+  $ python setup.py develop
+  $ pybot DjangoLibrary/tests/autologin.robot
+
+
 Generate Documentation
 ----------------------
 
@@ -12,3 +31,5 @@ Further Reading
 ---------------
 
 http://robotframework.googlecode.com/hg/doc/userguide/RobotFrameworkUserGuide.html?r=2.8.3#creating-test-libraries
+
+https://docs.djangoproject.com/en/dev/howto/auth-remote-user/
