@@ -48,14 +48,28 @@ class DjangoLibrary:
         ]
         subprocess.call(args)
 
+    def create_user(self, username, email, password):
+        # XXX: Untested!
+        sys.path.append(os.path.dirname(os.path.realpath('mysite/mysite')))
+        os.environ.setdefault("DJANGO_SETTINGS_MODULE", "mysite.settings")
+        from django.contrib.auth.models import User
+        user = User.objects.create_user(
+            username,
+            email=email,
+            password=password,
+        )
+        user.save()
+        logger.console("-" * 79)
+        logger.console("Create User: %s" % username)
+
     def create_superuser(self, username, email, password):
         sys.path.append(os.path.dirname(os.path.realpath('mysite/mysite')))
         os.environ.setdefault("DJANGO_SETTINGS_MODULE", "mysite.settings")
         from django.contrib.auth.models import User
         user = User.objects.create_superuser(
-            'admin',
-            email='admin@admin.com',
-            password='admin'
+            username,
+            email=email,
+            password=password,
         )
         user.save()
         logger.console("-" * 79)
@@ -78,7 +92,6 @@ class DjangoLibrary:
         logger.console(
             "Django started (PID: %s)" % self.django_pid,
         )
-        self.create_superuser("admin", "admin@admin.com", "admin")
 
     def stop_django(self):
         """Stop Django server."""

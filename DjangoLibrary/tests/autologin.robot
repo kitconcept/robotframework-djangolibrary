@@ -30,11 +30,12 @@ Pause
 
 *** Test Cases ***
 
-Scenario: As a administrator I can log myself in
+Scenario: Create superuser
+  Create Superuser  admin  admin@admin.com  password
   Go To  ${SERVER}/admin
   Wait until page contains  Django administration
   Input text  username  admin
-  Input text  password  admin
+  Input text  password  password
   Click Button  Log in
   Wait until page contains  Django administration
   Page should contain  Django administration
