@@ -5,7 +5,8 @@ python:
 env:
   - DJANGO_VERSION=1.6.1
 install:
+  - pip install -q Django==$DJANGO_VERSION
   - pip install -r requirements.txt
-  - python setup.py develop
+  - python setup.py -q install
 script:
   - pybot test.robot
