@@ -2,6 +2,7 @@
 .env/
 log.html
 mysite/db.sqlite3
+*.egg-info
 output.xml
 report.html
 selenium-screenshot*
