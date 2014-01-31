@@ -48,8 +48,7 @@ class DjangoLibrary:
         ]
         subprocess.call(args)
 
-    def create_user(self, username, email, password):
-        # XXX: Untested!
+    def create_user(self, username, email, password, **kwargs):
         sys.path.append(os.path.dirname(os.path.realpath('mysite/mysite')))
         os.environ.setdefault("DJANGO_SETTINGS_MODULE", "mysite.settings")
         from django.contrib.auth.models import User
@@ -58,6 +57,8 @@ class DjangoLibrary:
             email=email,
             password=password,
         )
+        user.is_superuser = kwargs.get('is_superuser', False)
+        user.is_staff = kwargs.get('is_staff', False)
         user.save()
         logger.console("-" * 79)
         logger.console("Create User: %s" % username)

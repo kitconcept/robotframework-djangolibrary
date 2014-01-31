@@ -27,6 +27,10 @@ Pause
   Import library  Dialogs
   Pause execution
 
+Logout
+  Go To  ${SERVER}/admin/logout
+  Wait until page contains  Logged out
+
 
 *** Test Cases ***
 
@@ -35,6 +39,18 @@ Scenario: Create superuser
   Go To  ${SERVER}/admin
   Wait until page contains  Django administration
   Input text  username  admin
+  Input text  password  password
+  Click Button  Log in
+  Wait until page contains  Django administration
+  Page should contain  Django administration
+  Page should not contain  Please enter the correct username and password
+  Logout
+
+Scenario: Create user
+  Create User  test-user-1  test@test.com  password  is_superuser=True  is_staff=True
+  Go To  ${SERVER}/admin
+  Wait until page contains  Django administration
+  Input text  username  test-user-1
   Input text  password  password
   Click Button  Log in
   Wait until page contains  Django administration
