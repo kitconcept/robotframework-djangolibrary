@@ -20,7 +20,9 @@ setup(
     author_email='tisto@plone.org',
     url='http://timostollenwerk.net',
     license='',
-    packages=find_packages(exclude=['ez_setup', 'examples', 'tests']),
+    packages=find_packages(
+        exclude=['ez_setup', 'examples', 'tests']
+    ),
     include_package_data=True,
     zip_safe=False,
     install_requires=[

@@ -5,31 +5,10 @@ A robot framework library for Django.
 .. image:: https://travis-ci.org/tisto/robotframework-djangolibrary.png?branch=master   :target: https://travis-ci.org/tisto/robotframework-djangolibrary
 
 
-Basic Setup
------------
+Installation
+------------
 
-  $ mkdir robotframework-djangolibrary
-  $ cd robotframework-djangolibrary
-  $ virtualenv .env
-  $ source .env/bin/activate
-
-
-Robot Framework Installation
-----------------------------
-
-requirements.txt::
-
-  robotframework
-  robotframework-selenium2library
-
-pip install -r requirements.txt
-
-
-Django Installation
--------------------
-
-  $ pip install django
-  $ django-admin.py startproject mysite
+  $ pip install robotframework-djangolibrary
 
 
 First Robot Test
@@ -67,17 +46,11 @@ test.robot::
     Page Should Contain  Congratulations on your first Django-powered page.
 
 
-Start Django
-------------
-
-  $ cd mysite
-  $ python manage.py runserver
-
-
-Run Robot Tests
----------------
+Run Tests
+---------
 
   $ pybot test.robot
+
 
 Output::
 
@@ -93,16 +66,3 @@ Output::
   Output:  /home/timo/workspace/prounix/robotframework-djangolibrary/output.xml
   Log:     /home/timo/workspace/prounix/robotframework-djangolibrary/log.html
   Report:  /home/timo/workspace/prounix/robotframework-djangolibrary/report.html
-
-
-
-Generate Documentation
-----------------------
-
-python -m robot.libdoc tests/robot-lib/DjangoLibrary.py DjangoLibrary.html
-
-
-Further Reading
----------------
-
-http://robotframework.googlecode.com/hg/doc/userguide/RobotFrameworkUserGuide.html?r=2.8.3#creating-test-libraries
