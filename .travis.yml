@@ -12,3 +12,4 @@ before_script:
   - "sh -e /etc/init.d/xvfb start"
 script:
   - pybot test.robot
+  - flake8 .
