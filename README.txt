@@ -5,8 +5,8 @@ How To Test a Django App with Robot Framework
 Basic Setup
 -----------
 
-  $ mkdir robot-testing
-  $ cd robot-testing
+  $ mkdir robotframework-djangolibrary
+  $ cd robotframework-djangolibrary
   $ virtualenv .env
   $ source .env/bin/activate
 
@@ -87,9 +87,9 @@ Output::
   1 critical test, 1 passed, 0 failed
   1 test total, 1 passed, 0 failed
   ==============================================================================
-  Output:  /home/timo/workspace/prounix/robot-testing/output.xml
-  Log:     /home/timo/workspace/prounix/robot-testing/log.html
-  Report:  /home/timo/workspace/prounix/robot-testing/report.html
+  Output:  /home/timo/workspace/prounix/robotframework-djangolibrary/output.xml
+  Log:     /home/timo/workspace/prounix/robotframework-djangolibrary/log.html
+  Report:  /home/timo/workspace/prounix/robotframework-djangolibrary/report.html
 
 
 
