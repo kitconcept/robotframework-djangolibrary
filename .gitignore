@@ -1,7 +1,7 @@
 *.pyc
 .env/
 log.html
-mysite/
+mysite/db.sqlite3
 output.xml
 report.html
 selenium-screenshot*
