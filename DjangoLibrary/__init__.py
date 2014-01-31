@@ -47,3 +47,4 @@ class DjangoLibrary:
         logger.console(
             "Django stopped (PID: %s)" % self.django_pid,
         )
+#

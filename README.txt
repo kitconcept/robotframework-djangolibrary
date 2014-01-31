@@ -1,6 +1,9 @@
 ==============================================================================
-How To Test a Django App with Robot Framework
+A robot framework library for Django.
 ==============================================================================
+
+.. image:: https://travis-ci.org/tisto/robotframework-djangolibrary.png?branch=master   :target: https://travis-ci.org/tisto/robotframework-djangolibrary
+
 
 Basic Setup
 -----------
