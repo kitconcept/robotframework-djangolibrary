@@ -4,7 +4,6 @@ python:
   - "3.2"
 env:
   - DJANGO_VERSION=1.6.1
-  - DJANGO_VERSION=1.7a1
 install:
   - pip install -q Django==$DJANGO_VERSION
   - python setup.py -q install
