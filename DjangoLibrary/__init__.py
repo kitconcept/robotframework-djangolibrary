@@ -60,8 +60,6 @@ class DjangoLibrary:
         user.is_superuser = kwargs.get('is_superuser', False)
         user.is_staff = kwargs.get('is_staff', False)
         user.save()
-        logger.console("-" * 79)
-        logger.console("Create User: %s" % username)
 
     def create_superuser(self, username, email, password):
         sys.path.append(os.path.dirname(os.path.realpath('mysite/mysite')))
@@ -73,14 +71,11 @@ class DjangoLibrary:
             password=password,
         )
         user.save()
-        logger.console("-" * 79)
-        logger.console("Create User: %s" % username)
 
     def start_django(self):
         """Start the Django server."""
         self.clear_db()
-        logger.console("-" * 79)
-        logger.console("Start Django")
+        logger.console("-" * 78)
         args = [
             'python',
             'mysite/manage.py',
@@ -89,15 +84,20 @@ class DjangoLibrary:
             '--nothreading',
             '--noreload',
         ]
-        self.django_pid = subprocess.Popen(args).pid
+        self.django_pid = subprocess.Popen(
+            args,
+            stdout=subprocess.PIPE,
+            stderr=subprocess.PIPE
+        ).pid
         logger.console(
             "Django started (PID: %s)" % self.django_pid,
         )
+        logger.console("-" * 78)
 
     def stop_django(self):
         """Stop Django server."""
         os.kill(self.django_pid, signal.SIGKILL)
-        logger.console("-" * 79)
         logger.console(
             "Django stopped (PID: %s)" % self.django_pid,
         )
+        logger.console("-" * 78)
