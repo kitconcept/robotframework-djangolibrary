@@ -66,9 +66,11 @@ Scenario: Create user
   Wait until page contains  Django administration
   Page should contain  Django administration
   Page should not contain  Please enter the correct username and password
+  Logout
 
 Scenario: Autologin
   [Tags]  current
+  Create User  test-user-2  test@test.com  password  is_superuser=True  is_staff=True
   Autologin as  admin
   Go To  ${SERVER}/admin
   Page should contain  Site administration
