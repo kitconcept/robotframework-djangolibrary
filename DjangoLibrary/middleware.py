@@ -1,4 +1,5 @@
 from django.contrib.auth import login
+from django.contrib.auth import logout
 from django.contrib.auth import authenticate
 from django.contrib.auth.middleware import AuthenticationMiddleware
 
@@ -7,6 +8,9 @@ class AutologinAuthenticationMiddleware(AuthenticationMiddleware):
 
     def process_request(self, request):
         if not 'autologin' in request.COOKIES:
+            return
+        if request.COOKIES['autologin'] == '':
+            logout(request)
             return
         username = request.COOKIES['autologin'].split(':')[0]
         password = request.COOKIES['autologin'].split(':')[1]

@@ -44,8 +44,18 @@ Autologin as
   # XXX: The 'Add Cookie' keywords does not work with Firefox, therefore we
   # have to add the cookie with js here. A bug has been filed:
   # https://github.com/rtomac/robotframework-selenium2library/issues/273
-  Execute Javascript  document.cookie = 'autologin=${username}:${password}';
+  Execute Javascript  document.cookie = 'autologin=${username}:${password};path=/;domain=localhost;';
 
+Autologin Logout
+  Execute Javascript  document.cookie = 'autologin=;path=/;domain=localhost;';
+
+User is logged in
+  Go To  ${SERVER}/admin
+  Page should contain  Site administration  message=User is not logged in
+
+User is logged out
+  Go To  ${SERVER}/admin
+  Page should not contain  Site administration  message=User is not logged out
 
 
 *** Test Cases ***
@@ -77,5 +87,11 @@ Scenario: Create user
 Scenario: Autologin
   Create User  test-user-2  test@test.com  password  is_superuser=True  is_staff=True
   Autologin as  test-user-2  password
-  Go To  ${SERVER}/admin
-  Page should contain  Site administration
+  User is logged in
+
+Scenario: Autologin Logout
+  Create User  test-user-3  test@test.com  password  is_superuser=True  is_staff=True
+  Autologin as  test-user-3  password
+  User is logged in
+  Autologin Logout
+  User is logged out
