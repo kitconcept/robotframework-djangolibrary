@@ -75,7 +75,6 @@ Scenario: Create user
   Logout
 
 Scenario: Autologin
-  [Tags]  current
   Create User  test-user-2  test@test.com  password  is_superuser=True  is_staff=True
   Autologin as  test-user-2  password
   Go To  ${SERVER}/admin
