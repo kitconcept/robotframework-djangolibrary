@@ -40,6 +40,11 @@ Autologin as
   Should Be Equal  ${autologin_cookie}  ${username}
   ${cookies} =  Get Cookies
   Should Not Be Empty  ${cookies}
+  # XXX: The 'Add Cookie' keywords does not work with Firefox, therefore we
+  # have to add the cookie with js here. A bug has been filed:
+  # https://github.com/rtomac/robotframework-selenium2library/issues/273
+  Execute Javascript  document.cookie = 'autologin=${username}';
+
 
 
 *** Test Cases ***
@@ -71,6 +76,6 @@ Scenario: Create user
 Scenario: Autologin
   [Tags]  current
   Create User  test-user-2  test@test.com  password  is_superuser=True  is_staff=True
-  Autologin as  admin
+  Autologin as  test-user-2
   Go To  ${SERVER}/admin
   Page should contain  Site administration

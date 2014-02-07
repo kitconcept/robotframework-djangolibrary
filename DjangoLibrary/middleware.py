@@ -6,7 +6,9 @@ from django.contrib.auth.middleware import AuthenticationMiddleware
 class AutologinAuthenticationMiddleware(AuthenticationMiddleware):
 
     def process_request(self, request):
-        username = 'test-user-2'
+        if not 'autologin' in request.COOKIES:
+            return
+        username = request.COOKIES['autologin']
         password = 'password'
         user = authenticate(username=username, password=password)
         if user is not None:
