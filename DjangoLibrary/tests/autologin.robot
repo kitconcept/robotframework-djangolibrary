@@ -31,6 +31,16 @@ Logout
   Go To  ${SERVER}/admin/logout
   Wait until page contains  Logged out
 
+Autologin as
+  [Arguments]  ${username}
+  [Documentation]  Auto login
+  Go To  ${SERVER}
+  Add Cookie  autologin  ${username}
+  ${autologin_cookie} =  Get Cookie Value  autologin
+  Should Be Equal  ${autologin_cookie}  ${username}
+  ${cookies} =  Get Cookies
+  Should Not Be Empty  ${cookies}
+
 
 *** Test Cases ***
 
@@ -56,3 +66,9 @@ Scenario: Create user
   Wait until page contains  Django administration
   Page should contain  Django administration
   Page should not contain  Please enter the correct username and password
+
+Scenario: Autologin
+  [Tags]  current
+  Autologin as  admin
+  Go To  ${SERVER}/admin
+  Page should contain  Site administration
