@@ -13,7 +13,17 @@ ROBOT_LIBRARY_DOC_FORMAT = 'reST'
 
 
 class DjangoLibrary:
-    """A library for testing Django with Robot Framework.
+    """DjangoLibrary is a web testing library to test Django with Robot
+    Framework.
+
+    It uses Selenium2Library to run tests against a real browser instance.
+
+    *Before running tests*
+
+    Prior to running test cases using DjangoLibrary, DjangoLibrary must be
+    imported (together with Selenium2Library) into your Robot test suite
+    (see `importing` section), and the Selenium2Library 'Open Browser' keyword
+    must be used to open a browser to the desired location.
     """
 
     django_pid = None
@@ -24,10 +34,25 @@ class DjangoLibrary:
     ROBOT_LIBRARY_SCOPE = 'TEST SUITE'
 
     def __init__(self, host="127.0.0.1", port=8000):
+        """Django2Library can be imported with optional arguments.
+
+        `host` is the hostname of your Django instance. Default value is
+        '127.0.0.1'.
+
+        `port` is the port number of your Django instance. Default value is
+        8000.
+
+        Examples:
+        | Library | Selenium2Library | timeout=15        | implicit_wait=0.5  | # Sets default timeout to 15 seconds and the default implicit_wait to 0.5 seconds. |
+        | Library | DjangoLibrary    | 127.0.0.1         | 55001              | # Sets default hostname to 127.0.0.1 and the default port to 55001.                |
+        """
         self.host = host
         self.port = port
 
     def clear_db(self):
+        """Clear the Django default database by running
+        'python manage.py syncdb'.
+        """
         # XXX: Flush seems to be not working
         #args = [
         #    'python',
@@ -49,6 +74,7 @@ class DjangoLibrary:
         subprocess.call(args)
 
     def create_user(self, username, email, password, **kwargs):
+        """Create a regular Django user in the default auth model."""
         sys.path.append(os.path.dirname(os.path.realpath('mysite/mysite')))
         os.environ.setdefault("DJANGO_SETTINGS_MODULE", "mysite.settings")
         from django.contrib.auth.models import User
@@ -62,6 +88,7 @@ class DjangoLibrary:
         user.save()
 
     def create_superuser(self, username, email, password):
+        """Create a Django superuser in the default auth model."""
         sys.path.append(os.path.dirname(os.path.realpath('mysite/mysite')))
         os.environ.setdefault("DJANGO_SETTINGS_MODULE", "mysite.settings")
         from django.contrib.auth.models import User
@@ -95,7 +122,7 @@ class DjangoLibrary:
         logger.console("-" * 78)
 
     def stop_django(self):
-        """Stop Django server."""
+        """Stop the Django server."""
         os.kill(self.django_pid, signal.SIGKILL)
         logger.console(
             "Django stopped (PID: %s)" % self.django_pid,
@@ -103,7 +130,29 @@ class DjangoLibrary:
         logger.console("-" * 78)
 
     def autologin_as(self, username, password):
-        """Autologin as user."""
+        """Autologin as Django user.
+
+        DjangoLibrary comes with a Django middleware component that allows the
+        autologin_as keyword to set an 'autologin' cookie that the
+        middleware uses to authenticate and login the user in Django.
+
+        If you want to use the autlogin_as keyword you have to add
+        'DjangoLibrary.middleware.AutologinAuthenticationMiddleware' to the
+        MIDDLEWARE_CLASSES right after the default AuthenticationMiddleware
+        in your settings.py::
+
+            MIDDLEWARE_CLASSES = (
+                ...
+                'django.contrib.auth.middleware.AuthenticationMiddleware',
+                'DjangoLibrary.middleware.AutologinAuthenticationMiddleware',
+            )
+
+        *Warning*
+
+        Make sure that you add this middleware only to your test setup and
+        NEVER to your deployment!
+
+        """
         selenium2lib = BuiltIn().get_library_instance('Selenium2Library')
         selenium2lib.add_cookie(
             "autologin",
@@ -124,7 +173,8 @@ class DjangoLibrary:
         assert cookies == u"autologin=%s:%s" % (username, password)
 
     def autologin_logout(self):
-        """Logout the user by removing the autologin cookie."""
+        """Logout a user that has been logged in by the autologin_as keyword.
+        """
         selenium2lib = BuiltIn().get_library_instance('Selenium2Library')
         selenium2lib.execute_javascript(
             "document.cookie = 'autologin=;path=/;domain=localhost;';")
