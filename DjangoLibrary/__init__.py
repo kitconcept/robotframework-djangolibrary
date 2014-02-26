@@ -43,8 +43,8 @@ class DjangoLibrary:
         8000.
 
         Examples:
-        | Library | Selenium2Library | timeout=15        | implicit_wait=0.5  | # Sets default timeout to 15 seconds and the default implicit_wait to 0.5 seconds. |
-        | Library | DjangoLibrary    | 127.0.0.1         | 55001              | # Sets default hostname to 127.0.0.1 and the default port to 55001.                |
+        | Library | Selenium2Library | timeout=15        | implicit_wait=0.5  | # Sets default timeout to 15 seconds and the default implicit_wait to 0.5 seconds. |  # noqa
+        | Library | DjangoLibrary    | 127.0.0.1         | 55001              | # Sets default hostname to 127.0.0.1 and the default port to 55001.                |  # noqa
         """
         self.host = host
         self.port = port
