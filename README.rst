@@ -5,10 +5,33 @@ A robot framework library for Django.
 .. image:: https://travis-ci.org/tisto/robotframework-djangolibrary.png?branch=master   :target: https://travis-ci.org/tisto/robotframework-djangolibrary
 
 
+Introduction
+------------
+
+DjangoLibrary is a web testing library to test Django with Robot Framework.
+
+It uses Selenium2Library to run tests against a real browser instance.
+
+
 Installation
 ------------
 
   $ pip install robotframework-djangolibrary
+
+In order to be able to use DjangoLibrary's autologin keywords you have to add
+the AutologinAuthenticationMiddleware to your MIDDLEWARE_CLASSES in your
+settings.py::
+
+  MIDDLEWARE_CLASSES = (
+      ...
+      'django.contrib.auth.middleware.AuthenticationMiddleware',
+      'DjangoLibrary.middleware.AutologinAuthenticationMiddleware',
+  )
+
+.. DANGER::
+   Make sure that you add this middleware only to your test setup and
+   NEVER to your deployment! The middleware just checks for a 'autologin'
+   cookie and then authenticates and login ANY user.
 
 
 First Robot Test
