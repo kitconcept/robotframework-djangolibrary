@@ -24,7 +24,7 @@ DjangoLibrary::
 Generate Documentation
 ----------------------
 
-python -m robot.libdoc tests/robot-lib/DjangoLibrary.py DjangoLibrary.html
+  $ python -m robot.libdoc DjangoLibrary docs/DjangoLibrary.html
 
 
 Further Reading
