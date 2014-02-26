@@ -46,9 +46,6 @@ Autologin as
   # https://github.com/rtomac/robotframework-selenium2library/issues/273
   Execute Javascript  document.cookie = 'autologin=${username}:${password};path=/;domain=localhost;';
 
-Autologin Logout
-  Execute Javascript  document.cookie = 'autologin=;path=/;domain=localhost;';
-
 User is logged in
   Go To  ${SERVER}/admin
   Page should contain  Site administration  message=User is not logged in

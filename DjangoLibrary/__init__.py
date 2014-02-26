@@ -2,6 +2,7 @@
 __version__ = '0.1'
 
 from robot.api import logger
+from robot.libraries.BuiltIn import BuiltIn
 
 import os
 import sys
@@ -16,7 +17,6 @@ class DjangoLibrary:
     """
 
     django_pid = None
-    selenium_pid = None
 
     # TEST CASE => New instance is created for every test case.
     # TEST SUITE => New instance is created for every test suite.
@@ -101,3 +101,9 @@ class DjangoLibrary:
             "Django stopped (PID: %s)" % self.django_pid,
         )
         logger.console("-" * 78)
+
+    def autologin_logout(self):
+        """Logout the user by removing the autologin cookie."""
+        selenium2lib = BuiltIn().get_library_instance('Selenium2Library')
+        selenium2lib.execute_javascript(
+            "document.cookie = 'autologin=;path=/;domain=localhost;';")
