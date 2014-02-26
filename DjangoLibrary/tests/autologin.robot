@@ -31,21 +31,6 @@ Logout
   Go To  ${SERVER}/admin/logout
   Wait until page contains  Logged out
 
-Autologin as
-  [Arguments]  ${username}  ${password}
-  [Documentation]  Auto login the user without the need to fill out the login
-  ...              form.
-  Go To  ${SERVER}
-  Add Cookie  autologin  ${username}:${password}
-  ${autologin_cookie} =  Get Cookie Value  autologin
-  Should Be Equal  ${autologin_cookie}  ${username}:${password}
-  ${cookies} =  Get Cookies
-  Should Not Be Empty  ${cookies}
-  # XXX: The 'Add Cookie' keywords does not work with Firefox, therefore we
-  # have to add the cookie with js here. A bug has been filed:
-  # https://github.com/rtomac/robotframework-selenium2library/issues/273
-  Execute Javascript  document.cookie = 'autologin=${username}:${password};path=/;domain=localhost;';
-
 User is logged in
   Go To  ${SERVER}/admin
   Page should contain  Site administration  message=User is not logged in

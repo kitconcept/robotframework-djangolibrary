@@ -102,6 +102,27 @@ class DjangoLibrary:
         )
         logger.console("-" * 78)
 
+    def autologin_as(self, username, password):
+        """Autologin as user."""
+        selenium2lib = BuiltIn().get_library_instance('Selenium2Library')
+        selenium2lib.add_cookie(
+            "autologin",
+            "%s:%s" % (username, password),
+            path="/",
+            domain="localhost",
+        )
+        # XXX: The 'Add Cookie' keywords does not work with Firefox, therefore
+        # we have to add the cookie with js here. A bug has been filed:
+        # https://github.com/rtomac/robotframework-selenium2library/issues/273
+        selenium2lib.execute_javascript(
+            "document.cookie = 'autologin=%s:%s;path=/;domain=localhost;';" %
+            (username, password)
+        )
+        autologin_cookie = selenium2lib.get_cookie_value('autologin')
+        assert autologin_cookie == "%s:%s" % (username, password)
+        cookies = selenium2lib.get_cookies()
+        assert cookies == u"autologin=%s:%s" % (username, password)
+
     def autologin_logout(self):
         """Logout the user by removing the autologin cookie."""
         selenium2lib = BuiltIn().get_library_instance('Selenium2Library')
