@@ -1,0 +1,102 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <title>Robotframework-djangolibrary by tisto</title>
+
+    <link rel="stylesheet" href="stylesheets/styles.css">
+    <link rel="stylesheet" href="stylesheets/pygment_trac.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+  </head>
+  <body>
+    <div class="wrapper">
+      <header>
+        <h1>Robotframework-djangolibrary</h1>
+        <p>A robot framework library for Django.</p>
+
+        <p class="view"><a href="https://github.com/tisto/robotframework-djangolibrary">View the Project on GitHub <small>tisto/robotframework-djangolibrary</small></a></p>
+
+
+        <ul>
+          <li><a href="https://github.com/tisto/robotframework-djangolibrary/zipball/master">Download <strong>ZIP File</strong></a></li>
+          <li><a href="https://github.com/tisto/robotframework-djangolibrary/tarball/master">Download <strong>TAR Ball</strong></a></li>
+          <li><a href="https://github.com/tisto/robotframework-djangolibrary">View On <strong>GitHub</strong></a></li>
+        </ul>
+      </header>
+      <section>
+        <h1></h1>
+
+<h1>
+<a name="a-robot-framework-library-for-django" class="anchor" href="#a-robot-framework-library-for-django"><span class="octicon octicon-link"></span></a>A robot framework library for Django.</h1>
+
+<p>.. image:: <a href="https://travis-ci.org/tisto/robotframework-djangolibrary.png?branch=master">https://travis-ci.org/tisto/robotframework-djangolibrary.png?branch=master</a>   :target: <a href="https://travis-ci.org/tisto/robotframework-djangolibrary">https://travis-ci.org/tisto/robotframework-djangolibrary</a></p>
+
+<h2>
+<a name="installation" class="anchor" href="#installation"><span class="octicon octicon-link"></span></a>Installation</h2>
+
+<p>$ pip install robotframework-djangolibrary</p>
+
+<h2>
+<a name="first-robot-test" class="anchor" href="#first-robot-test"><span class="octicon octicon-link"></span></a>First Robot Test</h2>
+
+<p>test.robot::</p>
+
+<p>*** Variables ***</p>
+
+<p>${SERVER}               http://localhost:8000/
+  ${BROWSER}              firefox</p>
+
+<p>*** Settings ***</p>
+
+<p>Documentation   Django Robot Tests
+  Library         Selenium2Library  timeout=10  implicit_wait=0.5
+  Suite Setup     Open Browser To Login Page
+  Suite Teardown  Close Browser</p>
+
+<p>*** Keywords ***</p>
+
+<p>Open Browser To Login Page
+    Open Browser  ${SERVER}  ${BROWSER}
+    Maximize Browser Window</p>
+
+<p>*** Test Cases ***</p>
+
+<p>Scenario: As a visitor I can visit the django default page
+    Go To  ${SERVER}
+    Wait until page contains element  id=explanation
+    Page Should Contain  It worked!
+    Page Should Contain  Congratulations on your first Django-powered page.</p>
+
+<h2>
+<a name="run-tests" class="anchor" href="#run-tests"><span class="octicon octicon-link"></span></a>Run Tests</h2>
+
+<p>$ pybot test.robot</p>
+
+<p>Output::</p>
+
+<p>==============================================================================
+  Test :: Django Robot Tests
+  ==============================================================================
+  Scenario: As a visitor I can visit the django default page            | PASS |</p>
+
+<hr><p>Test :: Django Robot Tests                                            | PASS |
+  1 critical test, 1 passed, 0 failed
+  1 test total, 1 passed, 0 failed
+  ==============================================================================
+  Output:  /home/timo/workspace/prounix/robotframework-djangolibrary/output.xml
+  Log:     /home/timo/workspace/prounix/robotframework-djangolibrary/log.html
+  Report:  /home/timo/workspace/prounix/robotframework-djangolibrary/report.html</p>
+      </section>
+      <footer>
+        <p>This project is maintained by <a href="https://github.com/tisto">tisto</a></p>
+        <p><small>Hosted on GitHub Pages &mdash; Theme by <a href="https://github.com/orderedlist">orderedlist</a></small></p>
+      </footer>
+    </div>
+    <script src="javascripts/scale.fix.js"></script>
+    
+  </body>
+</html>
