@@ -37,7 +37,8 @@ settings.py::
 First Robot Test
 ----------------
 
-test.robot::
+In order to write your first robot test, make sure that you include Selenium2Library and DjangoLibrary. Create a test.robot file with the
+following content::
 
   *** Variables ***
 
@@ -49,6 +50,7 @@ test.robot::
 
   Documentation   Django Robot Tests
   Library         Selenium2Library  timeout=10  implicit_wait=0.5
+  Library         DjangoLibrary  127.0.0.1  8080
   Suite Setup     Open Browser To Login Page
   Suite Teardown  Close Browser
 
@@ -72,10 +74,11 @@ test.robot::
 Run Tests
 ---------
 
+Then you can run the test with pybot::
+
   $ pybot test.robot
 
-
-Output::
+The output should look like this::
 
   ==============================================================================
   Test :: Django Robot Tests
