@@ -4,6 +4,7 @@ __version__ = '0.1'
 from robot.api import logger
 from robot.libraries.BuiltIn import BuiltIn
 
+import base64
 import os
 import sys
 import signal
@@ -78,6 +79,8 @@ class DjangoLibrary:
         sys.path.append(os.path.dirname(os.path.realpath('mysite/mysite')))
         os.environ.setdefault("DJANGO_SETTINGS_MODULE", "mysite.settings")
         from django.contrib.auth.models import User
+        username = username.encode("utf-8")
+        #password = password.encode("utf-8")
         user = User.objects.create_user(
             username,
             email=email,
@@ -153,24 +156,33 @@ class DjangoLibrary:
         NEVER to your deployment!
 
         """
-        selenium2lib = BuiltIn().get_library_instance('Selenium2Library')
-        selenium2lib.add_cookie(
-            "autologin",
-            "%s:%s" % (username, password),
-            path="/",
-            domain="localhost",
+        # encode robot keyword params (unicode) -> utf-8 string
+        username = username.encode("utf-8")
+        password = password.encode("utf-8")
+        # encode autologin cookie value as base64
+        autologin_cookie_value = base64.b64encode(
+            "%s:%s" % (username, password)
         )
+
+        selenium2lib = BuiltIn().get_library_instance('Selenium2Library')
         # XXX: The 'Add Cookie' keywords does not work with Firefox, therefore
         # we have to add the cookie with js here. A bug has been filed:
         # https://github.com/rtomac/robotframework-selenium2library/issues/273
+        #selenium2lib.add_cookie(
+        #    "autologin",
+        #    "%s:%s" % (username, password),
+        #    path="/",
+        #    domain="localhost",
+        #)
+
         selenium2lib.execute_javascript(
-            "document.cookie = 'autologin=%s:%s;path=/;domain=localhost;';" %
-            (username, password)
+            "document.cookie = 'autologin=%s;path=/;domain=localhost;';" %
+            autologin_cookie_value
         )
-        autologin_cookie = selenium2lib.get_cookie_value('autologin')
-        assert autologin_cookie == "%s:%s" % (username, password)
-        cookies = selenium2lib.get_cookies()
-        assert cookies == u"autologin=%s:%s" % (username, password)
+        #autologin_cookie = selenium2lib.get_cookie_value('autologin')
+        #assert autologin_cookie == "%s:%s" % (username, password)
+        #cookies = selenium2lib.get_cookies()
+        #assert cookies == u"autologin=%s:%s" % (username, password)
 
     def autologin_logout(self):
         """Logout a user that has been logged in by the autologin_as keyword.

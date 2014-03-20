@@ -66,9 +66,27 @@ Scenario: Create user
   Page should not contain  Please enter the correct username and password
   Logout
 
+Scenario: Create user with special characters
+  Create User  äüö-user  test@test.com  password  is_superuser=True  is_staff=True
+  Go To  ${SERVER}/admin
+  Wait until page contains  Django administration
+  Input text  username  äüö-user
+  Input text  password  password
+  Click Button  Log in
+  Wait until page contains  Django administration
+  Page should contain  Django administration
+  Page should not contain  Please enter the correct username and password
+  Logout
+
 Scenario: Autologin
   Create User  test-user-2  test@test.com  password  is_superuser=True  is_staff=True
   Autologin as  test-user-2  password
+  User is logged in
+
+Scenario: Autologin with special characters
+  [tags]  current
+  Create User  öüä-user  test@test.com  password  is_superuser=True  is_staff=True
+  Autologin as  öüä-user  password
   User is logged in
 
 Scenario: Autologin Logout
