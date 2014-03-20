@@ -35,6 +35,10 @@ User is logged in
   Go To  ${SERVER}/admin
   Page should contain  Site administration  message=User is not logged in
 
+User '${username}' is logged in
+  Go To  ${SERVER}/admin
+  Page should contain  ${username}  message=User '${username}' is not logged in
+
 User is logged out
   Go To  ${SERVER}/admin
   Page should not contain  Site administration  message=User is not logged out
@@ -100,6 +104,11 @@ Scenario: Autologin with special characters
   Create User  öüä-user  test@test.com  password  is_superuser=True  is_staff=True
   Autologin as  öüä-user  password
   User is logged in
+
+Scenario: Autologin without Logout
+  Autologin as  test-user-1  password
+  Autologin as  test-user-2  password
+  User 'test-user-2' is logged in
 
 Scenario: Autologin Logout
   Create User  test-user-3  test@test.com  password  is_superuser=True  is_staff=True
