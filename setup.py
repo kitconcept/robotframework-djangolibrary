@@ -28,6 +28,7 @@ setup(
         'Django',
         'robotframework',
         'robotframework-selenium2library',
+        'robotframework-debuglibrary',
     ],
     entry_points="""
     # -*- Entry points: -*-
