@@ -80,7 +80,7 @@ class DjangoLibrary:
         os.environ.setdefault("DJANGO_SETTINGS_MODULE", "mysite.settings")
         from django.contrib.auth.models import User
         username = username.encode("utf-8")
-        #password = password.encode("utf-8")
+        password = password.encode("utf-8")
         user = User.objects.create_user(
             username,
             email=email,
@@ -156,7 +156,7 @@ class DjangoLibrary:
         NEVER to your deployment!
 
         """
-        # encode robot keyword params (unicode) -> utf-8 string
+        # robot keyword params are unicode. b64encode expects utf-8 strings
         username = username.encode("utf-8")
         password = password.encode("utf-8")
         # encode autologin cookie value as base64

@@ -54,6 +54,18 @@ Scenario: Create superuser
   Page should not contain  Please enter the correct username and password
   Logout
 
+Scenario: Create superuser with special characters
+  Create Superuser  admin-öüä  admin@admin.com  password
+  Go To  ${SERVER}/admin
+  Wait until page contains  Django administration
+  Input text  username  admin-öüä
+  Input text  password  password
+  Click Button  Log in
+  Wait until page contains  Django administration
+  Page should contain  Django administration
+  Page should not contain  Please enter the correct username and password
+  Logout
+
 Scenario: Create user
   Create User  test-user-1  test@test.com  password  is_superuser=True  is_staff=True
   Go To  ${SERVER}/admin
