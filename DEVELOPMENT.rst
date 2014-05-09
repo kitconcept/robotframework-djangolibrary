@@ -9,13 +9,13 @@ Set up development environment
   $ source .env/bin/activate
   $ python setup.py develop
 
-MySite::
+Start 'MySite' Django application that is used to run the tests against::
 
   $ pip install Django
   $ python mysite/manage.py syncdb
   $ python mysite/manage.py runserver
 
-DjangoLibrary::
+Run DjangoLibrary tests::
 
   $ python setup.py develop
   $ pybot DjangoLibrary/tests/autologin.robot
