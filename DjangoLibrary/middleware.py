@@ -7,7 +7,7 @@ import base64
 class AutologinAuthenticationMiddleware(AuthenticationMiddleware):
 
     def process_request(self, request):
-        if not 'autologin' in request.COOKIES:
+        if 'autologin' not in request.COOKIES:
             return
         if request.COOKIES['autologin'] == '':
             auth.logout(request)
