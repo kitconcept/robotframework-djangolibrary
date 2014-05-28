@@ -2,4 +2,4 @@ django
 robotframework
 robotframework-selenium2library
 robotframework-debuglibrary
-Selenium==2.42.1
+Selenium==2.19.0
