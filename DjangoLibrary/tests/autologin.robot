@@ -13,37 +13,6 @@ Suite Setup     Start Django and Open Browser
 Suite Teardown  Stop Django and Close Browser
 
 
-*** Keywords ***
-
-Start Django and open Browser
-  Start Django
-  Open Browser  ${SERVER}  ${BROWSER}
-
-Stop Django and close browser
-  Close Browser
-  Stop Django
-
-Pause
-  Import library  Dialogs
-  Pause execution
-
-Logout
-  Go To  ${SERVER}/admin/logout
-  Wait until page contains  Logged out
-
-User is logged in
-  Go To  ${SERVER}/admin
-  Page should contain  Site administration  message=User is not logged in
-
-User '${username}' is logged in
-  Go To  ${SERVER}/admin
-  Page should contain  ${username}  message=User '${username}' is not logged in
-
-User is logged out
-  Go To  ${SERVER}/admin
-  Page should not contain  Site administration  message=User is not logged out
-
-
 *** Test Cases ***
 
 Scenario: Create superuser
@@ -116,3 +85,34 @@ Scenario: Autologin Logout
   User is logged in
   Autologin Logout
   User is logged out
+
+
+*** Keywords ***
+
+Start Django and open Browser
+  Start Django
+  Open Browser  ${SERVER}  ${BROWSER}
+
+Stop Django and close browser
+  Close Browser
+  Stop Django
+
+Pause
+  Import library  Dialogs
+  Pause execution
+
+Logout
+  Go To  ${SERVER}/admin/logout
+  Wait until page contains  Logged out
+
+User is logged in
+  Go To  ${SERVER}/admin
+  Page should contain  Site administration  message=User is not logged in
+
+User '${username}' is logged in
+  Go To  ${SERVER}/admin
+  Page should contain  ${username}  message=User '${username}' is not logged in
+
+User is logged out
+  Go To  ${SERVER}/admin
+  Page should not contain  Site administration  message=User is not logged out
