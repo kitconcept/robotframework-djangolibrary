@@ -74,10 +74,18 @@ following content::
 Development
 -----------
 
+Checkout repository from github::
+
   $ git clone https://github.com/kitconcept/robotframework-djangolibrary.git
+
+Create a virtual Python environment::
+
   $ cd robotframework-djangolibrary/
   $ virtualenv .env
   $ source .env/bin/activate
+
+Install the requirements::
+
   $ pip install -r requirements.txt
 
 
