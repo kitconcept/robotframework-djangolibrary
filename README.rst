@@ -2,15 +2,13 @@
 A robot framework library for Django.
 ==============================================================================
 
-.. image:: https://travis-ci.org/kitconcept/robotframework-djangolibrary.png?branch=master   :target: https://travis-ci.org/kitconcept/robotframework-djangolibrary
+.. image:: https://travis-ci.org/kitconcept/robotframework-djangolibrary.png?branch=master :target: https://travis-ci.org/kitconcept/robotframework-djangolibrary
 
 
 Introduction
 ------------
 
-DjangoLibrary is a web testing library to test Django with Robot Framework.
-
-It uses Selenium2Library to run tests against a real browser instance.
+DjangoLibrary is a web testing library to test Django with Robot Framework. It uses Selenium2Library to run tests against a real browser instance.
 
 
 Installation
@@ -71,24 +69,6 @@ following content::
     Page Should Contain  Congratulations on your first Django-powered page.
 
 
-Development
------------
-
-Checkout repository from github::
-
-  $ git clone https://github.com/kitconcept/robotframework-djangolibrary.git
-
-Create a virtual Python environment::
-
-  $ cd robotframework-djangolibrary/
-  $ virtualenv .env
-  $ source .env/bin/activate
-
-Install the requirements::
-
-  $ pip install -r requirements.txt
-
-
 Run Tests
 ---------
 
@@ -110,3 +90,29 @@ The output should look like this::
   Output:  /home/timo/workspace/prounix/robotframework-djangolibrary/output.xml
   Log:     /home/timo/workspace/prounix/robotframework-djangolibrary/log.html
   Report:  /home/timo/workspace/prounix/robotframework-djangolibrary/report.html
+
+
+Development
+-----------
+
+Checkout repository from github::
+
+  $ git clone https://github.com/kitconcept/robotframework-djangolibrary.git
+
+Create a virtual Python environment::
+
+  $ cd robotframework-djangolibrary/
+  $ virtualenv .env
+  $ source .env/bin/activate
+
+Install robotframework-djangolibrary in development mode::
+
+  $ python setup.py develop
+
+Install the requirements::
+
+  $ pip install -r requirements.txt
+
+Run robotframework-djangolibrary tests::
+
+  $ pybot DjangoLibrary/tests/
