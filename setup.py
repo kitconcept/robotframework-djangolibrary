@@ -1,6 +1,6 @@
 from setuptools import setup, find_packages
 
-version = '0.1'
+version = '1.0a1.dev0'
 
 setup(
     name='robotframework-djangolibrary',
@@ -16,8 +16,8 @@ setup(
     # Get strings from http://pypi.python.org/pypi?%3Aaction=list_classifiers
     keywords='robotframework django test',
     author='Timo Stollenwerk',
-    author_email='tisto@plone.org',
-    url='http://timostollenwerk.net',
+    author_email='stollenwerk@kitconcept.com',
+    url='http://kitconcept.com',
     license='',
     packages=find_packages(
         exclude=['ez_setup', 'examples', 'tests']
