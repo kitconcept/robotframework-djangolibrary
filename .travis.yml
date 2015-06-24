@@ -3,10 +3,13 @@ python:
   - "2.7"
 # - "3.3"
 env:
-#  - DJANGO_VERSION=1.5.8
+  - DJANGO_VERSION=1.5.8
   - DJANGO_VERSION=1.6.5
   - DJANGO_VERSION=1.7.8
   - DJANGO_VERSION=1.8.2
+matrix:
+  allow_failures:
+    - DJANGO_VERSION: 1.5.8
 install:
   - pip install -r requirements.txt
   - pip install -q flake8
