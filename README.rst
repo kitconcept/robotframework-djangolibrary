@@ -10,6 +10,8 @@ Introduction
 
 DjangoLibrary is a web testing library to test Django with Robot Framework. It uses Selenium2Library to run tests against a real browser instance.
 
+The library will automatically start and stop your Django instance while running the tests. It also comes with serveral autologin keywords that allow you to login different users during your tests, without the need to actually access the login page.
+
 
 Installation
 ------------
