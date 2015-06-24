@@ -71,6 +71,16 @@ following content::
     Page Should Contain  Congratulations on your first Django-powered page.
 
 
+Development
+-----------
+
+  $ git clone https://github.com/kitconcept/robotframework-djangolibrary.git
+  $ cd robotframework-djangolibrary/
+  $ virtualenv .env
+  $ source .env/bin/activate
+  $ pip install -r requirements.txt
+
+
 Run Tests
 ---------
 
