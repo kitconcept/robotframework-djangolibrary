@@ -1,4 +1,4 @@
-django==1.6.1
+django
 robotframework
 robotframework-selenium2library
 robotframework-debuglibrary
