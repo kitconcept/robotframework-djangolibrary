@@ -1,6 +1,6 @@
 from setuptools import setup, find_packages
 
-version = '1.0a2'
+version = '1.0a3.dev0'
 
 setup(
     name='robotframework-djangolibrary',
