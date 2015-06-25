@@ -1,5 +1,5 @@
 
-1.0a2 (unreleased)
+1.0a2 (2015-06-25)
 ------------------
 
 - Remove Django and zest.releaser from requirements.txt. This fixes #2.
