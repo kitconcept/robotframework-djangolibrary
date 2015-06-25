@@ -1,7 +1,4 @@
-django
 robotframework
 robotframework-selenium2library
 robotframework-debuglibrary
 Selenium==2.41.0
-zest.releaser
-
