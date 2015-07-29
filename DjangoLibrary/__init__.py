@@ -34,7 +34,7 @@ class DjangoLibrary:
     # GLOBAL => Only one instance is created during the whole test execution.
     ROBOT_LIBRARY_SCOPE = 'TEST SUITE'
 
-    def __init__(self, host="127.0.0.1", port=8000):
+    def __init__(self, host="127.0.0.1", port=8000, path='mysite/mysite', manage='mysite/manage.py', settings='mysite.settings', db="test.db"):
         """Django2Library can be imported with optional arguments.
 
         `host` is the hostname of your Django instance. Default value is
@@ -49,6 +49,10 @@ class DjangoLibrary:
         """
         self.host = host
         self.port = port
+        self.path = os.path.realpath(path)
+        self.manage = os.path.realpath(manage)
+        self.settings = settings
+        self.db = os.path.realpath(db)
 
     def clear_db(self):
         """Clear the Django default database by running
@@ -63,21 +67,22 @@ class DjangoLibrary:
         # ]
         args = [
             'rm',
-            'mysite/db.sqlite3',
+            self.db,
         ]
         subprocess.call(args)
         args = [
             'python',
-            'mysite/manage.py',
+            self.manage,
             'syncdb',
             '--noinput',
+            '--settings=%s' % self.settings,
         ]
         subprocess.call(args)
 
     def create_user(self, username, email, password, **kwargs):
         """Create a regular Django user in the default auth model."""
-        sys.path.append(os.path.dirname(os.path.realpath('mysite/mysite')))
-        os.environ.setdefault("DJANGO_SETTINGS_MODULE", "mysite.settings")
+        sys.path.append(os.path.dirname(self.path))
+        os.environ.setdefault("DJANGO_SETTINGS_MODULE", self.settings)
         from django.contrib.auth.models import User
         username = username.encode("utf-8")
         password = password.encode("utf-8")
@@ -92,8 +97,8 @@ class DjangoLibrary:
 
     def create_superuser(self, username, email, password):
         """Create a Django superuser in the default auth model."""
-        sys.path.append(os.path.dirname(os.path.realpath('mysite/mysite')))
-        os.environ.setdefault("DJANGO_SETTINGS_MODULE", "mysite.settings")
+        sys.path.append(os.path.dirname(self.path))
+        os.environ.setdefault("DJANGO_SETTINGS_MODULE", self.settings)
         from django.contrib.auth.models import User
         user = User.objects.create_superuser(
             username,
@@ -108,12 +113,14 @@ class DjangoLibrary:
         logger.console("-" * 78)
         args = [
             'python',
-            'mysite/manage.py',
+            self.manage,
             'runserver',
             '%s:%s' % (self.host, self.port),
             '--nothreading',
             '--noreload',
+            '--settings=%s' % self.settings,
         ]
+
         self.django_pid = subprocess.Popen(
             args,
             stdout=subprocess.PIPE,
