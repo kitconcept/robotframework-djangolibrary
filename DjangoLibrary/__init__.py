@@ -73,8 +73,7 @@ class DjangoLibrary:
         args = [
             'python',
             self.manage,
-            'syncdb',
-            '--noinput',
+            'migrate',
             '--settings=%s' % self.settings,
         ]
         subprocess.call(args)
