@@ -16,7 +16,7 @@ matrix:
 install:
   - pip install -r requirements.txt
   - pip install -q flake8
-  - pip install -q Django==$DJANGO_VERSION --pre
+  - pip install -q  --pre Django==$DJANGO_VERSION
   - python setup.py install
 before_script:
   - "export DISPLAY=:99.0"
