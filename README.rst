@@ -57,10 +57,10 @@ following content::
   *** Settings ***
 
   Documentation   Django Robot Tests
-  Library         Selenium2Library  timeout=10  implicit_wait=0.5
-  Library         DjangoLibrary  127.0.0.1  8080
-  Suite Setup     Open Browser To Login Page
-  Suite Teardown  Close Browser
+  Library         Selenium2Library  timeout=10  implicit_wait=0
+  Library         DjangoLibrary  127.0.0.1  55001  path=mysite/mysite  manage=mysite/manage.py  settings=mysite.settings  db=mysite/db.sqlite3
+  Suite Setup     Start Django and Open Browser
+  Suite Teardown  Stop Django and Close Browser
 
 
   *** Keywords ***
