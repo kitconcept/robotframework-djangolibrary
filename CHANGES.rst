@@ -2,7 +2,8 @@
 1.0a4 (unreleased)
 ------------------
 
-- Nothing changed yet.
+- Use 'migrate' instead of 'syncdb' for Django > 1.7.x.
+  [timo]
 
 
 1.0a3 (2015-09-28)
