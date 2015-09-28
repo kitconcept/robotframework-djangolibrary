@@ -2,7 +2,8 @@
 1.0a3 (unreleased)
 ------------------
 
-- Nothing changed yet.
+- Fix user creation and startup. This fixes #3.
+  [MatthewWilkes]
 
 
 1.0a2 (2015-06-25)
