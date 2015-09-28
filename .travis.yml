@@ -15,7 +15,7 @@ matrix:
     - python: 3.3
 #      env: DJANGO_VERSION=1.9a1
 before_install:
-  - if [ $TRAVIS_PYTHON_VERSION == 3.3 ]; then sed -ie "s/^robotframework/\n/robotframework-python3/g" requirements.txt; fi
+  - if [ $TRAVIS_PYTHON_VERSION == 3.3 ]; then sed -ie "s/^robotframework\s/robotframework-python3/g" requirements.txt; fi
 install:
   - cat requirements.txt
   - pip install -r requirements.txt
