@@ -78,10 +78,12 @@ class DjangoLibrary:
             self.db,
         ]
         subprocess.call(args)
-        migrate_stmt = 'syncdb'
         import django
-        if getattr(django, '__version__') > 1.7:
+        try:
+            django.__version__
             migrate_stmt = 'migrate'
+        except AttributeError:
+            migrate_stmt = 'syncdb'
         args = [
             'python',
             self.manage,
