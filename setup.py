@@ -12,6 +12,10 @@ setup(
         'Development Status :: 2 - Pre-Alpha',
         'Environment :: Web Environment',
         'Framework :: Django',
+        'Framework :: Django :: 1.5',
+        'Framework :: Django :: 1.6',
+        'Framework :: Django :: 1.7',
+        'Framework :: Django :: 1.8',
     ],
     # Get strings from http://pypi.python.org/pypi?%3Aaction=list_classifiers
     keywords='robotframework django test',
