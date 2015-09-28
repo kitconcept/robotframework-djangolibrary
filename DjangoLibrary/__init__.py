@@ -80,7 +80,8 @@ class DjangoLibrary:
         subprocess.call(args)
         migrate_stmt = 'migrate'
         import django
-        if django.get_version() < 1.7:
+        print django.__version__
+        if django.__version__ < 1.7:
             migrate_stmt = 'syncdb'
         args = [
             'python',
