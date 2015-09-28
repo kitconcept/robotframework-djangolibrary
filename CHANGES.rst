@@ -2,6 +2,9 @@
 1.0a3 (unreleased)
 ------------------
 
+- Add list_classifiers to setup.py.
+  [timo]
+
 - Fix user creation and startup. This fixes #3.
   [MatthewWilkes]
 
