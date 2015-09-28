@@ -8,11 +8,11 @@ env:
   - DJANGO_VERSION=1.6.11
   - DJANGO_VERSION=1.7.10
   - DJANGO_VERSION=1.8.4
-  - DJANGO_VERSION=1.9.1a1
+  - DJANGO_VERSION=1.9a1
 matrix:
   allow_failures:
     - python: 2.7
-      env: DJANGO_VERSION=1.9.1a1
+      env: DJANGO_VERSION=1.9a1
 install:
   - pip install -r requirements.txt
   - pip install -q flake8
