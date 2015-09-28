@@ -1,12 +1,10 @@
 # -*- coding: utf-8 -*-
 __version__ = '0.1'
-
 from robot.api import logger
 from robot.libraries.BuiltIn import BuiltIn
 
 import base64
 import os
-import sys
 import signal
 import subprocess
 
@@ -34,7 +32,9 @@ class DjangoLibrary:
     # GLOBAL => Only one instance is created during the whole test execution.
     ROBOT_LIBRARY_SCOPE = 'TEST SUITE'
 
-    def __init__(self, host="127.0.0.1", port=8000):
+    def __init__(self, host="0.0.0.0", port=8000, path='mysite/mysite',
+                 manage='mysite/manage.py', settings='mysite.settings',
+                 db="test.db"):
         """Django2Library can be imported with optional arguments.
 
         `host` is the hostname of your Django instance. Default value is
@@ -49,6 +49,10 @@ class DjangoLibrary:
         """
         self.host = host
         self.port = port
+        self.path = os.path.realpath(path)
+        self.manage = os.path.realpath(manage)
+        self.settings = settings
+        self.db = os.path.realpath(db)
 
     def clear_db(self):
         """Clear the Django default database by running
@@ -63,44 +67,57 @@ class DjangoLibrary:
         # ]
         args = [
             'rm',
-            'mysite/db.sqlite3',
+            self.db,
         ]
         subprocess.call(args)
         args = [
             'python',
-            'mysite/manage.py',
+            self.manage,
             'syncdb',
             '--noinput',
+            '--settings=%s' % self.settings,
         ]
         subprocess.call(args)
 
     def create_user(self, username, email, password, **kwargs):
         """Create a regular Django user in the default auth model."""
-        sys.path.append(os.path.dirname(os.path.realpath('mysite/mysite')))
-        os.environ.setdefault("DJANGO_SETTINGS_MODULE", "mysite.settings")
-        from django.contrib.auth.models import User
-        username = username.encode("utf-8")
-        password = password.encode("utf-8")
-        user = User.objects.create_user(
-            username,
-            email=email,
-            password=password,
+        to_run = """
+from django.contrib.auth.models import User
+user = User.objects.create_user(
+    %(username)s,
+    email=%(email)s,
+    password=%(password)s,
+)
+user.is_superuser = %(is_superuser)s
+user.is_staff = %(is_staff)s
+user.save()""" % {
+            'username': repr(username.encode("utf-8")),
+            'password': repr(password.encode("utf-8")),
+            'email': repr(email),
+            'is_superuser': repr(kwargs.get('is_superuser', False)),
+            'is_staff': repr(kwargs.get('is_staff', False)),
+        }
+
+        args = [
+            'python',
+            self.manage,
+            'shell',
+            '--plain',
+            '--settings=%s' % self.settings,
+        ]
+
+        django = subprocess.Popen(
+            args,
+            stdin=subprocess.PIPE,
+            stdout=subprocess.PIPE,
+            stderr=subprocess.PIPE
         )
-        user.is_superuser = kwargs.get('is_superuser', False)
-        user.is_staff = kwargs.get('is_staff', False)
-        user.save()
+        django.communicate(to_run)
 
     def create_superuser(self, username, email, password):
         """Create a Django superuser in the default auth model."""
-        sys.path.append(os.path.dirname(os.path.realpath('mysite/mysite')))
-        os.environ.setdefault("DJANGO_SETTINGS_MODULE", "mysite.settings")
-        from django.contrib.auth.models import User
-        user = User.objects.create_superuser(
-            username,
-            email=email,
-            password=password,
-        )
-        user.save()
+        self.create_user(username, email, password,
+                         is_superuser=True, is_staff=True)
 
     def start_django(self):
         """Start the Django server."""
@@ -108,12 +125,14 @@ class DjangoLibrary:
         logger.console("-" * 78)
         args = [
             'python',
-            'mysite/manage.py',
+            self.manage,
             'runserver',
             '%s:%s' % (self.host, self.port),
             '--nothreading',
             '--noreload',
+            '--settings=%s' % self.settings,
         ]
+
         self.django_pid = subprocess.Popen(
             args,
             stdout=subprocess.PIPE,
