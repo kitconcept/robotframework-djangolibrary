@@ -1,4 +1,4 @@
 robotframework
 robotframework-selenium2library
 robotframework-debuglibrary
-Selenium
+Selenium==2.41.0
