@@ -1,5 +1,4 @@
 # -*- coding: utf-8 -*-
-__version__ = '0.1'
 from robot.api import logger
 from robot.libraries.BuiltIn import BuiltIn
 
@@ -8,6 +7,7 @@ import os
 import signal
 import subprocess
 
+__version__ = '0.1'
 ROBOT_LIBRARY_DOC_FORMAT = 'reST'
 
 
