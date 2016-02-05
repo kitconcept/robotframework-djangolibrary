@@ -9,7 +9,7 @@ env:
   - DJANGO_VERSION=1.6.11
   - DJANGO_VERSION=1.7.10
   - DJANGO_VERSION=1.8.4
-  - DJANGO_VERSION=1.9a1
+  - DJANGO_VERSION=1.9.2
 matrix:
   allow_failures:
     - python: 3.3
