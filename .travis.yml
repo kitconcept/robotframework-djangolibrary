@@ -1,7 +1,7 @@
 language: python
 python:
   - 2.7
-  - 3.3
+  - 3.5
 sudo: false
 env:
   - DJANGO_VERSION=1.4.22
@@ -12,10 +12,10 @@ env:
   - DJANGO_VERSION=1.9.2
 matrix:
   allow_failures:
-    - python: 3.3
+    - python: 3.5
 #      env: DJANGO_VERSION=1.9a1
 before_install:
-  - if [ $TRAVIS_PYTHON_VERSION == 3.3 ]; then sed -ie "s/^robotframework$/robotframework-python3/g" requirements.txt; fi
+  - if [ $TRAVIS_PYTHON_VERSION == 3.5 ]; then sed -ie "s/^robotframework$/robotframework-python3/g" requirements.txt; fi
 install:
   - cat requirements.txt
   - pip install -r requirements.txt
