@@ -10,6 +10,7 @@ setup(
 """,
     classifiers=[
         'Development Status :: 3 - Alpha',
+        'License :: OSI Approved :: Apache Software License',
         'Environment :: Web Environment',
         'Framework :: Django',
         'Framework :: Django :: 1.5',
@@ -25,7 +26,7 @@ setup(
     author='Timo Stollenwerk',
     author_email='stollenwerk@kitconcept.com',
     url='http://kitconcept.com',
-    license='',
+    license='Apache License 2.0',
     packages=find_packages(
         exclude=['ez_setup', 'examples', 'tests']
     ),
