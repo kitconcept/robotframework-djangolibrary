@@ -1,5 +1,5 @@
 
-1.0a4 (unreleased)
+1.0a4 (2016-02-05)
 ------------------
 
 - Use 'migrate' instead of 'syncdb' for Django > 1.7.x.
