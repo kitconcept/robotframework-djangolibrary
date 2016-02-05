@@ -12,7 +12,8 @@ Set up development environment
 Start 'MySite' Django application that is used to run the tests against::
 
   $ pip install Django
-  $ python mysite/manage.py syncdb
+  $ python mysite/manage.py makemigrations
+  $ python mysite/manage.py migrate
   $ python mysite/manage.py runserver
 
 Run DjangoLibrary tests::
