@@ -4,9 +4,6 @@ python:
   - 3.5
 sudo: false
 env:
-  - DJANGO_VERSION=1.4.22
-  - DJANGO_VERSION=1.5.12
-  - DJANGO_VERSION=1.6.11
   - DJANGO_VERSION=1.7.10
   - DJANGO_VERSION=1.8.9
   - DJANGO_VERSION=1.9.2
