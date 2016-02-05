@@ -28,6 +28,13 @@ Generate Documentation
   $ python -m robot.libdoc DjangoLibrary docs/DjangoLibrary.html
 
 
+Make Release
+------------
+
+  $ pip install zest.releaser
+  $ fullrelease
+
+
 Further Reading
 ---------------
 
