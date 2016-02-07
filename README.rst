@@ -66,7 +66,9 @@ following content::
 
   *** Variables ***
 
-  ${SERVER}               http://localhost:8000/
+  ${HOSTNAME}             127.0.0.1
+  ${PORT}                 55001
+  ${SERVER}               http://${HOSTNAME}:${PORT}/
   ${BROWSER}              firefox
 
 
@@ -74,16 +76,20 @@ following content::
 
   Documentation   Django Robot Tests
   Library         Selenium2Library  timeout=10  implicit_wait=0
-  Library         DjangoLibrary  127.0.0.1  55001  path=mysite/mysite  manage=mysite/manage.py  settings=mysite.settings  db=mysite/db.sqlite3
-  Suite Setup     Start Django and Open Browser
-  Suite Teardown  Stop Django and Close Browser
+  Library         DjangoLibrary  ${HOSTNAME}  ${PORT}  path=mysite/mysite  manage=mysite/manage.py  settings=mysite.settings  db=mysite/db.sqlite3
+  Suite Setup     Start Django and open Browser
+  Suite Teardown  Stop Django and close Browser
 
 
   *** Keywords ***
 
-  Open Browser To Login Page
+  Start Django and open Browser
+    Start Django
     Open Browser  ${SERVER}  ${BROWSER}
-    Maximize Browser Window
+
+  Stop Django and close browser
+    Close Browser
+    Stop Django
 
 
   *** Test Cases ***
