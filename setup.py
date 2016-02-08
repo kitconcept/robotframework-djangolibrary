@@ -12,6 +12,7 @@ setup(
         'Development Status :: 3 - Alpha',
         'License :: OSI Approved :: Apache Software License',
         'Environment :: Web Environment',
+        'Framework :: Robot Framework',
         'Framework :: Django',
         'Framework :: Django :: 1.5',
         'Framework :: Django :: 1.6',

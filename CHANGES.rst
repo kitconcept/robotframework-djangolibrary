@@ -2,7 +2,8 @@
 1.0a5 (unreleased)
 ------------------
 
-- Nothing changed yet.
+- Add 'Framework :: Robot Framework' classifier to setup.py.
+  [timo]
 
 
 1.0a4 (2016-02-05)
