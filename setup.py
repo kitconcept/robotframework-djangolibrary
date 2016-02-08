@@ -2,12 +2,18 @@ from setuptools import setup, find_packages
 
 version = '1.0a5.dev0'
 
+long_description = (
+    open('README.rst').read() +
+    '\n' +
+    '\n' +
+    open('CHANGES.rst').read() +
+    '\n')
+
 setup(
     name='robotframework-djangolibrary',
     version=version,
     description="A robot framework library for Django.",
-    long_description="""\
-""",
+    long_description=long_description,
     classifiers=[
         'Development Status :: 3 - Alpha',
         'License :: OSI Approved :: Apache Software License',
