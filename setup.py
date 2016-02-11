@@ -42,8 +42,8 @@ setup(
     install_requires=[
         'Django',
         'robotframework',
-        'robotframework-selenium2library',
-        'robotframework-debuglibrary',
+#        'robotframework-selenium2library',
+#        'robotframework-debuglibrary',
     ],
     entry_points="""
     # -*- Entry points: -*-
