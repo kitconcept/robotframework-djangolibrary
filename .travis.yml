@@ -25,6 +25,7 @@ before_script:
   - "sh -e /etc/init.d/xvfb start"
 script:
   - flake8 .
-  - pybot DjangoLibrary/tests/
+  # Run tests for Py27 only. See comment above.
+  - if [ $TRAVIS_PYTHON_VERSION == 2.7 ]; pybot DjangoLibrary/tests/; fi
 after_script:
   - firefox --version
