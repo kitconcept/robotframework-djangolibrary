@@ -26,6 +26,6 @@ before_script:
 script:
   - flake8 .
   # Run tests for Py27 only. See comment above.
-  - if [ $TRAVIS_PYTHON_VERSION == 2.7 ]; pybot DjangoLibrary/tests/; fi
+  - if [ $TRAVIS_PYTHON_VERSION == 2.7 ]; then pybot DjangoLibrary/tests/; fi
 after_script:
   - firefox --version
