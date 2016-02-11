@@ -35,6 +35,16 @@ Make Release
   $ fullrelease
 
 
+Setting Up ChromeDriver
+-----------------------
+
+OS X:
+
+  $ wget http://chromedriver.storage.googleapis.com/2.21/chromedriver_mac32.zip
+  $ unzip chromedriver_mac32.zip
+  $ mv chromedriver /usr/local/bin
+
+
 Further Reading
 ---------------
 
