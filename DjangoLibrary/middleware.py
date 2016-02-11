@@ -13,12 +13,9 @@ class AutologinAuthenticationMiddleware(AuthenticationMiddleware):
             auth.logout(request)
             return
         autologin_cookie_value = base64.b64decode(request.COOKIES['autologin'])
-        try:
-            username = autologin_cookie_value.split(':')[0]
-            password = autologin_cookie_value.split(':')[1]
-        except TypeError:
-            username = autologin_cookie_value.decode('utf8').split(':')[0]
-            password = autologin_cookie_value.decode('utf8').split(':')[1]
+        autologin_cookie_value = autologin_cookie_value.decode('utf8')
+        username = autologin_cookie_value.split(':')[0]
+        password = autologin_cookie_value.split(':')[1]
         user = auth.authenticate(username=username, password=password)
         if user is not None:
             if user.is_active:
