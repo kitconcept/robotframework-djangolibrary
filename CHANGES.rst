@@ -5,8 +5,8 @@
 - Make middleware part Python 3 compatible.
 
   robotframework-djangolibrary is still not compatible with Python 3 because
-  the selenium2library does not work with Python 3 yet. Though, you can
-  install robotframwork-djangolibrary on Python 3 with "pip install
+  robotframework-selenium2library does not work with Python 3 yet. Though, you
+  can install robotframwork-djangolibrary on Python 3 with "pip install
   robotframework-djangolibrary --no-deps" and then run your tests with
   Python 2.7.
   [timo]
