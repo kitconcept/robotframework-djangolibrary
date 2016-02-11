@@ -7,22 +7,21 @@ env:
   - DJANGO_VERSION=1.7.10
   - DJANGO_VERSION=1.8.9
   - DJANGO_VERSION=1.9.2
-matrix:
-  allow_failures:
-    - python: 3.5
-before_install:
-  - if [ $TRAVIS_PYTHON_VERSION == 3.5 ]; then sed -ie "s/^robotframework$/robotframework-python3/g" requirements.txt; fi
 install:
-  - cat requirements.txt
-  - pip install -r requirements.txt
+  # Install dependencies only for Py27. For Py3 we can currently only
+  # guarantee that the package is installable without fetching the deps.
+  # We need to keep this until selenium2library becomes Py3 compatible.
+  - if [ $TRAVIS_PYTHON_VERSION == 2.7 ]; then pip install -r requirements.txt; fi
+  - pip install . --no-dependencies
   - pip install -q flake8
   - pip install -q  --pre Django==$DJANGO_VERSION
-  - python setup.py install
+#  - python setup.py install
 before_script:
   - "export DISPLAY=:99.0"
   - "sh -e /etc/init.d/xvfb start"
 script:
   - flake8 .
-  - pybot DjangoLibrary/tests/
+  # Run tests for Py27 only. See comment above.
+  - if [ $TRAVIS_PYTHON_VERSION == 2.7 ]; then pybot DjangoLibrary/tests/; fi
 after_script:
   - firefox --version
