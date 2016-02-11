@@ -15,7 +15,7 @@ install:
   # Install dependencies only for Py27. For Py3 we can currently only
   # guarantee that the package is installable without fetching the deps.
   # We need to keep this until selenium2library becomes Py3 compatible.
-  - if [ $TRAVIS_PYTHON_VERSION == 2.7 ]; pip install -r requirements.txt; fi
+  - if [ $TRAVIS_PYTHON_VERSION == 2.7 ]; then pip install -r requirements.txt; fi
   - pip install . --no-dependencies
   - pip install -q flake8
   - pip install -q  --pre Django==$DJANGO_VERSION
