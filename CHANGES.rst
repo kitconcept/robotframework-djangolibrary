@@ -1,5 +1,5 @@
 
-1.0a5 (unreleased)
+1.0a5 (2016-02-11)
 ------------------
 
 - Make middleware part Python 3 compatible.
