@@ -4,9 +4,9 @@ python:
   - 3.5
 sudo: false
 env:
-  - DJANGO_VERSION=1.7.10
-  - DJANGO_VERSION=1.8.9
-  - DJANGO_VERSION=1.9.2
+  - DJANGO_VERSION=1.7.11
+  - DJANGO_VERSION=1.8.11
+  - DJANGO_VERSION=1.9.4
 install:
   # Install dependencies only for Py27. For Py3 we can currently only
   # guarantee that the package is installable without fetching the deps.
