@@ -52,10 +52,10 @@ Scenario: Create user
   Logout
 
 Scenario: Create user with special characters
-  Create User  äüö-user  test@test.com  password  is_superuser=True  is_staff=True
+  Create User  äüö-AÜÖ  test@test.com  password  is_superuser=True  is_staff=True
   Go To  ${SERVER}/admin
   Wait until page contains  Django administration
-  Input text  username  äüö-user
+  Input text  username  äüö-AÜÖ
   Input text  password  password
   Click Button  Log in
   Wait until page contains  Django administration
@@ -70,8 +70,8 @@ Scenario: Autologin
 
 Scenario: Autologin with special characters
   [tags]  current
-  Create User  öüä-user  test@test.com  password  is_superuser=True  is_staff=True
-  Autologin as  öüä-user  password
+  Create User  äüö-AÜÖ  test@test.com  password  is_superuser=True  is_staff=True
+  Autologin as  äüö-AÜÖ  password
   User is logged in
 
 Scenario: Autologin without Logout
@@ -96,10 +96,6 @@ Start Django and open Browser
 Stop Django and close browser
   Close Browser
   Stop Django
-
-Pause
-  Import library  Dialogs
-  Pause execution
 
 Logout
   Go To  ${SERVER}/admin/logout
