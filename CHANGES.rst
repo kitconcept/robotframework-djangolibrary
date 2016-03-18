@@ -2,6 +2,12 @@
 1.0a6 (unreleased)
 ------------------
 
+Breaking Changes:
+
+- Change 'Clear DB' implementation to use "python manage.py flush" instead of
+  deleting and re-building the database.
+  [timo]
+
 - Remove 'Debug' and 'Pause' keywords. The 'Debug' keyword which is
   providedby robotframework-debuglibrary is sufficient.
   [timo]

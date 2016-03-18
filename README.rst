@@ -124,6 +124,25 @@ The output should look like this::
   Report:  /home/timo/workspace/prounix/robotframework-djangolibrary/report.html
 
 
+Test Isolation
+--------------
+
+robotframework-djangolibrary does not provide isolation between tests by
+default. This means if you add an object to the database in a test, this
+object will be present in the next test as well. You need to cleanup
+yourself in order to have a proper isolation between the tests. You can use
+the robotframework "Test Teardown" call to call the "Clear DB" keyword after
+each test::
+
+  *** Settings ***
+
+  Library         Selenium2Library  timeout=10  implicit_wait=0
+  Library         DjangoLibrary  ${HOSTNAME}  ${PORT}  path=mysite/mysite  manage=mysite/manage.py  settings=mysite.settings  db=mysite/db.sqlite3
+  Suite Setup     Start Django and open Browser
+  Suite Teardown  Stop Django and close Browser
+  Test Teardown   Clear DB
+
+
 Development
 -----------
 

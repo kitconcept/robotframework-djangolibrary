@@ -12,6 +12,7 @@ Library         DjangoLibrary  127.0.0.1  55001
 Library         DebugLibrary
 Suite Setup     Start Django and Open Browser
 Suite Teardown  Stop Django and Close Browser
+Test Teardown   Clear DB
 
 
 *** Keywords ***
@@ -29,9 +30,15 @@ Stop Django and close browser
 
 Test One: Create User
   Create User  test-user-1  test@test.com  password  is_superuser=True  is_staff=True
+  Autologin as  test-user-1  password
+  Go To  ${SERVER}/admin
+  Wait until page contains  Django administration
+  Page should contain  Site administration
 
-Test Two: No user should be present
-  Autologin as  admin  password
-  Go To  ${SERVER}/admin/auth/user/
-  Wait until page contains  Select user to change
-  Page should not contain  test-user-1
+
+Test Two: User from Test One should not be present
+  Autologin as  test-user-1  password
+  Go To  ${SERVER}/admin
+  Wait until page contains  Django administration
+  Page should not contain  Site administration
+  Page should contain  Log in

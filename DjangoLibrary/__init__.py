@@ -66,30 +66,11 @@ class DjangoLibrary:
         """Clear the Django default database by running
         'python manage.py migrate'.
         """
-        # XXX: Flush seems to be not working
-        # args = [
-        #     'python',
-        #     'mysite/manage.py',
-        #     'flush',
-        #     '--noinput',
-        # ]
-        args = [
-            'rm',
-            self.db,
-        ]
-        subprocess.call(args)
-        import django
-        try:
-            django.__version__
-            migrate_stmt = 'migrate'
-        except AttributeError:
-            migrate_stmt = 'syncdb'
         args = [
             'python',
-            self.manage,
-            migrate_stmt,
+            'mysite/manage.py',
+            'flush',
             '--noinput',
-            '--settings=%s' % self.settings,
         ]
         subprocess.call(args)
 
