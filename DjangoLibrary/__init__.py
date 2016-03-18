@@ -64,7 +64,7 @@ class DjangoLibrary:
 
     def clear_db(self):
         """Clear the Django default database by running
-        'python manage.py syncdb'.
+        'python manage.py migrate'.
         """
         # XXX: Flush seems to be not working
         # args = [
