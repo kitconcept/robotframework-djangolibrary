@@ -223,21 +223,3 @@ user.save()""" % {
         selenium2lib = BuiltIn().get_library_instance('Selenium2Library')
         selenium2lib.execute_javascript(
             "document.cookie = 'autologin=;path=/;domain=localhost;';")
-
-    def pause(self):
-        """Visually pause test execution with interactive dialog by importing
-        **Dialogs**-library and calling its **Pause Execution**-keyword.
-        """
-        from robotframework.libraries.Dialogs import pause_execution
-        pause_execution()
-
-    def debug(self):
-        """Pause test execution with interactive debugger (REPL) in the
-        current shell.
-
-        This keyword is based on ``roboframework-debuglibrary``
-        and requires that the used Python is compiled with
-        ``readline``-support.
-        """
-        from robotframework_debuglibrary.DebugLibrary import Debug
-        Debug()

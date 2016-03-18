@@ -23,10 +23,6 @@ Stop Django and close browser
   Close Browser
   Stop Django
 
-Pause
-  Import library  Dialogs
-  Pause execution
-
 
 *** Test Cases ***
 

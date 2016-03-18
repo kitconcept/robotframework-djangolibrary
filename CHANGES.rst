@@ -2,7 +2,9 @@
 1.0a6 (unreleased)
 ------------------
 
-- Nothing changed yet.
+- Remove 'Debug' and 'Pause' keywords. The 'Debug' keyword which is
+  providedby robotframework-debuglibrary is sufficient.
+  [timo]
 
 
 1.0a5 (2016-02-11)
