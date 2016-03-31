@@ -76,9 +76,9 @@ if 'TRAVIS' in os.environ:
         DATABASES = {
             'default': {
                 'ENGINE': 'django.db.backends.postgresql_psycopg2',
-                'NAME': 'robotframework-djangolibrary',
-                'USER': 'robotframework-djangolibrary',
-                'PASSWORD': 'robotframework-djangolibrary',
+                'NAME': 'travis_ci_test',
+                'USER': 'postgres',
+                'PASSWORD': '',
                 'HOST': 'localhost',
                 'PORT': '',
             }

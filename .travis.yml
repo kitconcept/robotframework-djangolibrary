@@ -22,7 +22,7 @@ install:
 before_script:
   - "export DISPLAY=:99.0"
   - "sh -e /etc/init.d/xvfb start"
-  - psql -c 'create database robotframework-djangolibrary;' -U postgres
+  - psql -c 'create database travis_ci_test;' -U postgres
 script:
   - flake8 .
   # Run tests for Py27 only. See comment above.
