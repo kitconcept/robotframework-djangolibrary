@@ -62,10 +62,23 @@ class DjangoLibrary:
         self.settings = settings
         self.db = os.path.realpath(db)
 
-    def clear_db(self):
-        """Clear the Django default database by running
-        'python manage.py migrate'.
-        """
+    def manage_makemigrations(self):
+        args = [
+            'python',
+            'mysite/manage.py',
+            'makemigrations',
+        ]
+        subprocess.call(args)
+
+    def manage_migrate(self):
+        args = [
+            'python',
+            'mysite/manage.py',
+            'migrate',
+        ]
+        subprocess.call(args)
+
+    def manage_flush(self):
         args = [
             'python',
             'mysite/manage.py',
@@ -73,6 +86,11 @@ class DjangoLibrary:
             '--noinput',
         ]
         subprocess.call(args)
+
+    def clear_db(self):
+        """Legacy keyword.
+        """
+        self.manage_flush()
 
     def create_user(self, username, email, password, **kwargs):
         """Create a regular Django user in the default auth model."""
@@ -117,6 +135,8 @@ user.save()""" % {
     def start_django(self):
         """Start the Django server."""
         self.clear_db()
+        self.manage_makemigrations()
+        self.manage_migrate()
         logger.console("-" * 78)
         args = [
             'python',
