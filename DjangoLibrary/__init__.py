@@ -63,32 +63,36 @@ class DjangoLibrary:
         self.db = os.path.realpath(db)
 
     def manage_makemigrations(self):
+        """Create migration by running 'python manage.py makemigrations'."""
         args = [
             'python',
-            'mysite/manage.py',
+            self.manage,
             'makemigrations',
         ]
         subprocess.call(args)
 
     def manage_migrate(self):
+        """Execute migration by running 'python manage.py migrate'."""
         args = [
             'python',
-            'mysite/manage.py',
+            self.manage,
             'migrate',
         ]
         subprocess.call(args)
 
     def manage_flush(self):
+        """Clear database by running 'python manage.py flush'."""
         args = [
             'python',
-            'mysite/manage.py',
+            self.manage,
             'flush',
             '--noinput',
         ]
         subprocess.call(args)
 
     def clear_db(self):
-        """Legacy keyword.
+        """Clear database. This is a legacy keyword now. Use 'Manage Flush'
+           instead.
         """
         self.manage_flush()
 
