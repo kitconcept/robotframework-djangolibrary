@@ -4,6 +4,9 @@
 
 Breaking Changes:
 
+- Drop Django 1.7.x support. We test and support Django 1.8.x and 1.9.x.
+  [timo]
+
 - Change 'Clear DB' implementation to use "python manage.py flush" instead of
   deleting and re-building the database.
   [timo]
