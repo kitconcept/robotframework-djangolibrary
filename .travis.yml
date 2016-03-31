@@ -7,6 +7,8 @@ env:
   - DJANGO_VERSION=1.7.11
   - DJANGO_VERSION=1.8.11
   - DJANGO_VERSION=1.9.4
+services:
+  – postgresql
 install:
   # Install dependencies only for Py27. For Py3 we can currently only
   # guarantee that the package is installable without fetching the deps.
@@ -19,6 +21,7 @@ install:
 before_script:
   - "export DISPLAY=:99.0"
   - "sh -e /etc/init.d/xvfb start"
+  - psql -c 'create database robotframework-djangolibrary;' -U postgres
 script:
   - flake8 .
   # Run tests for Py27 only. See comment above.
