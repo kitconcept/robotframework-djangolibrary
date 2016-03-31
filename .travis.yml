@@ -28,7 +28,7 @@ before_script:
   - psql -c 'create database travis_ci_test;' -U postgres
   # - django-admin startproject mysite
 script:
-  - flake8 .
+  - flake8 DjangoLibrary
   # Run tests for Py27 only. See comment above.
   - if [ $TRAVIS_PYTHON_VERSION == 2.7 ]; then pybot DjangoLibrary/tests/; fi
 after_script:
