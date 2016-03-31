@@ -4,9 +4,9 @@ python:
   - 3.5
 sudo: false
 env:
-  - DJANGO_VERSION=1.7.11
-  - DJANGO_VERSION=1.8.11
-  - DJANGO_VERSION=1.9.4
+  - DJANGO_VERSION=1.7.11 DB=SQLite
+  - DJANGO_VERSION=1.8.11 DB=SQLite
+  - DJANGO_VERSION=1.9.4 DB=SQLite
 services:
   – postgresql
 install:
@@ -16,6 +16,7 @@ install:
   - if [ $TRAVIS_PYTHON_VERSION == 2.7 ]; then pip install -r requirements.txt; fi
   - pip install . --no-dependencies
   - pip install -q flake8
+  - pip install -q psycopg2
   - pip install -q  --pre Django==$DJANGO_VERSION
 #  - python setup.py install
 before_script:

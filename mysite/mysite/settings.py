@@ -59,16 +59,30 @@ WSGI_APPLICATION = 'mysite.wsgi.application'
 
 DATABASES = {
     'default': {
-        # 'ENGINE': 'django.db.backends.sqlite3',
-        # 'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'robotframework-djangolibrary',
-        'USER': 'robotframework-djangolibrary',
-        'PASSWORD': 'robotframework-djangolibrary',
-        'HOST': 'localhost',
-        'PORT': '',
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
     }
 }
+
+if 'TRAVIS' in os.environ:
+    if os.environ.get('DB') == 'SQLite':
+        DATABASES = {
+            'default': {
+                'ENGINE': 'django.db.backends.sqlite3',
+                'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+            }
+        }
+    elif os.environ.get('DB') == 'Postgres':
+        DATABASES = {
+            'default': {
+                'ENGINE': 'django.db.backends.postgresql_psycopg2',
+                'NAME': 'robotframework-djangolibrary',
+                'USER': 'robotframework-djangolibrary',
+                'PASSWORD': 'robotframework-djangolibrary',
+                'HOST': 'localhost',
+                'PORT': '',
+            }
+        }
 
 # AUTOCOMMIT = False
 
