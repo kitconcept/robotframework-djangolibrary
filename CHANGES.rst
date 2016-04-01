@@ -2,7 +2,24 @@
 1.0a6 (unreleased)
 ------------------
 
-- Nothing changed yet.
+Breaking Changes:
+
+- Drop Django 1.7.x support. We test and support Django 1.8.x and 1.9.x.
+  [timo]
+
+- Change 'Clear DB' implementation to use "python manage.py flush" instead of
+  deleting and re-building the database.
+  [timo]
+
+- Remove 'Debug' and 'Pause' keywords. The 'Debug' keyword which is
+  providedby robotframework-debuglibrary is sufficient.
+  [timo]
+
+New Features:
+
+- Support for Postgres added. All Django database backends should work.
+  We test SQLite and Postgres only though.
+  [timo]
 
 
 1.0a5 (2016-02-11)

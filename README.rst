@@ -29,6 +29,8 @@ DjangoLibrary is a web testing library to test Django with Robot Framework. It u
 
 The library will automatically start and stop your Django instance while running the tests. It also comes with serveral autologin keywords that allow you to login different users during your tests, without the need to actually access the login page.
 
+DjangoLibrary is tested against Django 1.8.x and 1.9.x with SQLite and Postgres on Python 2.7 and 3.5.
+
 
 Documentation
 -------------
@@ -122,6 +124,25 @@ The output should look like this::
   Output:  /home/timo/workspace/prounix/robotframework-djangolibrary/output.xml
   Log:     /home/timo/workspace/prounix/robotframework-djangolibrary/log.html
   Report:  /home/timo/workspace/prounix/robotframework-djangolibrary/report.html
+
+
+Test Isolation
+--------------
+
+robotframework-djangolibrary does not provide isolation between tests by
+default. This means if you add an object to the database in a test, this
+object will be present in the next test as well. You need to cleanup
+yourself in order to have a proper isolation between the tests. You can use
+the robotframework "Test Teardown" call to call the "Clear DB" keyword after
+each test::
+
+  *** Settings ***
+
+  Library         Selenium2Library  timeout=10  implicit_wait=0
+  Library         DjangoLibrary  ${HOSTNAME}  ${PORT}  path=mysite/mysite  manage=mysite/manage.py  settings=mysite.settings  db=mysite/db.sqlite3
+  Suite Setup     Start Django and open Browser
+  Suite Teardown  Stop Django and close Browser
+  Test Teardown   Clear DB
 
 
 Development
