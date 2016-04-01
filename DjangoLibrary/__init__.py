@@ -67,7 +67,7 @@ class DjangoLibrary:
             )
 
     def manage_makemigrations(self):
-        """Create migration by running 'python manage.py makemigrations'."""
+        """Create migrations by running 'python manage.py makemigrations'."""
         args = [
             'python',
             self.manage,
