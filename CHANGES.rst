@@ -15,6 +15,12 @@ Breaking Changes:
   providedby robotframework-debuglibrary is sufficient.
   [timo]
 
+New Features:
+
+- Support for Postgres added. All Django database backends should work.
+  We test SQLite and Postgres only though.
+  [timo]
+
 
 1.0a5 (2016-02-11)
 ------------------
