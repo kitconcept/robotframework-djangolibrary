@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 from robot.api import logger
 from robot.libraries.BuiltIn import BuiltIn
+from warnings import warn
 
 import base64
 import os
@@ -34,7 +35,7 @@ class DjangoLibrary:
 
     def __init__(self, host="0.0.0.0", port=8000, path='mysite/mysite',
                  manage='mysite/manage.py', settings='mysite.settings',
-                 db="test.db"):
+                 db=None):
         """Django2Library can be imported with optional arguments.
 
         `host` is the hostname of your Django instance. Default value is
@@ -49,8 +50,6 @@ class DjangoLibrary:
 
         `settings` is the path to your Django instance settings.py.
 
-        `db` is the path to your Django instance database.
-
         Examples:
         | Library | Selenium2Library | timeout=15        | implicit_wait=0.5  | # Sets default timeout to 15 seconds and the default implicit_wait to 0.5 seconds. |  # noqa
         | Library | DjangoLibrary    | 127.0.0.1         | 55001              | path=mysite/mysite | manage=mysite/manage.py | settings=mysite.settings | db=mysite/db.sqlite3 | # Sets default hostname to 127.0.0.1 and the default port to 55001.                |  # noqa
@@ -60,7 +59,12 @@ class DjangoLibrary:
         self.path = os.path.realpath(path)
         self.manage = os.path.realpath(manage)
         self.settings = settings
-        self.db = os.path.realpath(db)
+        if db:
+            warn(
+                "Using the DjangoLibrary 'db' parameter is deprecated. " +
+                "Use the 'settings' parameter instead to set a " +
+                "database connection."
+            )
 
     def manage_makemigrations(self):
         """Create migration by running 'python manage.py makemigrations'."""
@@ -94,6 +98,10 @@ class DjangoLibrary:
         """Clear database. This is a legacy keyword now. Use 'Manage Flush'
            instead.
         """
+        warn(
+            "The DjangoLibrary 'clear_db' keyword is deprecated. " +
+            "Use the 'manage_flush' keyword instead."
+        )
         self.manage_flush()
 
     def create_user(self, username, email, password, **kwargs):
