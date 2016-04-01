@@ -23,7 +23,7 @@ install:
 before_script:
   - "export DISPLAY=:99.0"
   - "sh -e /etc/init.d/xvfb start"
-  - psql -c 'create robotframework_djangolibrary_test;' -U postgres
+  - psql -c 'create database travis_ci_test;' -U postgres
   # - django-admin startproject mysite
 script:
   - flake8 DjangoLibrary
