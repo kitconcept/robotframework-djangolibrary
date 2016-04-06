@@ -39,8 +39,14 @@ Test Factory Boy Keyword
   Dictionary should contain item  ${user}  is_superuser  False
   Dictionary should contain item  ${user}  is_staff  False
 
-Test Factory Boy Keyword Override attribute
+Test Factory Boy Keyword Override Single Attribute
   ${user}=  Factory Boy  DjangoLibrary.tests.factories.UserFactory  username=janedoe
   Log Dictionary  ${user}  WARN
   Dictionary should contain item  ${user}  username  janedoe
   Dictionary should contain item  ${user}  email  janedoe@example.com
+
+Test Factory Boy Keyword Override Multiple Attribute
+  ${user}=  Factory Boy  DjangoLibrary.tests.factories.UserFactory  username=janedoe  email=jane@doe.com
+  Log Dictionary  ${user}  WARN
+  Dictionary should contain item  ${user}  username  janedoe
+  Dictionary should contain item  ${user}  email  jane@doe.com
