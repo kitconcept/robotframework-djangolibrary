@@ -32,7 +32,7 @@ setup(
     keywords='robotframework django test',
     author='Timo Stollenwerk',
     author_email='stollenwerk@kitconcept.com',
-    url='http://kitconcept.com',
+    url='https://kitconcept.com',
     license='Apache License 2.0',
     packages=find_packages(
         exclude=['ez_setup', 'examples', 'tests']
@@ -41,6 +41,8 @@ setup(
     zip_safe=False,
     install_requires=[
         'Django',
+        'factory_boy',
+        'requests',
         'robotframework',
         'robotframework-selenium2library',
         'robotframework-debuglibrary',

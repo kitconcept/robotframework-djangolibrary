@@ -12,7 +12,7 @@ Library         DjangoLibrary  127.0.0.1  55001
 Library         DebugLibrary
 Suite Setup     Start Django and Open Browser
 Suite Teardown  Stop Django and Close Browser
-Test Teardown   Clear DB
+Test Teardown   Manage Flush
 
 
 *** Keywords ***

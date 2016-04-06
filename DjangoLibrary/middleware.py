@@ -1,7 +1,10 @@
 from django.contrib import auth
 from django.contrib.auth.middleware import AuthenticationMiddleware
+from django.http import JsonResponse
+from pydoc import locate
 
 import base64
+import json
 
 
 class AutologinAuthenticationMiddleware(AuthenticationMiddleware):
@@ -21,3 +24,23 @@ class AutologinAuthenticationMiddleware(AuthenticationMiddleware):
         if user is not None:
             if user.is_active:
                 auth.login(request, user)
+
+
+class FactoryBoyMiddleware():
+
+    def process_request(self, request):
+        model_name = request.GET.get('FACTORY_BOY_MODEL_PATH')
+        if not model_name:
+            return
+        args = request.GET.get('FACTORY_BOY_ARGS')
+        args = json.loads(args)
+        FactoryBoyClass = locate(model_name)
+        user = FactoryBoyClass(**args)
+        return JsonResponse({
+            'username': user.username,
+            'email': user.email,
+            'password': user.password,
+            'is_superuser': user.is_superuser,
+            'is_staff': user.is_staff,
+            'args': args
+        }, status=201)
