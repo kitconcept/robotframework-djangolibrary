@@ -1,3 +1,4 @@
+from django.apps import apps
 from django.contrib import auth
 from django.contrib.auth.middleware import AuthenticationMiddleware
 
@@ -21,3 +22,21 @@ class AutologinAuthenticationMiddleware(AuthenticationMiddleware):
         if user is not None:
             if user.is_active:
                 auth.login(request, user)
+
+
+class CreateContentMiddleware():
+
+    def process_request(self, request):
+        model_name = getattr(request, 'ROBOTFRAMEWORK_DJANGO_MODEL_NAME')
+        DjangoModel = apps.get_model(app_label='auth', model_name=model_name)
+        username = 'johndoe'
+        email = 'john@doe.com'
+        password = 'secret'
+        user = DjangoModel.objects.create_user(
+            username,
+            email=email,
+            password=password,
+        )
+        user.is_superuser = True
+        user.is_staff = True
+        user.save()
