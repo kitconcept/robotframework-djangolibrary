@@ -5,6 +5,7 @@ from warnings import warn
 
 import base64
 import os
+import requests
 import signal
 import subprocess
 
@@ -236,3 +237,14 @@ user.save()""" % {
         selenium2lib = BuiltIn().get_library_instance('Selenium2Library')
         selenium2lib.execute_javascript(
             "document.cookie = 'autologin=;path=/;domain=localhost;';")
+
+    def factory_boy(self, factory):
+        url = 'http://{}:{}?FACTORY_BOY_MODEL_NAME=User'.format(
+            self.host,
+            self.port
+        )
+        payload = {'FACTORY_BOY_MODEL_NAME': 'User'}
+        response = requests.get(url, params=payload)
+        if response.status_code != 201:
+            raise
+        return response.json()

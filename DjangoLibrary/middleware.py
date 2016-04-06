@@ -1,6 +1,7 @@
 from django.apps import apps
 from django.contrib import auth
 from django.contrib.auth.middleware import AuthenticationMiddleware
+from django.http import JsonResponse
 
 import base64
 
@@ -27,16 +28,27 @@ class AutologinAuthenticationMiddleware(AuthenticationMiddleware):
 class CreateContentMiddleware():
 
     def process_request(self, request):
-        model_name = getattr(request, 'ROBOTFRAMEWORK_DJANGO_MODEL_NAME')
-        DjangoModel = apps.get_model(app_label='auth', model_name=model_name)
-        username = 'johndoe'
-        email = 'john@doe.com'
-        password = 'secret'
-        user = DjangoModel.objects.create_user(
-            username,
-            email=email,
-            password=password,
-        )
-        user.is_superuser = True
-        user.is_staff = True
-        user.save()
+        model_name = request.GET.get('FACTORY_BOY_MODEL_NAME')
+        if model_name:
+            DjangoModel = apps.get_model(
+                app_label='auth',
+                model_name=model_name
+            )
+            username = 'johndoe'
+            email = 'johndoe@example.com'
+            password = 'secret'
+            user = DjangoModel.objects.create_user(
+                username,
+                email=email,
+                password=password,
+            )
+            user.is_superuser = True
+            user.is_staff = True
+            user.save()
+            return JsonResponse({
+                'username': user.username,
+                'email': user.email,
+                'password': user.password,
+                'is_superuser': user.is_superuser,
+                'is_staff': user.is_staff,
+            }, status=201)

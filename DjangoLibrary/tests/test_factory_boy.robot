@@ -9,6 +9,7 @@ ${BROWSER}              firefox
 Documentation   Testing Test Isolation
 Library         Selenium2Library  timeout=10  implicit_wait=0.5
 Library         DjangoLibrary  127.0.0.1  55001
+Library         Collections
 Library         DebugLibrary
 Suite Setup     Start Django and Open Browser
 Suite Teardown  Stop Django and Close Browser
@@ -28,17 +29,12 @@ Stop Django and close browser
 
 *** Test Cases ***
 
-Test One: Create User
-  Create User  test-user-1  test@test.com  password  is_superuser=True  is_staff=True
-  Autologin as  test-user-1  password
-  Go To  ${SERVER}/admin
-  Wait until page contains  Django administration
-  Page should contain  Site administration
-
-
-Test Two: User from Test One should not be present
-  Autologin as  test-user-1  password
-  Go To  ${SERVER}/admin
-  Wait until page contains  Django administration
-  Page should not contain  Site administration
-  Page should contain  Log in
+Test Factory Boy Keyword
+  ${user}=  Factory Boy  UserFactory
+  Log Dictionary  ${user}  WARN
+  Dictionary Should Contain Key  ${user}  username
+  Dictionary should contain key  ${user}  password
+  Dictionary should contain item  ${user}  username  johndoe
+  Dictionary should contain item  ${user}  email  johndoe@example.com
+  Dictionary should contain item  ${user}  is_superuser  True
+  Dictionary should contain item  ${user}  is_staff  True
