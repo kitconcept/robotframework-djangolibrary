@@ -26,7 +26,7 @@ class AutologinAuthenticationMiddleware(AuthenticationMiddleware):
                 auth.login(request, user)
 
 
-class CreateContentMiddleware():
+class FactoryBoyMiddleware():
 
     def process_request(self, request):
         model_name = request.GET.get('FACTORY_BOY_MODEL_PATH')

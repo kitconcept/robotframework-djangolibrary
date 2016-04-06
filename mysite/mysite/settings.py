@@ -47,7 +47,7 @@ MIDDLEWARE_CLASSES = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.auth.middleware.SessionAuthenticationMiddleware',
     'DjangoLibrary.middleware.AutologinAuthenticationMiddleware',
-    'DjangoLibrary.middleware.CreateContentMiddleware',
+    'DjangoLibrary.middleware.FactoryBoyMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]

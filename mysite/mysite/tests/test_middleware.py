@@ -1,13 +1,13 @@
 from django.contrib.auth.models import User
 from django.test import TestCase
-from DjangoLibrary.middleware import CreateContentMiddleware
+from DjangoLibrary.middleware import FactoryBoyMiddleware
 from mock import Mock
 
 
-class TestCreateContentMiddleware(TestCase):
+class TestFactoryBoyMiddleware(TestCase):
 
     def setUp(self):
-        self.cm = CreateContentMiddleware()
+        self.cm = FactoryBoyMiddleware()
         self.request = Mock()
         self.request.session = {}
 
