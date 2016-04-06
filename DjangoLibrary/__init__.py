@@ -4,7 +4,9 @@ from robot.libraries.BuiltIn import BuiltIn
 from warnings import warn
 
 import base64
+import json
 import os
+import requests
 import signal
 import subprocess
 
@@ -236,3 +238,17 @@ user.save()""" % {
         selenium2lib = BuiltIn().get_library_instance('Selenium2Library')
         selenium2lib.execute_javascript(
             "document.cookie = 'autologin=;path=/;domain=localhost;';")
+
+    def factory_boy(self, factory, **kwargs):
+        url = 'http://{}:{}'.format(
+            self.host,
+            self.port
+        )
+        payload = {
+            'FACTORY_BOY_MODEL_PATH': factory,
+            'FACTORY_BOY_ARGS': json.dumps(kwargs)
+        }
+        response = requests.get(url, params=payload)
+        if response.status_code != 201:
+            raise
+        return response.json()
