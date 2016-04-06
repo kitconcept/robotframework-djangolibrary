@@ -28,7 +28,7 @@ class AutologinAuthenticationMiddleware(AuthenticationMiddleware):
 class CreateContentMiddleware():
 
     def process_request(self, request):
-        model_name = request.GET.get('FACTORY_BOY_MODEL_NAME')
+        model_name = request.GET.get('FACTORY_BOY_MODEL_PATH')
         if not model_name:
             return
         FactoryBoyClass = locate(model_name)

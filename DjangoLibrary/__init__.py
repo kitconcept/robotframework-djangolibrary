@@ -243,7 +243,7 @@ user.save()""" % {
             self.host,
             self.port
         )
-        payload = {'FACTORY_BOY_MODEL_NAME': factory}
+        payload = {'FACTORY_BOY_MODEL_PATH': factory}
         response = requests.get(url, params=payload)
         if response.status_code != 201:
             raise
