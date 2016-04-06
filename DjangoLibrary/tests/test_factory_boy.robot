@@ -7,7 +7,7 @@ ${BROWSER}              firefox
 *** Settings ***
 
 Documentation   Testing Test Isolation
-Library         Selenium2Library  timeout=10  implicit_wait=0.5
+Library         Selenium2Library  timeout=10  implicit_wait=0
 Library         DjangoLibrary  127.0.0.1  55001
 Library         Collections
 Library         DebugLibrary
@@ -38,3 +38,9 @@ Test Factory Boy Keyword
   Dictionary should contain item  ${user}  email  johndoe@example.com
   Dictionary should contain item  ${user}  is_superuser  False
   Dictionary should contain item  ${user}  is_staff  False
+
+Test Factory Boy Keyword Override attribute
+  ${user}=  Factory Boy  DjangoLibrary.tests.factories.UserFactory  username=janedoe
+  Log Dictionary  ${user}  WARN
+  Dictionary should contain item  ${user}  username  janedoe
+  Dictionary should contain item  ${user}  email  janedoe@example.com
