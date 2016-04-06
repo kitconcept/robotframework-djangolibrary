@@ -12,7 +12,7 @@ class TestCreateContentMiddleware(TestCase):
         self.request.session = {}
 
     def test_process_request_creates_object(self):
-        setattr(self.request, 'ROBOTFRAMEWORK_DJANGO_MODEL_NAME', 'User')
+        setattr(self.request, 'FACTORY_BOY_MODEL_NAME', 'User')
         self.assertEqual(self.cm.process_request(self.request), None)
         self.assertEqual(1, len(User.objects.values()))
         self.assertEqual('johndoe', User.objects.values()[0]['username'])
