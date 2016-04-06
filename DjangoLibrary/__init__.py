@@ -239,11 +239,11 @@ user.save()""" % {
             "document.cookie = 'autologin=;path=/;domain=localhost;';")
 
     def factory_boy(self, factory):
-        url = 'http://{}:{}?FACTORY_BOY_MODEL_NAME=User'.format(
+        url = 'http://{}:{}'.format(
             self.host,
             self.port
         )
-        payload = {'FACTORY_BOY_MODEL_NAME': 'User'}
+        payload = {'FACTORY_BOY_MODEL_NAME': factory}
         response = requests.get(url, params=payload)
         if response.status_code != 201:
             raise

@@ -30,11 +30,11 @@ Stop Django and close browser
 *** Test Cases ***
 
 Test Factory Boy Keyword
-  ${user}=  Factory Boy  UserFactory
+  ${user}=  Factory Boy  DjangoLibrary.tests.factories.UserFactory
   Log Dictionary  ${user}  WARN
   Dictionary Should Contain Key  ${user}  username
   Dictionary should contain key  ${user}  password
   Dictionary should contain item  ${user}  username  johndoe
   Dictionary should contain item  ${user}  email  johndoe@example.com
-  Dictionary should contain item  ${user}  is_superuser  True
-  Dictionary should contain item  ${user}  is_staff  True
+  Dictionary should contain item  ${user}  is_superuser  False
+  Dictionary should contain item  ${user}  is_staff  False
