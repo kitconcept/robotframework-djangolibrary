@@ -32,15 +32,18 @@ class FactoryBoyMiddleware():
         model_name = request.GET.get('FACTORY_BOY_MODEL_PATH')
         if not model_name:
             return
-        args = request.GET.get('FACTORY_BOY_ARGS')
-        args = json.loads(args)
+        get_args = request.GET.get('FACTORY_BOY_ARGS')
+        try:
+            factory_boy_args = json.loads(get_args)
+        except ValueError:
+            factory_boy_args = {}
         FactoryBoyClass = locate(model_name)
-        user = FactoryBoyClass(**args)
+        user = FactoryBoyClass(**factory_boy_args)
         return JsonResponse({
             'username': user.username,
             'email': user.email,
             'password': user.password,
             'is_superuser': user.is_superuser,
             'is_staff': user.is_staff,
-            'args': args
+            'args': factory_boy_args
         }, status=201)
