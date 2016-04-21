@@ -249,6 +249,11 @@ user.save()""" % {
             'FACTORY_BOY_ARGS': json.dumps(kwargs)
         }
         response = requests.get(url, params=payload)
-        if response.status_code != 201:
-            response.raise_for_status()
-        return response.json()
+        if response.status_code == 201:
+            return response.json()
+        status_code_400 = response.status_code == 400
+        type_json = response.headers.get('Content-Type') == 'application/json'
+        if status_code_400 and type_json:
+            msg = response.json().get('error')
+            raise requests.exceptions.HTTPError(msg, response=response)
+        return response.raise_for_status()
