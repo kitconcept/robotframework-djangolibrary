@@ -12,7 +12,7 @@ Breaking Changes:
   [timo]
 
 - Remove 'Debug' and 'Pause' keywords. The 'Debug' keyword which is
-  providedby robotframework-debuglibrary is sufficient.
+  provided by robotframework-debuglibrary is sufficient.
   [timo]
 
 New Features:
