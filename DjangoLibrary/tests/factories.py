@@ -2,8 +2,6 @@ import datetime
 from django.template.defaultfilters import slugify
 from factory import DjangoModelFactory, lazy_attribute
 from random import randint
-from .models import Author
-from .models import Book
 
 
 class UserFactory(DjangoModelFactory):
@@ -26,19 +24,3 @@ class UserFactory(DjangoModelFactory):
     last_login = lazy_attribute(
         lambda o: o.date_joined + datetime.timedelta(days=4)
     )
-
-
-class AuthorFactory(DjangoModelFactory):
-    class Meta:
-        model = Author
-        django_get_or_create = ('name',)
-
-    name = 'Noam Chomsky'
-
-
-class BookFactory(DjangoModelFactory):
-    class Meta:
-        model = Book
-        django_get_or_create = ('title',)
-
-    title = 'Colorless Green Ideas Sleep Furiously'
