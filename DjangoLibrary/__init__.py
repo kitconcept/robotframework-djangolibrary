@@ -254,6 +254,9 @@ user.save()""" % {
         status_code_400 = response.status_code == 400
         type_json = response.headers.get('Content-Type') == 'application/json'
         if status_code_400 and type_json:
-            msg = response.json().get('error')
+            msg = response.json().get('error', '')
+            traceback = response.json().get('traceback', '')
+            if traceback:
+                msg = msg + '\n\n' + traceback
             raise requests.exceptions.HTTPError(msg, response=response)
         return response.raise_for_status()
