@@ -39,9 +39,10 @@ class FactoryBoyMiddleware():
             factory_boy_args = {}
         FactoryBoyClass = locate(model_name)
         if not FactoryBoyClass:
+            msg = 'Factory Boy class could not be found in: {}'
             return JsonResponse(
                 {
-                    'error': 'Factory Boy class could not be found in: {}'.format(model_name)
+                    'error': msg.format(model_name)
                 },
                 status=400
             )
