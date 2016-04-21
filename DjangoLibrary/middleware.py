@@ -38,12 +38,10 @@ class FactoryBoyMiddleware():
         except ValueError:
             factory_boy_args = {}
         FactoryBoyClass = locate(model_name)
-        user = FactoryBoyClass(**factory_boy_args)
-        return JsonResponse({
-            'username': user.username,
-            'email': user.email,
-            'password': user.password,
-            'is_superuser': user.is_superuser,
-            'is_staff': user.is_staff,
-            'args': factory_boy_args
-        }, status=201)
+        obj = FactoryBoyClass(**factory_boy_args)
+        fields = obj._meta._get_fields()
+        result = {}
+        for field in fields:
+            result[field.name] = str(getattr(obj, field.name, ''))
+        result['args'] = str(factory_boy_args)
+        return JsonResponse(result, status=201)

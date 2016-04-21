@@ -50,3 +50,19 @@ Test Factory Boy Keyword Override Multiple Attribute
   Log Dictionary  ${user}  WARN
   Dictionary should contain item  ${user}  username  janedoe
   Dictionary should contain item  ${user}  email  jane@doe.com
+
+#Test Factory Boy Raises Exception
+#  ${response}=  Factory Boy  Non.Existing.Path
+
+Test Factory Boy Keyword for Author
+  ${user}=  Factory Boy  bookstore.factories.AuthorFactory
+  Log Dictionary  ${user}  WARN
+  Dictionary Should Contain Key  ${user}  name
+  Dictionary should contain item  ${user}  name  Noam Chomsky
+
+Test Factory Boy Keyword for Book
+  ${user}=  Factory Boy  bookstore.factories.BookFactory
+  Log Dictionary  ${user}  WARN
+  Dictionary Should Contain Key  ${user}  title
+  Dictionary should contain item  ${user}  title  Colorless Green Ideas Sleep Furiously
+
