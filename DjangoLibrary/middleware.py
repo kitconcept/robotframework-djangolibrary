@@ -49,8 +49,12 @@ class FactoryBoyMiddleware():
         try:
             obj = FactoryBoyClass(**factory_boy_args)
         except:
+            error = 'FactoryBoyClass "{}" could not be instantiated with args "{}"'.format(
+                model_name,
+                factory_boy_args
+            )
             return JsonResponse(
-                {'error': 'FactoryBoyClass could not be instantiated'},
+                {'error': error},
                 status=400
             )
         fields = obj._meta._get_fields()
