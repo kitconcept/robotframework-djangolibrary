@@ -64,7 +64,7 @@ Test Factory Boy Keyword for Book
   Dictionary should contain item  ${user}  title  Colorless Green Ideas Sleep Furiously
 
 Test Factory Boy with non-existing path raises Exception
-  Run Keyword and Expect Error  HTTPError: Factory Boy class could not be found in: Non.Existing.Path  Factory Boy  Non.Existing.Path
+  Run Keyword and Expect Error  HTTPError: Factory Boy class "Non.Existing.Path" could not be found  Factory Boy  Non.Existing.Path
 
 Test Factory Boy with broken class raises Exception
   Run Keyword and Expect Error  HTTPError: FactoryBoyClass "DjangoLibrary.tests.factories.BrokenFactory" could not be instantiated with args "{}"  Factory Boy  DjangoLibrary.tests.factories.BrokenFactory

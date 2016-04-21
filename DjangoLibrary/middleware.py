@@ -39,7 +39,7 @@ class FactoryBoyMiddleware():
             factory_boy_args = {}
         FactoryBoyClass = locate(model_name)
         if not FactoryBoyClass:
-            msg = 'Factory Boy class could not be found in: {}'
+            msg = 'Factory Boy class "{}" could not be found'
             return JsonResponse(
                 {
                     'error': msg.format(model_name)
@@ -49,12 +49,13 @@ class FactoryBoyMiddleware():
         try:
             obj = FactoryBoyClass(**factory_boy_args)
         except:
-            error = 'FactoryBoyClass "{}" could not be instantiated with args "{}"'.format(
-                model_name,
-                factory_boy_args
-            )
             return JsonResponse(
-                {'error': error},
+                {
+                    'error': 'FactoryBoyClass "{}" '.format(model_name) +
+                    'could not be instantiated with args "{}"'.format(
+                        factory_boy_args
+                    )
+                },
                 status=400
             )
         fields = obj._meta._get_fields()
