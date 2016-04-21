@@ -38,6 +38,13 @@ class FactoryBoyMiddleware():
         except ValueError:
             factory_boy_args = {}
         FactoryBoyClass = locate(model_name)
+        if not FactoryBoyClass:
+            return JsonResponse(
+                {
+                    'error': 'Factory Boy class could not be found in: {}'.format(model_name)
+                },
+                status=400
+            )
         obj = FactoryBoyClass(**factory_boy_args)
         fields = obj._meta._get_fields()
         result = {}
