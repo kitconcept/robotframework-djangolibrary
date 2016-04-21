@@ -45,7 +45,13 @@ class FactoryBoyMiddleware():
                 },
                 status=400
             )
-        obj = FactoryBoyClass(**factory_boy_args)
+        try:
+            obj = FactoryBoyClass(**factory_boy_args)
+        except:
+            return JsonResponse(
+                {'error': 'FactoryBoyClass could not be instantiated'},
+                status=400
+            )
         fields = obj._meta._get_fields()
         result = {}
         for field in fields:

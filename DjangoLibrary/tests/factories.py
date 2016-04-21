@@ -24,3 +24,9 @@ class UserFactory(DjangoModelFactory):
     last_login = lazy_attribute(
         lambda o: o.date_joined + datetime.timedelta(days=4)
     )
+
+
+class BrokenFactory(DjangoModelFactory):
+
+    class Meta:
+        model = 'nonExistingModel'
