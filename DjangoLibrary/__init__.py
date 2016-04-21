@@ -250,5 +250,5 @@ user.save()""" % {
         }
         response = requests.get(url, params=payload)
         if response.status_code != 201:
-            raise
+            response.raise_for_status()
         return response.json()
