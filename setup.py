@@ -46,6 +46,7 @@ setup(
         'robotframework',
         'robotframework-selenium2library',
         'robotframework-debuglibrary',
+        'six',
     ],
     entry_points="""
     # -*- Entry points: -*-

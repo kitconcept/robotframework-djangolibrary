@@ -8,10 +8,19 @@ import json
 import os
 import requests
 import signal
+import six
 import subprocess
 
 __version__ = '1.0'
 ROBOT_LIBRARY_DOC_FORMAT = 'reST'
+
+
+def safe_bytes(str):
+    """Returns bytes on Py3 and a string on Py2."""
+    if six.PY3:
+        return bytes(str, 'utf-8')
+    else:
+        return str
 
 
 class DjangoLibrary:
@@ -114,7 +123,8 @@ class DjangoLibrary:
         The `Create User` keyword allows to provide additional arguments that
         are passed directly to the Djange create_user method (e.g.
         "is_staff=True")."""
-        to_run = """
+        if six.PY3:
+            to_run = """
 from django.contrib.auth.models import User
 user = User.objects.create_user(
     '{0}',
@@ -124,12 +134,30 @@ user = User.objects.create_user(
 user.is_superuser = '{3}'
 user.is_staff = '{4}'
 user.save()""".format(
-            username,
-            email,
-            password,
-            kwargs.get('is_superuser', False),
-            kwargs.get('is_staff', False),
-        )
+                username,
+                email,
+                password,
+                kwargs.get('is_superuser', False),
+                kwargs.get('is_staff', False),
+            )
+        else:
+            pass
+            to_run = """
+from django.contrib.auth.models import User
+user = User.objects.create_user(
+    %(username)s,
+    email=%(email)s,
+    password=%(password)s,
+)
+user.is_superuser = %(is_superuser)s
+user.is_staff = %(is_staff)s
+user.save()""" % {
+                'username': repr(username.encode("utf-8")),
+                'password': repr(password.encode("utf-8")),
+                'email': repr(email),
+                'is_superuser': repr(kwargs.get('is_superuser', False)),
+                'is_staff': repr(kwargs.get('is_staff', False)),
+            }
 
         args = [
             'python',
@@ -145,7 +173,8 @@ user.save()""".format(
             stdout=subprocess.PIPE,
             stderr=subprocess.PIPE
         )
-        django.communicate(bytes(to_run, 'utf-8'))
+
+        django.communicate(safe_bytes(to_run))
 
     def create_superuser(self, username, email, password):
         """Create a Django superuser in the default auth model."""
@@ -212,7 +241,7 @@ user.save()""".format(
         """
         # encode autologin cookie value as base64
         autologin_cookie_value = base64.b64encode(
-            bytes("%s:%s" % (username, password), "utf-8")
+            safe_bytes("%s:%s" % (username, password))
         )
 
         selenium2lib = BuiltIn().get_library_instance('Selenium2Library')
@@ -226,10 +255,17 @@ user.save()""".format(
         #     domain="localhost",
         # )
 
-        selenium2lib.execute_javascript(
-            "document.cookie = 'autologin=%s;path=/;domain=localhost;';" %
-            autologin_cookie_value.decode('utf-8')
-        )
+        if six.PY3:
+            selenium2lib.execute_javascript(
+                "document.cookie = 'autologin=%s;path=/;domain=localhost;';" %
+                autologin_cookie_value.decode('utf-8')
+            )
+        else:
+            selenium2lib.execute_javascript(
+                "document.cookie = 'autologin=%s;path=/;domain=localhost;';" %
+                autologin_cookie_value
+            )
+
         # autologin_cookie = selenium2lib.get_cookie_value('autologin')
         # assert autologin_cookie == "%s:%s" % (username, password)
         # cookies = selenium2lib.get_cookies()
