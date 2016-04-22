@@ -52,6 +52,8 @@ class DjangoLibrary:
 
         `settings` is the path to your Django instance settings.py.
 
+        `db` is deprecated. Please don't use it.
+
         Examples:
         | Library | Selenium2Library | timeout=15        | implicit_wait=0.5  | # Sets default timeout to 15 seconds and the default implicit_wait to 0.5 seconds. |  # noqa
         | Library | DjangoLibrary    | 127.0.0.1         | 55001              | path=mysite/mysite | manage=mysite/manage.py | settings=mysite.settings | db=mysite/db.sqlite3 | # Sets default hostname to 127.0.0.1 and the default port to 55001.                |  # noqa
@@ -240,6 +242,20 @@ user.save()""" % {
             "document.cookie = 'autologin=;path=/;domain=localhost;';")
 
     def factory_boy(self, factory, **kwargs):
+        """Create content objects in the Django database with Factory Boy.
+        See https://factoryboy.readthedocs.org for more details.
+
+        Arguments:
+
+        `factory` is a required argument and should contain the full path to
+        your factory boy factory class (e.g.
+        "mysite.polls.factories.PollFactory").
+
+        The `Factory Boy` keyword allows to provide additional arguments that
+        are passed directly to the Factory Boy Factory class
+        (e.g. "mysite.polls.factories.PollFactory pollname='mypoll'").
+
+        """
         url = 'http://{}:{}'.format(
             self.host,
             self.port
