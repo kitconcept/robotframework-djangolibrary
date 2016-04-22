@@ -239,6 +239,9 @@ user.save()""" % {
         NEVER to your deployment!
 
         """
+        if six.PY2:
+            username = username.encode('utf-8')
+            password = password.encode('utf-8')
         # encode autologin cookie value as base64
         autologin_cookie_value = base64.b64encode(
             safe_bytes("%s:%s" % (username, password))
