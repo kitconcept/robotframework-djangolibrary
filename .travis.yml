@@ -27,8 +27,7 @@ before_script:
   # - django-admin startproject mysite
 script:
   - flake8 DjangoLibrary
-  # Run tests for Py27 only. See comment above.
-  - if [ $TRAVIS_PYTHON_VERSION == 2.7 ]; then py.test mysite; fi
-  - if [ $TRAVIS_PYTHON_VERSION == 2.7 ]; then pybot DjangoLibrary/tests/; fi
+  - py.test mysite
+  - pybot DjangoLibrary/tests/
 after_script:
   - firefox --version
