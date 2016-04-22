@@ -210,12 +210,9 @@ user.save()""".format(
         NEVER to your deployment!
 
         """
-        # robot keyword params are unicode. b64encode expects utf-8 strings
-        username = username.encode("utf-8")
-        password = password.encode("utf-8")
         # encode autologin cookie value as base64
         autologin_cookie_value = base64.b64encode(
-            "%s:%s" % (username, password)
+            bytes("%s:%s" % (username, password), "utf-8")
         )
 
         selenium2lib = BuiltIn().get_library_instance('Selenium2Library')
@@ -229,10 +226,7 @@ user.save()""".format(
         #     domain="localhost",
         # )
 
-        selenium2lib.execute_javascript(
-            "document.cookie = 'autologin=%s;path=/;domain=localhost;';" %
-            autologin_cookie_value
-        )
+        selenium2lib.execute_javascript("document.cookie = 'autologin=%s;path=/;domain=localhost;';" % autologin_cookie_value.decode('utf-8'))
         # autologin_cookie = selenium2lib.get_cookie_value('autologin')
         # assert autologin_cookie == "%s:%s" % (username, password)
         # cookies = selenium2lib.get_cookies()
@@ -243,7 +237,8 @@ user.save()""".format(
         """
         selenium2lib = BuiltIn().get_library_instance('Selenium2Library')
         selenium2lib.execute_javascript(
-            "document.cookie = 'autologin=;path=/;domain=localhost;';")
+            "document.cookie = 'autologin=;path=/;domain=localhost;';"
+        )
 
     def factory_boy(self, factory, **kwargs):
         """Create content objects in the Django database with Factory Boy.
