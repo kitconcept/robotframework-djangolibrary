@@ -123,8 +123,12 @@ class DjangoLibrary:
         The `Create User` keyword allows to provide additional arguments that
         are passed directly to the Djange create_user method (e.g.
         "is_staff=True")."""
-        if six.PY3:
-            to_run = """
+        if six.PY2:
+            username = username.encode("utf-8")
+            password = password.encode("utf-8")
+            email = email.encode("utf-8")
+
+        to_run = """
 from django.contrib.auth.models import User
 user = User.objects.create_user(
     '{0}',
@@ -134,31 +138,12 @@ user = User.objects.create_user(
 user.is_superuser = '{3}'
 user.is_staff = '{4}'
 user.save()""".format(
-                username,
-                email,
-                password,
-                kwargs.get('is_superuser', False),
-                kwargs.get('is_staff', False),
-            )
-        else:
-            pass
-            to_run = """
-from django.contrib.auth.models import User
-user = User.objects.create_user(
-    %(username)s,
-    email=%(email)s,
-    password=%(password)s,
-)
-user.is_superuser = %(is_superuser)s
-user.is_staff = %(is_staff)s
-user.save()""" % {
-                'username': repr(username.encode("utf-8")),
-                'password': repr(password.encode("utf-8")),
-                'email': repr(email),
-                'is_superuser': repr(kwargs.get('is_superuser', False)),
-                'is_staff': repr(kwargs.get('is_staff', False)),
-            }
-
+            username,
+            email,
+            password,
+            kwargs.get('is_superuser', False),
+            kwargs.get('is_staff', False),
+        )
         args = [
             'python',
             self.manage,
