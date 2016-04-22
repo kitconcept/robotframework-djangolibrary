@@ -117,19 +117,19 @@ class DjangoLibrary:
         to_run = """
 from django.contrib.auth.models import User
 user = User.objects.create_user(
-    %(username)s,
-    email=%(email)s,
-    password=%(password)s,
+    '{0}',
+    email='{1}',
+    password='{2}',
 )
-user.is_superuser = %(is_superuser)s
-user.is_staff = %(is_staff)s
-user.save()""" % {
-            'username': repr(username.encode("utf-8")),
-            'password': repr(password.encode("utf-8")),
-            'email': repr(email),
-            'is_superuser': repr(kwargs.get('is_superuser', False)),
-            'is_staff': repr(kwargs.get('is_staff', False)),
-        }
+user.is_superuser = '{3}'
+user.is_staff = '{4}'
+user.save()""".format(
+            username,
+            email,
+            password,
+            kwargs.get('is_superuser', False),
+            kwargs.get('is_staff', False),
+        )
 
         args = [
             'python',
@@ -145,7 +145,7 @@ user.save()""" % {
             stdout=subprocess.PIPE,
             stderr=subprocess.PIPE
         )
-        django.communicate(to_run)
+        django.communicate(bytes(to_run, 'utf-8'))
 
     def create_superuser(self, username, email, password):
         """Create a Django superuser in the default auth model."""
