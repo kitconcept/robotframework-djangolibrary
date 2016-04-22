@@ -109,7 +109,11 @@ class DjangoLibrary:
         self.manage_flush()
 
     def create_user(self, username, email, password, **kwargs):
-        """Create a regular Django user in the default auth model."""
+        """Create a regular Django user in the default auth model.
+
+        The `Create User` keyword allows to provide additional arguments that
+        are passed directly to the Djange create_user method (e.g.
+        "is_staff=True")."""
         to_run = """
 from django.contrib.auth.models import User
 user = User.objects.create_user(
