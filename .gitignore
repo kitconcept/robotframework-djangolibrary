@@ -3,6 +3,8 @@
 log.html
 mysite/db.sqlite3
 *.egg-info
+.cache
+.py27/
 output.xml
 report.html
 selenium-screenshot*

@@ -4,10 +4,10 @@ python:
   - 3.5
 sudo: false
 env:
-  - DJANGO_VERSION=1.8.11 DB=SQLite
-  - DJANGO_VERSION=1.9.4 DB=SQLite
-  - DJANGO_VERSION=1.8.11 DB=Postgres
-  - DJANGO_VERSION=1.9.4 DB=Postgres
+  - DJANGO_VERSION=1.8.12 DB=SQLite
+  - DJANGO_VERSION=1.9.5 DB=SQLite
+  - DJANGO_VERSION=1.8.12 DB=Postgres
+  - DJANGO_VERSION=1.9.5 DB=Postgres
 services:
   – postgresql
 install:
@@ -28,6 +28,7 @@ before_script:
 script:
   - flake8 DjangoLibrary
   # Run tests for Py27 only. See comment above.
+  - if [ $TRAVIS_PYTHON_VERSION == 2.7 ]; then py.test mysite; fi
   - if [ $TRAVIS_PYTHON_VERSION == 2.7 ]; then pybot DjangoLibrary/tests/; fi
 after_script:
   - firefox --version

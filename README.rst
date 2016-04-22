@@ -155,8 +155,8 @@ Checkout repository from github::
 Create a virtual Python environment::
 
   $ cd robotframework-djangolibrary/
-  $ virtualenv .env
-  $ source .env/bin/activate
+  $ virtualenv .py27
+  $ source .py27/bin/activate
 
 Install robotframework-djangolibrary in development mode::
 
@@ -166,9 +166,12 @@ Install the requirements::
 
   $ pip install -r requirements.txt
 
-Run robotframework-djangolibrary tests::
+Run Unit/Integration-Tests::
+
+  $ pytest mysite/
+
+Run Acceptance Tests::
 
   $ pybot DjangoLibrary/tests/
-
 
 .. _`Robot Framework Django Library Keyword Documentation`: https://kitconcept.github.io/robotframework-djangolibrary/DjangoLibraryDocs.html
