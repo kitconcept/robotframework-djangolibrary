@@ -17,6 +17,9 @@ Breaking Changes:
 
 New Features:
 
+- Add 'Factory Boy' keyword.
+  [timo]
+
 - Support for Postgres added. All Django database backends should work.
   We test SQLite and Postgres only though.
   [timo]
