@@ -226,7 +226,10 @@ user.save()""".format(
         #     domain="localhost",
         # )
 
-        selenium2lib.execute_javascript("document.cookie = 'autologin=%s;path=/;domain=localhost;';" % autologin_cookie_value.decode('utf-8'))
+        selenium2lib.execute_javascript(
+            "document.cookie = 'autologin=%s;path=/;domain=localhost;';" %
+            autologin_cookie_value.decode('utf-8')
+        )
         # autologin_cookie = selenium2lib.get_cookie_value('autologin')
         # assert autologin_cookie == "%s:%s" % (username, password)
         # cookies = selenium2lib.get_cookies()
