@@ -23,6 +23,14 @@ def safe_bytes(str):
         return str
 
 
+def safe_utf8(string):
+    """Returns bytes on Py3 and an utf-8 encoded string on Py2."""
+    if six.PY2:
+        return string.encode("utf-8")
+    else:
+        return string
+
+
 class DjangoLibrary:
     """DjangoLibrary is a web testing library to test Django with Robot
     Framework.
@@ -123,10 +131,6 @@ class DjangoLibrary:
         The `Create User` keyword allows to provide additional arguments that
         are passed directly to the Djange create_user method (e.g.
         "is_staff=True")."""
-        if six.PY2:
-            username = username.encode("utf-8")
-            password = password.encode("utf-8")
-            email = email.encode("utf-8")
 
         to_run = """
 from django.contrib.auth.models import User
@@ -138,9 +142,9 @@ user = User.objects.create_user(
 user.is_superuser = '{3}'
 user.is_staff = '{4}'
 user.save()""".format(
-            username,
-            email,
-            password,
+            safe_utf8(username),
+            safe_utf8(email),
+            safe_utf8(password),
             kwargs.get('is_superuser', False),
             kwargs.get('is_staff', False),
         )
