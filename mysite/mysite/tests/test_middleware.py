@@ -28,7 +28,7 @@ class TestFactoryBoyMiddleware(TestCase):
         self.assertEqual(201, response.status_code)
         self.assertEqual(
             'johndoe',
-            json.loads(response.content).get('username')
+            json.loads(response.content.decode('utf-8')).get('username')
         )
         self.assertEqual(1, len(User.objects.values()))
         self.assertEqual('johndoe', User.objects.values()[0]['username'])
