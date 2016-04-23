@@ -8,10 +8,27 @@ import json
 import os
 import requests
 import signal
+import six
 import subprocess
 
 __version__ = '1.0'
 ROBOT_LIBRARY_DOC_FORMAT = 'reST'
+
+
+def safe_bytes(str):
+    """Returns bytes on Py3 and a string on Py2."""
+    if six.PY3:
+        return bytes(str, 'utf-8')
+    else:
+        return str
+
+
+def safe_utf8(string):
+    """Returns bytes on Py3 and an utf-8 encoded string on Py2."""
+    if six.PY2:
+        return string.encode("utf-8")
+    else:
+        return string
 
 
 class DjangoLibrary:
@@ -114,23 +131,23 @@ class DjangoLibrary:
         The `Create User` keyword allows to provide additional arguments that
         are passed directly to the Djange create_user method (e.g.
         "is_staff=True")."""
+
         to_run = """
 from django.contrib.auth.models import User
 user = User.objects.create_user(
-    %(username)s,
-    email=%(email)s,
-    password=%(password)s,
+    '{0}',
+    email='{1}',
+    password='{2}',
 )
-user.is_superuser = %(is_superuser)s
-user.is_staff = %(is_staff)s
-user.save()""" % {
-            'username': repr(username.encode("utf-8")),
-            'password': repr(password.encode("utf-8")),
-            'email': repr(email),
-            'is_superuser': repr(kwargs.get('is_superuser', False)),
-            'is_staff': repr(kwargs.get('is_staff', False)),
-        }
-
+user.is_superuser = '{3}'
+user.is_staff = '{4}'
+user.save()""".format(
+            safe_utf8(username),
+            safe_utf8(email),
+            safe_utf8(password),
+            kwargs.get('is_superuser', False),
+            kwargs.get('is_staff', False),
+        )
         args = [
             'python',
             self.manage,
@@ -145,7 +162,8 @@ user.save()""" % {
             stdout=subprocess.PIPE,
             stderr=subprocess.PIPE
         )
-        django.communicate(to_run)
+
+        django.communicate(safe_bytes(to_run))
 
     def create_superuser(self, username, email, password):
         """Create a Django superuser in the default auth model."""
@@ -210,12 +228,12 @@ user.save()""" % {
         NEVER to your deployment!
 
         """
-        # robot keyword params are unicode. b64encode expects utf-8 strings
-        username = username.encode("utf-8")
-        password = password.encode("utf-8")
+        if six.PY2:
+            username = username.encode('utf-8')
+            password = password.encode('utf-8')
         # encode autologin cookie value as base64
         autologin_cookie_value = base64.b64encode(
-            "%s:%s" % (username, password)
+            safe_bytes("%s:%s" % (username, password))
         )
 
         selenium2lib = BuiltIn().get_library_instance('Selenium2Library')
@@ -229,10 +247,17 @@ user.save()""" % {
         #     domain="localhost",
         # )
 
-        selenium2lib.execute_javascript(
-            "document.cookie = 'autologin=%s;path=/;domain=localhost;';" %
-            autologin_cookie_value
-        )
+        if six.PY3:
+            selenium2lib.execute_javascript(
+                "document.cookie = 'autologin=%s;path=/;domain=localhost;';" %
+                autologin_cookie_value.decode('utf-8')
+            )
+        else:
+            selenium2lib.execute_javascript(
+                "document.cookie = 'autologin=%s;path=/;domain=localhost;';" %
+                autologin_cookie_value
+            )
+
         # autologin_cookie = selenium2lib.get_cookie_value('autologin')
         # assert autologin_cookie == "%s:%s" % (username, password)
         # cookies = selenium2lib.get_cookies()
@@ -243,7 +268,8 @@ user.save()""" % {
         """
         selenium2lib = BuiltIn().get_library_instance('Selenium2Library')
         selenium2lib.execute_javascript(
-            "document.cookie = 'autologin=;path=/;domain=localhost;';")
+            "document.cookie = 'autologin=;path=/;domain=localhost;';"
+        )
 
     def factory_boy(self, factory, **kwargs):
         """Create content objects in the Django database with Factory Boy.

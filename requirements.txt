@@ -1,5 +1,5 @@
-robotframework==2.9.2
-robotframework-selenium2library==1.7.4
+robotframework==3.0
+robotframework-selenium2library
 robotframework-debuglibrary==0.4
 Selenium==2.53.1
 factory_boy==2.6.1

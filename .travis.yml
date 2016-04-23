@@ -11,10 +11,10 @@ env:
 services:
   – postgresql
 install:
-  # Install dependencies only for Py27. For Py3 we can currently only
-  # guarantee that the package is installable without fetching the deps.
-  # We need to keep this until selenium2library becomes Py3 compatible.
-  - if [ $TRAVIS_PYTHON_VERSION == 2.7 ]; then pip install -r requirements.txt; fi
+  # for Python 3 we need robotframework-selenium2library 1.8.x
+  - if [ $TRAVIS_PYTHON_VERSION == 3.5 ]; then pip install future; fi
+  - if [ $TRAVIS_PYTHON_VERSION == 3.5 ]; then pip install -U https://github.com/HelioGuilherme66/robotframework-selenium2library/archive/v1.8.0b1.tar.gz; fi
+  - pip install -r requirements.txt
   - pip install . --no-dependencies
   - pip install -q flake8
   - pip install -q psycopg2
@@ -27,8 +27,7 @@ before_script:
   # - django-admin startproject mysite
 script:
   - flake8 DjangoLibrary
-  # Run tests for Py27 only. See comment above.
-  - if [ $TRAVIS_PYTHON_VERSION == 2.7 ]; then py.test mysite; fi
-  - if [ $TRAVIS_PYTHON_VERSION == 2.7 ]; then pybot DjangoLibrary/tests/; fi
+  - py.test mysite
+  - pybot DjangoLibrary/tests/
 after_script:
   - firefox --version

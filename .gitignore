@@ -4,7 +4,8 @@ log.html
 mysite/db.sqlite3
 *.egg-info
 .cache
-.py27/
+.py2*/
+.py3*/
 output.xml
 report.html
 selenium-screenshot*
