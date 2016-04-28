@@ -24,6 +24,10 @@ New Features:
   We test SQLite and Postgres only though.
   [timo]
 
+- Python 3 compatibility. Note that selenium2library is currently not
+  compatible with Python 3. See https://github.com/HelioGuilherme66/robotframework-selenium2library/archive/v1.8.0b1.tar.gz for details.
+  [timo]
+
 
 1.0a5 (2016-02-11)
 ------------------
