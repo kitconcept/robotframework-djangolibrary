@@ -65,7 +65,7 @@ class FactoryBoyMiddleware():
                     'error': 'The FactoryBoyClass "{}" '.format(model_name) +
                     'instance does not seem to provide a _meta attribute. ' +
                     'Please check if the Factory Boy class inherits from ' +
-                    'FromDjangoModelFactory'
+                    'DjangoModelFactory'
                 },
                 status=400
             )

@@ -87,6 +87,5 @@ Test Factory Boy class does not inherit from DjangoModelFactory
   ...  HTTPError: The FactoryBoyClass
   ...  "DjangoLibrary.tests.factories.BrokenFactoryClassDoesNotInheritFromDjangoModelFactory"
   ...  instance does not seem to provide a _meta attribute.
-  ...  Please check if the Factory Boy class inherits from
-  ...  FromDjangoModelFactory
+  ...  Please check if the Factory Boy class inherits from DjangoModelFactory
   Run Keyword and Expect Error  ${expected_error}  Factory Boy  DjangoLibrary.tests.factories.BrokenFactoryClassDoesNotInheritFromDjangoModelFactory
