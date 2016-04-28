@@ -30,3 +30,12 @@ class BrokenFactory(DjangoModelFactory):
 
     class Meta:
         model = 'nonExistingModel'
+
+
+class BrokenFactoryWithoutMetaClass(DjangoModelFactory):
+    pass
+
+
+class BrokenFactoryClassDoesNotInheritFromDjangoModelFactory():
+    class Meta:
+        model = 'auth.User'

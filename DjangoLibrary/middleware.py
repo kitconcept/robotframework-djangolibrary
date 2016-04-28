@@ -58,6 +58,17 @@ class FactoryBoyMiddleware():
                 },
                 status=400
             )
+        obj_meta = getattr(obj, '_meta', None)
+        if not obj_meta:
+            return JsonResponse(
+                {
+                    'error': 'The FactoryBoyClass "{}" '.format(model_name) +
+                    'instance does not seem to provide a _meta attribute. ' +
+                    'Please check if the Factory Boy class inherits from ' +
+                    'FromDjangoModelFactory'
+                },
+                status=400
+            )
         fields = obj._meta._get_fields()
         result = {}
         for field in fields:
