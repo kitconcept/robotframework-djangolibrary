@@ -31,7 +31,7 @@ Stop Django and close browser
 
 Test Factory Boy Keyword
   ${user}=  Factory Boy  DjangoLibrary.tests.factories.UserFactory
-  Log Dictionary  ${user}  WARN
+  # Log Dictionary  ${user}  WARN
   Dictionary Should Contain Key  ${user}  username
   Dictionary should contain key  ${user}  password
   Dictionary should contain item  ${user}  username  johndoe
@@ -41,25 +41,25 @@ Test Factory Boy Keyword
 
 Test Factory Boy Keyword Override Single Attribute
   ${user}=  Factory Boy  DjangoLibrary.tests.factories.UserFactory  username=janedoe
-  Log Dictionary  ${user}  WARN
+  # Log Dictionary  ${user}  WARN
   Dictionary should contain item  ${user}  username  janedoe
   Dictionary should contain item  ${user}  email  janedoe@example.com
 
 Test Factory Boy Keyword Override Multiple Attribute
   ${user}=  Factory Boy  DjangoLibrary.tests.factories.UserFactory  username=janedoe  email=jane@doe.com
-  Log Dictionary  ${user}  WARN
+  # Log Dictionary  ${user}  WARN
   Dictionary should contain item  ${user}  username  janedoe
   Dictionary should contain item  ${user}  email  jane@doe.com
 
 Test Factory Boy Keyword for Author
   ${user}=  Factory Boy  bookstore.factories.AuthorFactory
-  Log Dictionary  ${user}  WARN
+  # Log Dictionary  ${user}  WARN
   Dictionary Should Contain Key  ${user}  name
   Dictionary should contain item  ${user}  name  Noam Chomsky
 
 Test Factory Boy Keyword for Book
   ${user}=  Factory Boy  bookstore.factories.BookFactory
-  Log Dictionary  ${user}  WARN
+  # Log Dictionary  ${user}  WARN
   Dictionary Should Contain Key  ${user}  title
   Dictionary should contain item  ${user}  title  Colorless Green Ideas Sleep Furiously
 
