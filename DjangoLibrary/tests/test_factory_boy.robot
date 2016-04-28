@@ -64,13 +64,29 @@ Test Factory Boy Keyword for Book
   Dictionary should contain item  ${user}  title  Colorless Green Ideas Sleep Furiously
 
 Test Factory Boy with non-existing path raises Exception
-  Run Keyword and Expect Error  HTTPError: Factory Boy class "Non.Existing.Path" could not be found  Factory Boy  Non.Existing.Path
+  ${expected_error}=  catenate  SEPARATOR=${SPACE}
+  ...  HTTPError: Factory Boy class "Non.Existing.Path" could not be found
+  Run Keyword and Expect Error  ${expected_error}  Factory Boy  Non.Existing.Path
 
 Test Factory Boy with broken class raises Exception
-  Run Keyword and Expect Error  HTTPError: FactoryBoyClass "DjangoLibrary.tests.factories.BrokenFactory" could not be instantiated with args "{}"  Factory Boy  DjangoLibrary.tests.factories.BrokenFactory
+  ${expected_error}=  catenate  SEPARATOR=${SPACE}
+  ...  HTTPError: FactoryBoyClass
+  ...  "DjangoLibrary.tests.factories.BrokenFactory"
+  ...  could not be instantiated with args "{}"
+  Run Keyword and Expect Error  ${expected_error}  Factory Boy  DjangoLibrary.tests.factories.BrokenFactory
 
 Test Factory Boy class without meta class
-  Run Keyword and Expect Error  HTTPError: FactoryBoyClass "DjangoLibrary.tests.factories.BrokenFactoryWithoutMetaClass" could not be instantiated with args "{}"  Factory Boy  DjangoLibrary.tests.factories.BrokenFactoryWithoutMetaClass
+  ${expected_error}=  catenate  SEPARATOR=${SPACE}
+  ...  HTTPError: FactoryBoyClass
+  ...  "DjangoLibrary.tests.factories.BrokenFactoryWithoutMetaClass"
+  ...  could not be instantiated with args "{}"
+  Run Keyword and Expect Error  ${expected_error}  Factory Boy  DjangoLibrary.tests.factories.BrokenFactoryWithoutMetaClass
 
 Test Factory Boy class does not inherit from DjangoModelFactory
-  Run Keyword and Expect Error  HTTPError: The FactoryBoyClass "DjangoLibrary.tests.factories.BrokenFactoryClassDoesNotInheritFromDjangoModelFactory" instance does not seem to provide a _meta attribute. Please check if the Factory Boy class inherits from FromDjangoModelFactory  Factory Boy  DjangoLibrary.tests.factories.BrokenFactoryClassDoesNotInheritFromDjangoModelFactory
+  ${expected_error}=  catenate  SEPARATOR=${SPACE}
+  ...  HTTPError: The FactoryBoyClass
+  ...  "DjangoLibrary.tests.factories.BrokenFactoryClassDoesNotInheritFromDjangoModelFactory"
+  ...  instance does not seem to provide a _meta attribute.
+  ...  Please check if the Factory Boy class inherits from
+  ...  FromDjangoModelFactory
+  Run Keyword and Expect Error  ${expected_error}  Factory Boy  DjangoLibrary.tests.factories.BrokenFactoryClassDoesNotInheritFromDjangoModelFactory
