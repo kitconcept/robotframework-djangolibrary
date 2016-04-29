@@ -4,15 +4,18 @@
 
 New Features:
 
-- Python 3 compatibility. Note that selenium2library is currently not
-  compatible with Python 3. See https://github.com/HelioGuilherme66/robotframework-selenium2library/archive/v1.8.0b1.tar.gz for details.
+- Python 3 compatibility. Note that the latest offical release of
+  robotframework-selenium2library is currently not compatible with Python 3.
+  See https://github.com/HelioGuilherme66/robotframework-selenium2library/releases
+  for a working pre-release and details.
   [timo]
 
 - Support for Postgres added. All Django database backends should work.
   We test SQLite and Postgres only though.
   [timo]
 
-- Add 'Factory Boy' keyword.
+- Add 'Factory Boy' keyword. This allows us to use factory_boy factories in
+  Robot Framework tests.
   [timo]
 
 Breaking Changes:
@@ -24,7 +27,7 @@ Breaking Changes:
   deleting and re-building the database.
   [timo]
 
-- Remove 'Debug' and 'Pause' keywords. The 'Debug' keyword which is
+- Remove 'Debug' and 'Pause' keywords. The 'Debug' keyword, which is
   provided by robotframework-debuglibrary is sufficient.
   [timo]
 
