@@ -19,70 +19,15 @@
     </section>
 
     <section class="main-content">
-      <h1></h1>
-
-<h1>
-<a id="a-robot-framework-library-for-django" class="anchor" href="#a-robot-framework-library-for-django" aria-hidden="true"><span class="octicon octicon-link"></span></a>A robot framework library for Django.</h1>
-
-<p>.. image:: <a href="https://travis-ci.org/tisto/robotframework-djangolibrary.png?branch=master">https://travis-ci.org/tisto/robotframework-djangolibrary.png?branch=master</a>   :target: <a href="https://travis-ci.org/tisto/robotframework-djangolibrary">https://travis-ci.org/tisto/robotframework-djangolibrary</a></p>
-
-<h2>
-<a id="installation" class="anchor" href="#installation" aria-hidden="true"><span class="octicon octicon-link"></span></a>Installation</h2>
+      <h1>
+<a id="installation" class="anchor" href="#installation" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Installation</h1>
 
 <p>$ pip install robotframework-djangolibrary</p>
 
-<h2>
-<a id="first-robot-test" class="anchor" href="#first-robot-test" aria-hidden="true"><span class="octicon octicon-link"></span></a>First Robot Test</h2>
+<h1>
+<a id="documentation" class="anchor" href="#documentation" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Documentation</h1>
 
-<p>test.robot::</p>
-
-<p>*** Variables ***</p>
-
-<p>${SERVER}               http://localhost:8000/
-  ${BROWSER}              firefox</p>
-
-<p>*** Settings ***</p>
-
-<p>Documentation   Django Robot Tests
-  Library         Selenium2Library  timeout=10  implicit_wait=0.5
-  Suite Setup     Open Browser To Login Page
-  Suite Teardown  Close Browser</p>
-
-<p>*** Keywords ***</p>
-
-<p>Open Browser To Login Page
-    Open Browser  ${SERVER}  ${BROWSER}
-    Maximize Browser Window</p>
-
-<p>*** Test Cases ***</p>
-
-<p>Scenario: As a visitor I can visit the django default page
-    Go To  ${SERVER}
-    Wait until page contains element  id=explanation
-    Page Should Contain  It worked!
-    Page Should Contain  Congratulations on your first Django-powered page.</p>
-
-<h2>
-<a id="run-tests" class="anchor" href="#run-tests" aria-hidden="true"><span class="octicon octicon-link"></span></a>Run Tests</h2>
-
-<p>$ pybot test.robot</p>
-
-<p>Output::</p>
-
-<p>==============================================================================
-  Test :: Django Robot Tests
-  ==============================================================================
-  Scenario: As a visitor I can visit the django default page            | PASS |</p>
-
-<hr>
-
-<p>Test :: Django Robot Tests                                            | PASS |
-  1 critical test, 1 passed, 0 failed
-  1 test total, 1 passed, 0 failed
-  ==============================================================================
-  Output:  /home/timo/workspace/prounix/robotframework-djangolibrary/output.xml
-  Log:     /home/timo/workspace/prounix/robotframework-djangolibrary/log.html
-  Report:  /home/timo/workspace/prounix/robotframework-djangolibrary/report.html</p>
+<p><a href="https://kitconcept.github.io/robotframework-djangolibrary/docs/DjangoLibrary.html">DjangoLibrary keyword documentation</a></p>
 
       <footer class="site-footer">
         <span class="site-footer-owner"><a href="https://github.com/kitconcept/robotframework-djangolibrary">Robotframework-djangolibrary</a> is maintained by <a href="https://github.com/kitconcept">kitconcept</a>.</span>
