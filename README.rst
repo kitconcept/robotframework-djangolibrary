@@ -40,9 +40,9 @@ Documentation
 Installation
 ------------
 
-robotframework-djangolibrary is still in alpha, therefore you have to use '--pre' to install it with pip::
+Install robotframework-djangolibrary with pip::
 
-  $ pip install --pre robotframework-djangolibrary
+  $ pip install robotframework-djangolibrary
 
 In order to be able to use DjangoLibrary's autologin keywords you have to add
 the AutologinAuthenticationMiddleware to your MIDDLEWARE_CLASSES in your

@@ -2,7 +2,8 @@
 1.0a7 (unreleased)
 ------------------
 
-- Nothing changed yet.
+- Re-release 1.0a6 as 1.0.
+  [timo]
 
 
 1.0a6 (2016-04-29)
