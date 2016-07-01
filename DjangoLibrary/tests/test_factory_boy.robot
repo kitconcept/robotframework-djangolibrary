@@ -63,6 +63,15 @@ Test Factory Boy Keyword for Book
   Dictionary Should Contain Key  ${book}  title
   Dictionary should contain item  ${book}  title  Colorless Green Ideas Sleep Furiously
 
+# Test Factory Boy Get Or Create
+#   # Create two authors with the same name
+#   ${author}=  Factory Boy  bookstore.factories.AuthorFactory  name=Howard Zinn
+#   ${author}=  Factory Boy  bookstore.factories.AuthorFactory  name=Howard Zinn
+#   # The author should not be created twice
+#   ${result}=  Query  bookstore.model.Author  name=Howard Zinn
+#   Log Dictionary  ${result}  Warn
+#   Length should be  ${result}  1
+
 Test Factory Boy Class with Subfactory
   ${book}=  Factory Boy  bookstore.factories.BookFactory
   ...  title=A People's History of the United States
@@ -71,13 +80,36 @@ Test Factory Boy Class with Subfactory
   Dictionary Should Contain Key  ${book}  title
   Dictionary should contain item  ${book}  title  A People's History of the United States
   Dictionary Should Contain Key  ${book}  author
-  Dictionary should contain item  ${book}  author  Author object
+  Dictionary should contain item  ${book}  author  1
+
+# Test Factory Boy Class with Subfactory Subfactory
+#   ${book}=  Factory Boy  bookstore.factories.BookFactory
+#   ...  title=A People's History of the United States
+#   ...  author__name=Howard Zinn
+#   ...  author__university__name=Boston University
+#   # Log Dictionary  ${book}  Warn
+#   Dictionary Should Contain Key  ${book}  title
+#   Dictionary should contain item  ${book}  title  A People's History of the United States
+#   Dictionary Should Contain Key  ${book}  author
+#   Dictionary should contain item  ${book}  author  1
 
 # Test Factory Boy Class with Subfactory and Existing Content
 #   ${author}=  Factory Boy  bookstore.factories.AuthorFactory  name=Howard Zinn
 #   ${book}=  Factory Boy  bookstore.factories.BookFactory
 #   ...  title=A People's History of the United States
 #   ...  author=${author}
+#   # Log Dictionary  ${book}  Warn
+#   Dictionary Should Contain Key  ${book}  title
+#   Dictionary should contain item  ${book}  title  A People's History of the United States
+#   Dictionary Should Contain Key  ${book}  author
+#   Dictionary should contain item  ${book}  author  Author object
+
+# Test Factory Boy Class with Subfactory and Existing Content with Query Lookup
+#   Factory Boy  bookstore.factories.AuthorFactory  name=Howard Zinn
+#   ${existing_author}=  Query  bookstore.models.Author  name=Howard Zinn
+#   ${book}=  Factory Boy  bookstore.factories.BookFactory
+#   ...  title=A People's History of the United States
+#   ...  author=${existing_author}
 #   # Log Dictionary  ${book}  Warn
 #   Dictionary Should Contain Key  ${book}  title
 #   Dictionary should contain item  ${book}  title  A People's History of the United States

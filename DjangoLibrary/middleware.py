@@ -1,6 +1,7 @@
 from django.contrib import auth
 from django.contrib.auth.middleware import AuthenticationMiddleware
 from django.forms.models import model_to_dict
+from django.db.models import ForeignKey
 from django.http import JsonResponse
 from pydoc import locate
 
@@ -47,6 +48,11 @@ class FactoryBoyMiddleware():
                 },
                 status=400
             )
+        # primary_key = FactoryBoyClass._meta.model._meta.pk.name
+        # for field in FactoryBoyClass._meta.model._meta.fields:
+        #     if isinstance(field, ForeignKey):
+        #         if field.name in factory_boy_args.keys():
+        #             import pdb; pdb.set_trace()
         try:
             obj = FactoryBoyClass(**factory_boy_args)
         except:
