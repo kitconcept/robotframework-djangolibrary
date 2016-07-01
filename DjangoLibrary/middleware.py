@@ -76,4 +76,44 @@ class FactoryBoyMiddleware():
                 },
                 status=400
             )
-        return JsonResponse(model_to_dict(obj), status=201)
+        fields = obj._meta._get_fields()
+        result = {}
+        for field in fields:
+            result[field.name] = str(getattr(obj, field.name, ''))
+        result['args'] = str(factory_boy_args)
+        return JsonResponse(result, status=201)
+
+
+class QueryMiddleware():
+
+    def process_request(self, request):
+        model_name = request.GET.get('MODEL_PATH')
+        if not model_name:
+            return
+        get_args = request.GET.get('QUERY_ARGS')
+        try:
+            query_args = json.loads(get_args)
+        except (ValueError, TypeError):
+            query_args = {}
+        ModelClass = locate(model_name)
+        if not ModelClass:
+            msg = 'Class "{}" could not be found'
+            return JsonResponse(
+                {
+                    'error': msg.format(model_name)
+                },
+                status=400
+            )
+        result = []
+        if query_args:
+            try:
+                objects = [ModelClass.objects.get(**query_args)]
+            except ModelClass.DoesNotExist:
+                objects = []
+        else:
+            objects = ModelClass.objects.all()
+        for obj in objects:
+            result.append(
+                model_to_dict(obj)
+            )
+        return JsonResponse(result, safe=False, status=200)

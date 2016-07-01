@@ -2,8 +2,7 @@
 1.0.1 (unreleased)
 ------------------
 
-- Use Django's model_to_dict method to serialize the response objects for the
-  factory_boy keyword.
+- Add query keyword.
   [timo]
 
 
@@ -21,7 +20,8 @@ New Features:
 
 - Python 3 compatibility. Note that the latest offical release of
   robotframework-selenium2library is currently not compatible with Python 3.
-  See https://github.com/HelioGuilherme66/robotframework-selenium2library/releases for a working pre-release and details.
+  See https://github.com/HelioGuilherme66/robotframework-selenium2library/releases
+  for a working pre-release and details.
   [timo]
 
 - Support for Postgres added. All Django database backends should work.
