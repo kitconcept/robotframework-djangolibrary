@@ -52,16 +52,37 @@ Test Factory Boy Keyword Override Multiple Attribute
   Dictionary should contain item  ${user}  email  jane@doe.com
 
 Test Factory Boy Keyword for Author
-  ${user}=  Factory Boy  bookstore.factories.AuthorFactory
+  ${author}=  Factory Boy  bookstore.factories.AuthorFactory
   # Log Dictionary  ${user}  WARN
-  Dictionary Should Contain Key  ${user}  name
-  Dictionary should contain item  ${user}  name  Noam Chomsky
+  Dictionary Should Contain Key  ${author}  name
+  Dictionary should contain item  ${author}  name  Noam Chomsky
 
 Test Factory Boy Keyword for Book
-  ${user}=  Factory Boy  bookstore.factories.BookFactory
+  ${book}=  Factory Boy  bookstore.factories.BookFactory
   # Log Dictionary  ${user}  WARN
-  Dictionary Should Contain Key  ${user}  title
-  Dictionary should contain item  ${user}  title  Colorless Green Ideas Sleep Furiously
+  Dictionary Should Contain Key  ${book}  title
+  Dictionary should contain item  ${book}  title  Colorless Green Ideas Sleep Furiously
+
+Test Factory Boy Class with Subfactory
+  ${book}=  Factory Boy  bookstore.factories.BookFactory
+  ...  title=A People's History of the United States
+  ...  author__name=Howard Zinn
+  # Log Dictionary  ${book}  Warn
+  Dictionary Should Contain Key  ${book}  title
+  Dictionary should contain item  ${book}  title  A People's History of the United States
+  Dictionary Should Contain Key  ${book}  author
+  Dictionary should contain item  ${book}  author  Author object
+
+# Test Factory Boy Class with Subfactory and Existing Content
+#   ${author}=  Factory Boy  bookstore.factories.AuthorFactory  name=Howard Zinn
+#   ${book}=  Factory Boy  bookstore.factories.BookFactory
+#   ...  title=A People's History of the United States
+#   ...  author=${author}
+#   # Log Dictionary  ${book}  Warn
+#   Dictionary Should Contain Key  ${book}  title
+#   Dictionary should contain item  ${book}  title  A People's History of the United States
+#   Dictionary Should Contain Key  ${book}  author
+#   Dictionary should contain item  ${book}  author  Author object
 
 Test Factory Boy with non-existing path raises Exception
   ${expected_error}=  catenate  SEPARATOR=${SPACE}
