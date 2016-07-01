@@ -86,11 +86,10 @@ Test Factory Boy Class with Subfactory Subfactory
   ...  title=A People's History of the United States
   ...  author__name=Howard Zinn
   ...  author__university__name=Boston University
-  # Log Dictionary  ${book}  Warn
-  Dictionary Should Contain Key  ${book}  title
   Dictionary should contain item  ${book}  title  A People's History of the United States
   Dictionary Should Contain Key  ${book}  author
-  Dictionary should contain item  ${book}  author  1
+  ${result}=  Query  bookstore.models.University  name=Boston University
+  Length should be  ${result}  1
 
 # Test Factory Boy Class with Subfactory and Existing Content
 #   ${author}=  Factory Boy  bookstore.factories.AuthorFactory  name=Howard Zinn
