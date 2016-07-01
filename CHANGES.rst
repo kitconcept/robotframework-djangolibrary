@@ -2,7 +2,8 @@
 1.0.1 (unreleased)
 ------------------
 
-- Nothing changed yet.
+- Add query keyword.
+  [timo]
 
 
 1.0 (2016-06-30)
