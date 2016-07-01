@@ -1,5 +1,6 @@
 from django.contrib import auth
 from django.contrib.auth.middleware import AuthenticationMiddleware
+from django.forms.models import model_to_dict
 from django.http import JsonResponse
 from pydoc import locate
 
@@ -106,10 +107,7 @@ class QueryMiddleware():
         else:
             objects = ModelClass.objects.all()
         for obj in objects:
-            result.append({
-                'username': obj.username,
-                'email': obj.email,
-                'is_superuser': obj.is_superuser,
-                'is_staff': obj.is_staff,
-            })
+            result.append(
+                model_to_dict(obj)
+            )
         return JsonResponse(result, safe=False, status=200)
