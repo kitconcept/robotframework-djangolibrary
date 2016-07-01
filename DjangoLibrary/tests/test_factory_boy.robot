@@ -80,7 +80,6 @@ Test Factory Boy Class with Subfactory
   Dictionary Should Contain Key  ${book}  title
   Dictionary should contain item  ${book}  title  A People's History of the United States
   Dictionary Should Contain Key  ${book}  author
-  Dictionary should contain item  ${book}  author  1
 
 # Test Factory Boy Class with Subfactory Subfactory
 #   ${book}=  Factory Boy  bookstore.factories.BookFactory
