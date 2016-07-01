@@ -1,7 +1,7 @@
 from django.contrib import auth
 from django.contrib.auth.middleware import AuthenticationMiddleware
 from django.forms.models import model_to_dict
-from django.db.models import ForeignKey
+# from django.db.models import ForeignKey
 from django.http import JsonResponse
 from pydoc import locate
 
