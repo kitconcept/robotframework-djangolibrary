@@ -76,12 +76,7 @@ class FactoryBoyMiddleware():
                 },
                 status=400
             )
-        fields = obj._meta._get_fields()
-        result = {}
-        for field in fields:
-            result[field.name] = str(getattr(obj, field.name, ''))
-        result['args'] = str(factory_boy_args)
-        return JsonResponse(result, status=201)
+        return JsonResponse(model_to_dict(obj), status=201)
 
 
 class QueryMiddleware():
