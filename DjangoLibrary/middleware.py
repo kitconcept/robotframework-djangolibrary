@@ -1,7 +1,7 @@
 from django.contrib import auth
 from django.contrib.auth.middleware import AuthenticationMiddleware
 from django.forms.models import model_to_dict
-# from django.db.models import ForeignKey
+from django.db.models import ForeignKey
 from django.http import JsonResponse
 from pydoc import locate
 
@@ -48,11 +48,18 @@ class FactoryBoyMiddleware():
                 },
                 status=400
             )
-        # primary_key = FactoryBoyClass._meta.model._meta.pk.name
-        # for field in FactoryBoyClass._meta.model._meta.fields:
-        #     if isinstance(field, ForeignKey):
-        #         if field.name in factory_boy_args.keys():
-        #             import pdb; pdb.set_trace()
+        # XXX: experiemental and ugly proof-of-concept code
+        if hasattr(FactoryBoyClass, '_meta'):
+            if hasattr(FactoryBoyClass._meta.model, '_meta'):
+                for field in FactoryBoyClass._meta.model._meta.fields:
+                    if isinstance(field, ForeignKey):
+                        for key, value in factory_boy_args.items():
+                            key_name = '{}__pk'.format(field.name)
+                            if key == key_name:
+                                RelModel = field.foreign_related_fields[0].model
+                                del factory_boy_args[key_name]
+                                new_key = key_name.replace('__pk', '')
+                                factory_boy_args[new_key] = RelModel.objects.first()
         try:
             obj = FactoryBoyClass(**factory_boy_args)
         except:

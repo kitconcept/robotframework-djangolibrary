@@ -93,14 +93,13 @@ Test Factory Boy Class with Subfactory Subfactory
 
 Test Factory Boy Class with Subfactory and Existing Content
   ${author}=  Factory Boy  bookstore.factories.AuthorFactory  name=Howard Zinn
+  ${author_id}=  Get From Dictionary  ${author}  id
   ${book}=  Factory Boy  bookstore.factories.BookFactory
   ...  title=A People's History of the United States
-  ...  author=${author}
-  # Log Dictionary  ${book}  Warn
+  ...  author__pk=${author_id}
   Dictionary Should Contain Key  ${book}  title
   Dictionary should contain item  ${book}  title  A People's History of the United States
   Dictionary Should Contain Key  ${book}  author
-  Dictionary should contain item  ${book}  author  Author object
 
 # Test Factory Boy Class with Subfactory and Existing Content with Query Lookup
 #   Factory Boy  bookstore.factories.AuthorFactory  name=Howard Zinn
