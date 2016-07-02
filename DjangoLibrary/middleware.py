@@ -56,10 +56,10 @@ class FactoryBoyMiddleware():
                         for key, value in factory_boy_args.items():
                             key_name = '{}__pk'.format(field.name)
                             if key == key_name:
-                                RelModel = field.foreign_related_fields[0].model
+                                RelModel = field.foreign_related_fields[0].model  # noqa
                                 del factory_boy_args[key_name]
                                 new_key = key_name.replace('__pk', '')
-                                factory_boy_args[new_key] = RelModel.objects.first()
+                                factory_boy_args[new_key] = RelModel.objects.first()  # noqa
         try:
             obj = FactoryBoyClass(**factory_boy_args)
         except:
