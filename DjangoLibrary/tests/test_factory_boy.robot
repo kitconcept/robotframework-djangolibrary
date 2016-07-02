@@ -63,14 +63,13 @@ Test Factory Boy Keyword for Book
   Dictionary Should Contain Key  ${book}  title
   Dictionary should contain item  ${book}  title  Colorless Green Ideas Sleep Furiously
 
-# Test Factory Boy Get Or Create
-#   # Create two authors with the same name
-#   ${author}=  Factory Boy  bookstore.factories.AuthorFactory  name=Howard Zinn
-#   ${author}=  Factory Boy  bookstore.factories.AuthorFactory  name=Howard Zinn
-#   # The author should not be created twice
-#   ${result}=  Query  bookstore.model.Author  name=Howard Zinn
-#   Log Dictionary  ${result}  Warn
-#   Length should be  ${result}  1
+Test Factory Boy Get Or Create
+  # Create two authors with the same name
+  Factory Boy  bookstore.factories.AuthorFactory  name=Howard Zinn
+  Factory Boy  bookstore.factories.AuthorFactory  name=Howard Zinn
+  # The author should not be created twice
+  ${result}=  Query  bookstore.models.Author  name=Howard Zinn
+  Length should be  ${result}  1
 
 Test Factory Boy Class with Subfactory
   ${book}=  Factory Boy  bookstore.factories.BookFactory
