@@ -100,17 +100,17 @@ Test Factory Boy Class with Subfactory and Existing Content
   Dictionary should contain item  ${book}  title  A People's History of the United States
   Dictionary Should Contain Key  ${book}  author
 
-# Test Factory Boy Class with Subfactory and Existing Content with Query Lookup
-#   Factory Boy  bookstore.factories.AuthorFactory  name=Howard Zinn
-#   ${existing_author}=  Query  bookstore.models.Author  name=Howard Zinn
-#   ${book}=  Factory Boy  bookstore.factories.BookFactory
-#   ...  title=A People's History of the United States
-#   ...  author=${existing_author}
-#   # Log Dictionary  ${book}  Warn
-#   Dictionary Should Contain Key  ${book}  title
-#   Dictionary should contain item  ${book}  title  A People's History of the United States
-#   Dictionary Should Contain Key  ${book}  author
-#   Dictionary should contain item  ${book}  author  Author object
+Test Factory Boy Class with Subfactory and Existing Content with Query Lookup
+  Factory Boy  bookstore.factories.AuthorFactory  name=Howard Zinn
+  ${authors}=  Query  bookstore.models.Author  name=Howard Zinn
+  ${author}=  Get From List  ${authors}  0
+  ${author_id}=  Get From Dictionary  ${author}  id
+  ${book}=  Factory Boy  bookstore.factories.BookFactory
+  ...  title=A People's History of the United States
+  ...  author__pk=${author_id}
+  Dictionary Should Contain Key  ${book}  title
+  Dictionary should contain item  ${book}  title  A People's History of the United States
+  Dictionary Should Contain Key  ${book}  author
 
 Test Factory Boy with non-existing path raises Exception
   ${expected_error}=  catenate  SEPARATOR=${SPACE}
