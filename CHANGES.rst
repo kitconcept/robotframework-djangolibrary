@@ -7,7 +7,8 @@ New Features:
 - Add QuerySet keyword.
   [timo]
 
-- Add support for subfactories to `FactoryBoy` keyword.
+- Make it possible to override subfactories when using the `FactoryBoy`
+  keyword.
   [timo]
 
 Bugfixes:
