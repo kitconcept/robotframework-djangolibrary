@@ -1,9 +1,16 @@
 
-1.0.1 (unreleased)
-------------------
+1.1 (unreleased)
+----------------
+
+New Features:
 
 - Add QuerySet keyword.
   [timo]
+
+- Add support for subfactories to `FactoryBoy` keyword.
+  [timo]
+
+Bugfixes:
 
 - Use Django's model_to_dict method to serialize the response objects for the
   factory_boy keyword.

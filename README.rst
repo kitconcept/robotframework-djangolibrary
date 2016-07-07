@@ -37,6 +37,7 @@ Documentation
 
 `Robot Framework Django Library Keyword Documentation`_
 
+
 Installation
 ------------
 
@@ -44,20 +45,22 @@ Install robotframework-djangolibrary with pip::
 
   $ pip install robotframework-djangolibrary
 
-In order to be able to use DjangoLibrary's autologin keywords you have to add
-the AutologinAuthenticationMiddleware to your MIDDLEWARE_CLASSES in your
-settings.py::
+In order to be able to use DjangoLibrary's `Autologin`, `FactoryBoy`, or
+`QuerySet` keywords you have to add the corresponding middleware classes to
+your MIDDLEWARE_CLASSES in yoursettings.py::
 
   MIDDLEWARE_CLASSES = (
       ...
       'django.contrib.auth.middleware.AuthenticationMiddleware',
       'DjangoLibrary.middleware.AutologinAuthenticationMiddleware',
+      'DjangoLibrary.middleware.FactoryBoyMiddleware',
+      'DjangoLibrary.middleware.QuerySetMiddleware',
   )
 
 .. DANGER::
-   Make sure that you add this middleware only to your test setup and
-   NEVER to your deployment! The middleware just checks for a 'autologin'
-   cookie and then authenticates and login ANY user.
+   Make sure that you add those middlewares only to your test setup and
+   NEVER to your deployment! The Autologin middleware just checks for a
+   'autologin' cookie and then authenticates and login ANY user.
 
 
 First Robot Test
