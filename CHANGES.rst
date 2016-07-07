@@ -2,7 +2,7 @@
 1.0.1 (unreleased)
 ------------------
 
-- Add query keyword.
+- Add QuerySet keyword.
   [timo]
 
 - Use Django's model_to_dict method to serialize the response objects for the
