@@ -307,8 +307,35 @@ user.save()""".format(
             raise requests.exceptions.HTTPError(msg, response=response)
         return response.raise_for_status()
 
-    def query(self, model, **kwargs):
+    def query_set(self, model, **kwargs):
         """Query the Django ORM.
+
+        Returns a QuerySet object. See https://docs.djangoproject.com/en/1.9/topics/db/queries/#retrieving-objects for details.  # noqa
+
+        Arguments:
+
+        `model` is a required argument and should contain the full path to
+        your Django model class (e.g. "django.contrib.auth.models.User").
+
+        The `QuerySet` keyword allows to provide additional arguments that
+        are passed as filter arguments
+        (e.g. "django.contrib.auth.models.User  username=john").
+        If no additonal argument is provided `QuerySet will just return all
+        objects that exists for that model.
+
+        `limit` limits the number of results,
+        e.g. "django.contrib.auth.models.User  limit=10" will return 10 results
+        max.
+        Limit is an optional argument that maps 1:1 to the QuerySet limit
+        argument. See https://docs.djangoproject.com/en/1.9/topics/db/queries/#limiting-querysets  # noqa
+        for details.
+
+        `offset` can be used in combination with `limit` to set an offset,
+        e.g. "django.contrib.auth.models.User  offeset=5  limit=10" will return
+        5 results while omitting the first 5 results.
+        See https://docs.djangoproject.com/en/1.9/topics/db/queries/#limiting-querysets  # noqa
+        for details.
+
         """
         url = 'http://{}:{}'.format(
             self.host,

@@ -63,6 +63,14 @@ Test Factory Boy Keyword for Book
   Dictionary Should Contain Key  ${book}  title
   Dictionary should contain item  ${book}  title  Colorless Green Ideas Sleep Furiously
 
+Test Factory Boy Get Or Create
+  # Create two authors with the same name
+  Factory Boy  bookstore.factories.AuthorFactory  name=Howard Zinn
+  Factory Boy  bookstore.factories.AuthorFactory  name=Howard Zinn
+  # The author should not be created twice
+  ${result}=  QuerySet  bookstore.models.Author  name=Howard Zinn
+  Length should be  ${result}  1
+
 Test Factory Boy Class with Subfactory
   ${book}=  Factory Boy  bookstore.factories.BookFactory
   ...  title=A People's History of the United States
@@ -71,18 +79,57 @@ Test Factory Boy Class with Subfactory
   Dictionary Should Contain Key  ${book}  title
   Dictionary should contain item  ${book}  title  A People's History of the United States
   Dictionary Should Contain Key  ${book}  author
-  Dictionary should contain item  ${book}  author  Author object
 
-# Test Factory Boy Class with Subfactory and Existing Content
-#   ${author}=  Factory Boy  bookstore.factories.AuthorFactory  name=Howard Zinn
-#   ${book}=  Factory Boy  bookstore.factories.BookFactory
-#   ...  title=A People's History of the United States
-#   ...  author=${author}
-#   # Log Dictionary  ${book}  Warn
-#   Dictionary Should Contain Key  ${book}  title
-#   Dictionary should contain item  ${book}  title  A People's History of the United States
-#   Dictionary Should Contain Key  ${book}  author
-#   Dictionary should contain item  ${book}  author  Author object
+Test Factory Boy Class with Subfactory Subfactory
+  ${book}=  Factory Boy  bookstore.factories.BookFactory
+  ...  title=A People's History of the United States
+  ...  author__name=Howard Zinn
+  ...  author__university__name=Boston University
+  Dictionary should contain item  ${book}  title  A People's History of the United States
+  Dictionary Should Contain Key  ${book}  author
+  ${result}=  QuerySet  bookstore.models.University  name=Boston University
+  Length should be  ${result}  1
+
+Test Factory Boy Class with Subfactory and Existing Content
+  ${author}=  Factory Boy  bookstore.factories.AuthorFactory  name=Howard Zinn
+  ${author_id}=  Get From Dictionary  ${author}  id
+  ${book}=  Factory Boy  bookstore.factories.BookFactory
+  ...  title=A People's History of the United States
+  ...  author__pk=${author_id}
+  Dictionary Should Contain Key  ${book}  title
+  Dictionary should contain item  ${book}  title  A People's History of the United States
+  Dictionary Should Contain Key  ${book}  author
+
+Test Factory Boy Class with Subfactory and Existing Content with QuerySetLookup
+  Factory Boy  bookstore.factories.AuthorFactory  name=Howard Zinn
+  ${authors}=  QuerySet  bookstore.models.Author  name=Howard Zinn
+  ${author}=  Get From List  ${authors}  0
+  ${author_id}=  Get From Dictionary  ${author}  id
+  ${book}=  Factory Boy  bookstore.factories.BookFactory
+  ...  title=A People's History of the United States
+  ...  author__pk=${author_id}
+  Dictionary Should Contain Key  ${book}  title
+  Dictionary should contain item  ${book}  title  A People's History of the United States
+  Dictionary Should Contain Key  ${book}  author
+
+Test Factory Boy Class with Subfactory and reuse of existing data
+  # Ensure that exactly one Howard Zinn exists
+  Factory Boy  bookstore.factories.AuthorFactory  name=Howard Zinn
+  ${authors}=  QuerySet  bookstore.models.Author  name=Howard Zinn
+  Length Should Be  ${authors}  1
+
+  # Create a Book with author__name=Howard Zinn
+  ${book}=  Factory Boy  bookstore.factories.BookFactory
+  ...  title=A People's History of the United States
+  ...  author__name=Howard Zinn
+  Dictionary Should Contain Key  ${book}  title
+  Dictionary should contain item  ${book}  title  A People's History of the United States
+  Dictionary Should Contain Key  ${book}  author
+
+  # Ensure that call to the BookFactory did not create another
+  # entry on the Author table, but reused the existing author
+  ${authors}=  QuerySet  bookstore.models.Author  name=Howard Zinn
+  Length Should Be    ${authors}    1
 
 Test Factory Boy with non-existing path raises Exception
   ${expected_error}=  catenate  SEPARATOR=${SPACE}

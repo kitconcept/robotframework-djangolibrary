@@ -1,6 +1,7 @@
 from django.contrib import auth
 from django.contrib.auth.middleware import AuthenticationMiddleware
 from django.forms.models import model_to_dict
+from django.db.models import ForeignKey
 from django.http import JsonResponse
 from pydoc import locate
 
@@ -29,6 +30,27 @@ class AutologinAuthenticationMiddleware(AuthenticationMiddleware):
 
 class FactoryBoyMiddleware():
 
+    def _get_foreign_key_fields(self, FactoryBoyClass):
+        foreign_key_fields = []
+        for field in FactoryBoyClass._meta.model._meta.fields:
+            if isinstance(field, ForeignKey):
+                foreign_key_fields.append(field)
+        return foreign_key_fields
+
+    def _foreign_key_to_model(self, FactoryBoyClass, factory_boy_args):
+        if not hasattr(FactoryBoyClass, '_meta'):
+            return
+        if not hasattr(FactoryBoyClass._meta.model, '_meta'):
+            return
+        for field in self._get_foreign_key_fields(FactoryBoyClass):
+            for key, value in factory_boy_args.items():
+                key_name = '{}__pk'.format(field.name)
+                if key == key_name:
+                    RelModel = field.foreign_related_fields[0].model
+                    del factory_boy_args[key_name]
+                    new_key = key_name.replace('__pk', '')
+                    factory_boy_args[new_key] = RelModel.objects.first()
+
     def process_request(self, request):
         model_name = request.GET.get('FACTORY_BOY_MODEL_PATH')
         if not model_name:
@@ -47,6 +69,7 @@ class FactoryBoyMiddleware():
                 },
                 status=400
             )
+        self._foreign_key_to_model(FactoryBoyClass, factory_boy_args)
         try:
             obj = FactoryBoyClass(**factory_boy_args)
         except:
@@ -70,15 +93,10 @@ class FactoryBoyMiddleware():
                 },
                 status=400
             )
-        fields = obj._meta._get_fields()
-        result = {}
-        for field in fields:
-            result[field.name] = str(getattr(obj, field.name, ''))
-        result['args'] = str(factory_boy_args)
-        return JsonResponse(result, status=201)
+        return JsonResponse(model_to_dict(obj), status=201)
 
 
-class QueryMiddleware():
+class QuerySetMiddleware():
 
     def process_request(self, request):
         model_name = request.GET.get('MODEL_PATH')
@@ -99,13 +117,25 @@ class QueryMiddleware():
                 status=400
             )
         result = []
+        limit = None
+        if 'limit' in query_args:
+            limit = query_args['limit']
+            del query_args['limit']
+        offset = None
+        if 'offset' in query_args:
+            offset = query_args['offset']
+            del query_args['offset']
         if query_args:
             try:
-                objects = [ModelClass.objects.get(**query_args)]
+                objects = ModelClass.objects.filter(**query_args)
             except ModelClass.DoesNotExist:
                 objects = []
         else:
             objects = ModelClass.objects.all()
+        if offset and limit:
+            objects = objects[int(offset):int(limit)]
+        elif not offset and limit:
+            objects = objects[:int(limit)]
         for obj in objects:
             result.append(
                 model_to_dict(obj)
