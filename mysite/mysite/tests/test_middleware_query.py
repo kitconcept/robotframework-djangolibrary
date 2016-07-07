@@ -1,15 +1,15 @@
 from django.contrib.auth.models import User
 from django.test import TestCase
-from DjangoLibrary.middleware import QueryMiddleware
+from DjangoLibrary.middleware import QuerySetMiddleware
 from mock import Mock
 
 import json
 
 
-class TestQueryMiddleware(TestCase):
+class TestQuerySetMiddleware(TestCase):
 
     def setUp(self):
-        self.middleware = QueryMiddleware()
+        self.middleware = QuerySetMiddleware()
         self.request = Mock()
         self.request.session = {}
 

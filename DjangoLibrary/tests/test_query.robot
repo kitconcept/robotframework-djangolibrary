@@ -31,7 +31,7 @@ Stop Django and close browser
 
 Test query without parameters
   Factory Boy  DjangoLibrary.tests.factories.UserFactory
-  ${result}=  Query  django.contrib.auth.models.User
+  ${result}=  QuerySet  django.contrib.auth.models.User
   # Log List  ${result}  WARN
   ${user}=  Get From List  ${result}  0
   Dictionary Should Contain Key  ${user}  username
@@ -42,7 +42,7 @@ Test query without parameters
 
 Test query with single parameter
   Factory Boy  DjangoLibrary.tests.factories.UserFactory  username=janedoe
-  ${result}=  Query  django.contrib.auth.models.User  username=janedoe
+  ${result}=  QuerySet  django.contrib.auth.models.User  username=janedoe
   # Log List  ${result}  WARN
   ${user}=  Get From List  ${result}  0
   Dictionary Should Contain Key  ${user}  username
@@ -50,13 +50,13 @@ Test query with single parameter
 
 Test query with single parameter returns none
   Factory Boy  DjangoLibrary.tests.factories.UserFactory  username=janedoe
-  ${result}=  Query  django.contrib.auth.models.User  username=johndoe
+  ${result}=  QuerySet  django.contrib.auth.models.User  username=johndoe
   # Log List  ${result}  WARN
   Length should be  ${result}  0
 
 Test query with Book
   Factory Boy  bookstore.factories.BookFactory
-  ${result}=  Query  bookstore.models.Book
+  ${result}=  QuerySet  bookstore.models.Book
   # Log List  ${result}  WARN
   ${book}=  Get From List  ${result}  0
   Dictionary Should contain key  ${book}  title

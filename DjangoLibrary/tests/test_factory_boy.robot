@@ -68,7 +68,7 @@ Test Factory Boy Get Or Create
   Factory Boy  bookstore.factories.AuthorFactory  name=Howard Zinn
   Factory Boy  bookstore.factories.AuthorFactory  name=Howard Zinn
   # The author should not be created twice
-  ${result}=  Query  bookstore.models.Author  name=Howard Zinn
+  ${result}=  QuerySet  bookstore.models.Author  name=Howard Zinn
   Length should be  ${result}  1
 
 Test Factory Boy Class with Subfactory
@@ -87,7 +87,7 @@ Test Factory Boy Class with Subfactory Subfactory
   ...  author__university__name=Boston University
   Dictionary should contain item  ${book}  title  A People's History of the United States
   Dictionary Should Contain Key  ${book}  author
-  ${result}=  Query  bookstore.models.University  name=Boston University
+  ${result}=  QuerySet  bookstore.models.University  name=Boston University
   Length should be  ${result}  1
 
 Test Factory Boy Class with Subfactory and Existing Content
@@ -100,9 +100,9 @@ Test Factory Boy Class with Subfactory and Existing Content
   Dictionary should contain item  ${book}  title  A People's History of the United States
   Dictionary Should Contain Key  ${book}  author
 
-Test Factory Boy Class with Subfactory and Existing Content with Query Lookup
+Test Factory Boy Class with Subfactory and Existing Content with QuerySetLookup
   Factory Boy  bookstore.factories.AuthorFactory  name=Howard Zinn
-  ${authors}=  Query  bookstore.models.Author  name=Howard Zinn
+  ${authors}=  QuerySet  bookstore.models.Author  name=Howard Zinn
   ${author}=  Get From List  ${authors}  0
   ${author_id}=  Get From Dictionary  ${author}  id
   ${book}=  Factory Boy  bookstore.factories.BookFactory
@@ -115,7 +115,7 @@ Test Factory Boy Class with Subfactory and Existing Content with Query Lookup
 Test Factory Boy Class with Subfactory and reuse of existing data
   # Ensure that exactly one Howard Zinn exists
   Factory Boy  bookstore.factories.AuthorFactory  name=Howard Zinn
-  ${authors}=  Query  bookstore.models.Author  name=Howard Zinn
+  ${authors}=  QuerySet  bookstore.models.Author  name=Howard Zinn
   Length Should Be  ${authors}  1
 
   # Create a Book with author__name=Howard Zinn
@@ -128,7 +128,7 @@ Test Factory Boy Class with Subfactory and reuse of existing data
 
   # Ensure that call to the BookFactory did not create another
   # entry on the Author table, but reused the existing author
-  ${authors}=  Query  bookstore.models.Author  name=Howard Zinn
+  ${authors}=  QuerySet  bookstore.models.Author  name=Howard Zinn
   Length Should Be    ${authors}    1
 
 Test Factory Boy with non-existing path raises Exception

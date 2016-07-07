@@ -307,7 +307,7 @@ user.save()""".format(
             raise requests.exceptions.HTTPError(msg, response=response)
         return response.raise_for_status()
 
-    def query(self, model, **kwargs):
+    def query_set(self, model, **kwargs):
         """Query the Django ORM.
         """
         url = 'http://{}:{}'.format(

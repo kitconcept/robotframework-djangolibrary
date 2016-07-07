@@ -86,7 +86,7 @@ class FactoryBoyMiddleware():
         return JsonResponse(model_to_dict(obj), status=201)
 
 
-class QueryMiddleware():
+class QuerySetMiddleware():
 
     def process_request(self, request):
         model_name = request.GET.get('MODEL_PATH')
