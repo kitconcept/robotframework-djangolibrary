@@ -133,9 +133,9 @@ class QuerySetMiddleware():
         else:
             objects = ModelClass.objects.all()
         if offset and limit:
-            objects = objects[offset:limit]
+            objects = objects[int(offset):int(limit)]
         elif not offset and limit:
-            objects = objects[:limit]
+            objects = objects[:int(limit)]
         for obj in objects:
             result.append(
                 model_to_dict(obj)
