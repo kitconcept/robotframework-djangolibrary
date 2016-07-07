@@ -30,6 +30,20 @@ class AutologinAuthenticationMiddleware(AuthenticationMiddleware):
 
 class FactoryBoyMiddleware():
 
+    def _foreign_key_to_model(self, FactoryBoyClass, factory_boy_args):
+        if hasattr(FactoryBoyClass, '_meta'):
+            if hasattr(FactoryBoyClass._meta.model, '_meta'):
+                # iterate over all keys to find foreign keys
+                for field in FactoryBoyClass._meta.model._meta.fields:
+                    if isinstance(field, ForeignKey):
+                        for key, value in factory_boy_args.items():
+                            key_name = '{}__pk'.format(field.name)
+                            if key == key_name:
+                                RelModel = field.foreign_related_fields[0].model  # noqa
+                                del factory_boy_args[key_name]
+                                new_key = key_name.replace('__pk', '')
+                                factory_boy_args[new_key] = RelModel.objects.first()  # noqa
+
     def process_request(self, request):
         model_name = request.GET.get('FACTORY_BOY_MODEL_PATH')
         if not model_name:
@@ -48,18 +62,7 @@ class FactoryBoyMiddleware():
                 },
                 status=400
             )
-        # XXX: experiemental and ugly proof-of-concept code
-        if hasattr(FactoryBoyClass, '_meta'):
-            if hasattr(FactoryBoyClass._meta.model, '_meta'):
-                for field in FactoryBoyClass._meta.model._meta.fields:
-                    if isinstance(field, ForeignKey):
-                        for key, value in factory_boy_args.items():
-                            key_name = '{}__pk'.format(field.name)
-                            if key == key_name:
-                                RelModel = field.foreign_related_fields[0].model  # noqa
-                                del factory_boy_args[key_name]
-                                new_key = key_name.replace('__pk', '')
-                                factory_boy_args[new_key] = RelModel.objects.first()  # noqa
+        self._foreign_key_to_model(FactoryBoyClass, factory_boy_args)
         try:
             obj = FactoryBoyClass(**factory_boy_args)
         except:
