@@ -119,7 +119,7 @@ class QuerySetMiddleware():
         result = []
         if query_args:
             try:
-                objects = [ModelClass.objects.get(**query_args)]
+                objects = ModelClass.objects.filter(**query_args)
             except ModelClass.DoesNotExist:
                 objects = []
         else:

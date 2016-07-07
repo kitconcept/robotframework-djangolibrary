@@ -309,6 +309,19 @@ user.save()""".format(
 
     def query_set(self, model, **kwargs):
         """Query the Django ORM.
+
+        Returns a QuerySet object. See https://docs.djangoproject.com/en/1.9/topics/db/queries/#retrieving-objects for details.  # noqa
+
+        Arguments:
+
+        `model` is a required argument and should contain the full path to
+        your Django model class (e.g. "django.contrib.auth.models.User").
+
+        The `QuerySet` keyword allows to provide additional arguments that
+        are passed as filter arguments
+        (e.g. "django.contrib.auth.models.User  username=john").
+        If no additonal argument is provided `QuerySet will just return all
+        objects that exists for that model.
         """
         url = 'http://{}:{}'.format(
             self.host,
