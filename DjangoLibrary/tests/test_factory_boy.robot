@@ -112,6 +112,25 @@ Test Factory Boy Class with Subfactory and Existing Content with Query Lookup
   Dictionary should contain item  ${book}  title  A People's History of the United States
   Dictionary Should Contain Key  ${book}  author
 
+Test Factory Boy Class with Subfactory and reuse of existing data
+  # Ensure that exactly one Howard Zinn exists
+  Factory Boy  bookstore.factories.AuthorFactory  name=Howard Zinn
+  ${authors}=  Query  bookstore.models.Author  name=Howard Zinn
+  Length Should Be  ${authors}  1
+
+  # Create a Book with author__name=Howard Zinn
+  ${book}=  Factory Boy  bookstore.factories.BookFactory
+  ...  title=A People's History of the United States
+  ...  author__name=Howard Zinn
+  Dictionary Should Contain Key  ${book}  title
+  Dictionary should contain item  ${book}  title  A People's History of the United States
+  Dictionary Should Contain Key  ${book}  author
+
+  # Ensure that call to the BookFactory did not create another
+  # entry on the Author table, but reused the existing author
+  ${authors}=  Query  bookstore.models.Author  name=Howard Zinn
+  Length Should Be    ${authors}    1
+
 Test Factory Boy with non-existing path raises Exception
   ${expected_error}=  catenate  SEPARATOR=${SPACE}
   ...  HTTPError: Factory Boy class "Non.Existing.Path" could not be found
