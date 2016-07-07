@@ -117,6 +117,14 @@ class QuerySetMiddleware():
                 status=400
             )
         result = []
+        limit = None
+        if 'limit' in query_args:
+            limit = query_args['limit']
+            del query_args['limit']
+        offset = None
+        if 'offset' in query_args:
+            offset = query_args['offset']
+            del query_args['offset']
         if query_args:
             try:
                 objects = ModelClass.objects.filter(**query_args)
@@ -124,6 +132,10 @@ class QuerySetMiddleware():
                 objects = []
         else:
             objects = ModelClass.objects.all()
+        if offset and limit:
+            objects = objects[offset:limit]
+        elif not offset and limit:
+            objects = objects[:limit]
         for obj in objects:
             result.append(
                 model_to_dict(obj)

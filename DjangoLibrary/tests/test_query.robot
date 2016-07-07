@@ -62,3 +62,40 @@ Test query with Book
   Dictionary Should contain key  ${book}  title
   Dictionary should contain item  ${book}  title  Colorless Green Ideas Sleep Furiously
 
+Test query with limit
+  Factory Boy  DjangoLibrary.tests.factories.UserFactory  username=user1
+  Factory Boy  DjangoLibrary.tests.factories.UserFactory  username=user2
+  Factory Boy  DjangoLibrary.tests.factories.UserFactory  username=user3
+  ${result}=  QuerySet  django.contrib.auth.models.User  limit=1
+  # Log List  ${result}  WARN
+  Length should be  ${result}  1
+  ${user}=  Get From List  ${result}  0
+  Dictionary Should Contain Key  ${user}  username
+  Dictionary should contain item  ${user}  username  user1
+
+Test query with offset and limit
+  Factory Boy  DjangoLibrary.tests.factories.UserFactory  username=user1
+  Factory Boy  DjangoLibrary.tests.factories.UserFactory  username=user2
+  Factory Boy  DjangoLibrary.tests.factories.UserFactory  username=user3
+  ${result}=  QuerySet  django.contrib.auth.models.User  offset=1  limit=2
+  # Log List  ${result}  WARN
+  Length should be  ${result}  1
+  ${user}=  Get From List  ${result}  0
+  Dictionary Should Contain Key  ${user}  username
+  Dictionary should contain item  ${user}  username  user2
+
+Test query with offset and limit (multiple results)
+  Factory Boy  DjangoLibrary.tests.factories.UserFactory  username=user1
+  Factory Boy  DjangoLibrary.tests.factories.UserFactory  username=user2
+  Factory Boy  DjangoLibrary.tests.factories.UserFactory  username=user3
+  Factory Boy  DjangoLibrary.tests.factories.UserFactory  username=user4
+  Factory Boy  DjangoLibrary.tests.factories.UserFactory  username=user5
+  ${result}=  QuerySet  django.contrib.auth.models.User  offset=2  limit=4
+  # Log List  ${result}  WARN
+  Length should be  ${result}  2
+  ${user}=  Get From List  ${result}  0
+  Dictionary Should Contain Key  ${user}  username
+  Dictionary should contain item  ${user}  username  user3
+  ${user}=  Get From List  ${result}  1
+  Dictionary Should Contain Key  ${user}  username
+  Dictionary should contain item  ${user}  username  user4
