@@ -322,6 +322,20 @@ user.save()""".format(
         (e.g. "django.contrib.auth.models.User  username=john").
         If no additonal argument is provided `QuerySet will just return all
         objects that exists for that model.
+
+        `limit` limits the number of results,
+        e.g. "django.contrib.auth.models.User  limit=10" will return 10 results
+        max.
+        Limit is an optional argument that maps 1:1 to the QuerySet limit
+        argument. See https://docs.djangoproject.com/en/1.9/topics/db/queries/#limiting-querysets  # noqa
+        for details.
+
+        `offset` can be used in combination with `limit` to set an offset,
+        e.g. "django.contrib.auth.models.User  offeset=5  limit=10" will return
+        5 results while omitting the first 5 results.
+        See https://docs.djangoproject.com/en/1.9/topics/db/queries/#limiting-querysets  # noqa
+        for details.
+
         """
         url = 'http://{}:{}'.format(
             self.host,
