@@ -227,6 +227,9 @@ user.save()""".format(
         Make sure that you add this middleware only to your test setup and
         NEVER to your deployment!
 
+        See https://github.com/kitconcept/robotframework-djangolibrary/blob/master/DjangoLibrary/tests/test_autologin.robot
+        for examples how to use the `Autologin As` keyword.
+
         """
         if six.PY2:
             username = username.encode('utf-8')
@@ -290,6 +293,9 @@ user.save()""".format(
         together with the `pk` lookup shortcut (https://docs.djangoproject.com/en/1.9/topics/db/queries/#the-pk-lookup-shortcut)
         (e.g. "Factory Boy  bookstore.factories.BookFactory ... author__pk=1")
 
+        See https://github.com/kitconcept/robotframework-djangolibrary/blob/master/DjangoLibrary/tests/test_factory_boy.robot
+        for examples how to use the `Factory Boy` keyword.
+
         """
         url = 'http://{}:{}'.format(
             self.host,
@@ -340,6 +346,9 @@ user.save()""".format(
         5 results while omitting the first 5 results.
         See https://docs.djangoproject.com/en/1.9/topics/db/queries/#limiting-querysets  # noqa
         for details.
+
+        See https://github.com/kitconcept/robotframework-djangolibrary/blob/master/DjangoLibrary/tests/test_query_set.robot
+        for examples how to use the `Query Set` keyword.
 
         """
         url = 'http://{}:{}'.format(
