@@ -27,6 +27,12 @@ Generate Documentation
 
   $ python -m robot.libdoc DjangoLibrary docs/DjangoLibrary.html
 
+Release Documentation:
+
+  $ git checkout gh-pages
+  $ git commit . -m"Update keyword docs."
+  $ git push
+  $ git checkout master
 
 Make Release
 ------------
