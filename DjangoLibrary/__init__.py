@@ -279,11 +279,16 @@ user.save()""".format(
 
         `factory` is a required argument and should contain the full path to
         your factory boy factory class (e.g.
-        "mysite.polls.factories.PollFactory").
+        "FactoryBoy mysite.polls.factories.PollFactory").
 
         The `Factory Boy` keyword allows to provide additional arguments that
         are passed directly to the Factory Boy Factory class
-        (e.g. "mysite.polls.factories.PollFactory pollname='mypoll'").
+        (e.g. "FactoryBoy mysite.polls.factories.PollFactory pollname='mypoll'").
+
+        You can also override subfactories by using the double-underscore
+        field lookup (https://docs.djangoproject.com/en/1.9/topics/db/queries/#field-lookups)  #noqa
+        together with the `pk` lookup shortcut (https://docs.djangoproject.com/en/1.9/topics/db/queries/#the-pk-lookup-shortcut)
+        (e.g. "Factory Boy  bookstore.factories.BookFactory ... author__pk=1")
 
         """
         url = 'http://{}:{}'.format(
