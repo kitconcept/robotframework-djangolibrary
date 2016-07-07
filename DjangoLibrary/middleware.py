@@ -30,21 +30,26 @@ class AutologinAuthenticationMiddleware(AuthenticationMiddleware):
 
 class FactoryBoyMiddleware():
 
+    def _get_foreign_key_fields(self, FactoryBoyClass):
+        foreign_key_fields = []
+        for field in FactoryBoyClass._meta.model._meta.fields:
+            if isinstance(field, ForeignKey):
+                foreign_key_fields.append(field)
+        return foreign_key_fields
+
     def _foreign_key_to_model(self, FactoryBoyClass, factory_boy_args):
         if not hasattr(FactoryBoyClass, '_meta'):
             return
         if not hasattr(FactoryBoyClass._meta.model, '_meta'):
             return
-        # iterate over all keys to find foreign keys
-        for field in FactoryBoyClass._meta.model._meta.fields:
-            if isinstance(field, ForeignKey):
-                for key, value in factory_boy_args.items():
-                    key_name = '{}__pk'.format(field.name)
-                    if key == key_name:
-                        RelModel = field.foreign_related_fields[0].model
-                        del factory_boy_args[key_name]
-                        new_key = key_name.replace('__pk', '')
-                        factory_boy_args[new_key] = RelModel.objects.first()
+        for field in self._get_foreign_key_fields(FactoryBoyClass):
+            for key, value in factory_boy_args.items():
+                key_name = '{}__pk'.format(field.name)
+                if key == key_name:
+                    RelModel = field.foreign_related_fields[0].model
+                    del factory_boy_args[key_name]
+                    new_key = key_name.replace('__pk', '')
+                    factory_boy_args[new_key] = RelModel.objects.first()
 
     def process_request(self, request):
         model_name = request.GET.get('FACTORY_BOY_MODEL_PATH')
