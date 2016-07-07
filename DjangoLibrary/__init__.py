@@ -227,7 +227,7 @@ user.save()""".format(
         Make sure that you add this middleware only to your test setup and
         NEVER to your deployment!
 
-        See https://github.com/kitconcept/robotframework-djangolibrary/blob/master/DjangoLibrary/tests/test_autologin.robot
+        See https://github.com/kitconcept/robotframework-djangolibrary/blob/master/DjangoLibrary/tests/test_autologin.robot  # noqa
         for examples how to use the `Autologin As` keyword.
 
         """
@@ -293,7 +293,7 @@ user.save()""".format(
         together with the `pk` lookup shortcut (https://docs.djangoproject.com/en/1.9/topics/db/queries/#the-pk-lookup-shortcut)
         (e.g. "Factory Boy  bookstore.factories.BookFactory ... author__pk=1")
 
-        See https://github.com/kitconcept/robotframework-djangolibrary/blob/master/DjangoLibrary/tests/test_factory_boy.robot
+        See https://github.com/kitconcept/robotframework-djangolibrary/blob/master/DjangoLibrary/tests/test_factory_boy.robot  # noqa
         for examples how to use the `Factory Boy` keyword.
 
         """
@@ -347,7 +347,7 @@ user.save()""".format(
         See https://docs.djangoproject.com/en/1.9/topics/db/queries/#limiting-querysets  # noqa
         for details.
 
-        See https://github.com/kitconcept/robotframework-djangolibrary/blob/master/DjangoLibrary/tests/test_query_set.robot
+        See https://github.com/kitconcept/robotframework-djangolibrary/blob/master/DjangoLibrary/tests/test_query_set.robot  # noqa
         for examples how to use the `Query Set` keyword.
 
         """
