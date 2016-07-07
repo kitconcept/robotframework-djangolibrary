@@ -27,7 +27,6 @@ setup(
         'Framework :: Django :: 1.9',
         'Programming Language :: Python :: 2.7',
         'Programming Language :: Python :: 3.5',
-        'Programming Language :: Python :: 3.6',
         'Programming Language :: Python :: Implementation :: CPython',
     ],
     # Get strings from http://pypi.python.org/pypi?%3Aaction=list_classifiers
