@@ -15,7 +15,7 @@ Suite Teardown  Stop Django and Close Browser
 
 *** Test Cases ***
 
-Scenario: Create superuser
+Create superuser keyword should create superuser
   Create Superuser  admin  admin@admin.com  password
   Go To  ${SERVER}/admin
   Wait until page contains  Django administration
@@ -27,7 +27,7 @@ Scenario: Create superuser
   Page should not contain  Please enter the correct username and password
   Logout
 
-Scenario: Create superuser with special characters
+Create superuser keyword should work with special characters
   Create Superuser  admin-öüä  admin@admin.com  password
   Go To  ${SERVER}/admin
   Wait until page contains  Django administration
@@ -39,7 +39,7 @@ Scenario: Create superuser with special characters
   Page should not contain  Please enter the correct username and password
   Logout
 
-Scenario: Create user
+Create user keyword should create user
   Create User  test-user-1  test@test.com  password  is_superuser=True  is_staff=True
   Go To  ${SERVER}/admin
   Wait until page contains  Django administration
@@ -51,7 +51,7 @@ Scenario: Create user
   Page should not contain  Please enter the correct username and password
   Logout
 
-Scenario: Create user with special characters
+Create user keyword should work with special characters
   Create User  äüö-AÜÖ  test@test.com  password  is_superuser=True  is_staff=True
   Go To  ${SERVER}/admin
   Wait until page contains  Django administration
@@ -63,23 +63,23 @@ Scenario: Create user with special characters
   Page should not contain  Please enter the correct username and password
   Logout
 
-Scenario: Autologin
+Autologin keyword should login user
   Create User  test-user-2  test@test.com  password  is_superuser=True  is_staff=True
   Autologin as  test-user-2  password
   User is logged in
 
-Scenario: Autologin with special characters
+Autologin keyword should login user with special characters
   [tags]  current
   Create User  äüö-AÜÖ  test@test.com  password  is_superuser=True  is_staff=True
   Autologin as  äüö-AÜÖ  password
   User is logged in
 
-Scenario: Autologin without Logout
+Autologin keyword should work multiple times
   Autologin as  test-user-1  password
   Autologin as  test-user-2  password
   User 'test-user-2' is logged in
 
-Scenario: Autologin Logout
+Autologin Logout keywords should log out user
   Create User  test-user-3  test@test.com  password  is_superuser=True  is_staff=True
   Autologin as  test-user-3  password
   User is logged in
