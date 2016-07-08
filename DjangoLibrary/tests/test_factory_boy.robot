@@ -45,15 +45,15 @@ Factory Boy Keyword Should Return Primary Key Attribute
 
 Factory Boy Keyword Should Override Attributes
   ${user}=  Factory Boy  DjangoLibrary.tests.factories.UserFactory
-  ..  username=janedoe
+  ...  username=janedoe
 
   Dictionary should contain item  ${user}  username  janedoe
   Dictionary should contain item  ${user}  email  janedoe@example.com
 
 Factory Boy Keyword Should Override Multiple Attributes
   ${user}=  Factory Boy  DjangoLibrary.tests.factories.UserFactory
-  ..  username=janedoe
-  ..  email=jane@doe.com
+  ...  username=janedoe
+  ...  email=jane@doe.com
 
   Dictionary should contain item  ${user}  username  janedoe
   Dictionary should contain item  ${user}  email  jane@doe.com
