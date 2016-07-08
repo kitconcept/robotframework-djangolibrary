@@ -39,6 +39,10 @@ Test Factory Boy Keyword
   Dictionary should contain item  ${user}  is_superuser  False
   Dictionary should contain item  ${user}  is_staff  False
 
+Factory Boy Keyword Should Return Primary Key Attribute
+  ${user}=  Factory Boy  DjangoLibrary.tests.factories.UserFactory
+  Dictionary should contain key  ${user}  pk
+
 Test Factory Boy Keyword Override Single Attribute
   ${user}=  Factory Boy  DjangoLibrary.tests.factories.UserFactory  username=janedoe
   # Log Dictionary  ${user}  WARN
