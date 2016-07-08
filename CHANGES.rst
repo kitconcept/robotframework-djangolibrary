@@ -2,7 +2,10 @@
 1.2 (unreleased)
 ----------------
 
-- Nothing changed yet.
+New Features:
+
+- Make Factory Boy keyword return 'pk' attribute.
+  [timo]
 
 
 1.1 (2016-07-07)
