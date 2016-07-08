@@ -93,7 +93,9 @@ class FactoryBoyMiddleware():
                 },
                 status=400
             )
-        return JsonResponse(model_to_dict(obj), status=201)
+        serialized_obj = model_to_dict(obj)
+        serialized_obj['pk'] = obj.pk
+        return JsonResponse(serialized_obj, status=201)
 
 
 class QuerySetMiddleware():
@@ -137,7 +139,7 @@ class QuerySetMiddleware():
         elif not offset and limit:
             objects = objects[:int(limit)]
         for obj in objects:
-            result.append(
-                model_to_dict(obj)
-            )
+            serialized_obj = model_to_dict(obj)
+            serialized_obj['pk'] = obj.pk
+            result.append(serialized_obj)
         return JsonResponse(result, safe=False, status=200)

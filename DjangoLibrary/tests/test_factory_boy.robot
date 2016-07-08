@@ -29,9 +29,8 @@ Stop Django and close browser
 
 *** Test Cases ***
 
-Test Factory Boy Keyword
+Factory Boy Keyword Should Return Object
   ${user}=  Factory Boy  DjangoLibrary.tests.factories.UserFactory
-  # Log Dictionary  ${user}  WARN
   Dictionary Should Contain Key  ${user}  username
   Dictionary should contain key  ${user}  password
   Dictionary should contain item  ${user}  username  johndoe
@@ -39,31 +38,37 @@ Test Factory Boy Keyword
   Dictionary should contain item  ${user}  is_superuser  False
   Dictionary should contain item  ${user}  is_staff  False
 
-Test Factory Boy Keyword Override Single Attribute
-  ${user}=  Factory Boy  DjangoLibrary.tests.factories.UserFactory  username=janedoe
-  # Log Dictionary  ${user}  WARN
+Factory Boy Keyword Should Return Primary Key Attribute
+  ${user}=  Factory Boy  DjangoLibrary.tests.factories.UserFactory
+
+  Dictionary should contain key  ${user}  pk
+
+Factory Boy Keyword Should Override Attributes
+  ${user}=  Factory Boy  DjangoLibrary.tests.factories.UserFactory
+  ...  username=janedoe
+
   Dictionary should contain item  ${user}  username  janedoe
   Dictionary should contain item  ${user}  email  janedoe@example.com
 
-Test Factory Boy Keyword Override Multiple Attribute
-  ${user}=  Factory Boy  DjangoLibrary.tests.factories.UserFactory  username=janedoe  email=jane@doe.com
-  # Log Dictionary  ${user}  WARN
+Factory Boy Keyword Should Override Multiple Attributes
+  ${user}=  Factory Boy  DjangoLibrary.tests.factories.UserFactory
+  ...  username=janedoe
+  ...  email=jane@doe.com
+
   Dictionary should contain item  ${user}  username  janedoe
   Dictionary should contain item  ${user}  email  jane@doe.com
 
-Test Factory Boy Keyword for Author
+Factory Boy Keyword Should Work For Author
   ${author}=  Factory Boy  bookstore.factories.AuthorFactory
-  # Log Dictionary  ${user}  WARN
   Dictionary Should Contain Key  ${author}  name
   Dictionary should contain item  ${author}  name  Noam Chomsky
 
-Test Factory Boy Keyword for Book
+Factory Boy Keyword Should Work For Book
   ${book}=  Factory Boy  bookstore.factories.BookFactory
-  # Log Dictionary  ${user}  WARN
   Dictionary Should Contain Key  ${book}  title
   Dictionary should contain item  ${book}  title  Colorless Green Ideas Sleep Furiously
 
-Test Factory Boy Get Or Create
+Factory Boy Keyword Should Get Or Create An Object
   # Create two authors with the same name
   Factory Boy  bookstore.factories.AuthorFactory  name=Howard Zinn
   Factory Boy  bookstore.factories.AuthorFactory  name=Howard Zinn
@@ -71,16 +76,15 @@ Test Factory Boy Get Or Create
   ${result}=  QuerySet  bookstore.models.Author  name=Howard Zinn
   Length should be  ${result}  1
 
-Test Factory Boy Class with Subfactory
+Factory Boy Keyword Should Work With Subfactory
   ${book}=  Factory Boy  bookstore.factories.BookFactory
   ...  title=A People's History of the United States
   ...  author__name=Howard Zinn
-  # Log Dictionary  ${book}  Warn
   Dictionary Should Contain Key  ${book}  title
   Dictionary should contain item  ${book}  title  A People's History of the United States
   Dictionary Should Contain Key  ${book}  author
 
-Test Factory Boy Class with Subfactory Subfactory
+Factory Boy Keyword Should Work With Subfactory Subfactory
   ${book}=  Factory Boy  bookstore.factories.BookFactory
   ...  title=A People's History of the United States
   ...  author__name=Howard Zinn
@@ -90,7 +94,7 @@ Test Factory Boy Class with Subfactory Subfactory
   ${result}=  QuerySet  bookstore.models.University  name=Boston University
   Length should be  ${result}  1
 
-Test Factory Boy Class with Subfactory and Existing Content
+Factory Boy Keyword Should Work With Subfactory and Existing Content
   ${author}=  Factory Boy  bookstore.factories.AuthorFactory  name=Howard Zinn
   ${author_id}=  Get From Dictionary  ${author}  id
   ${book}=  Factory Boy  bookstore.factories.BookFactory
@@ -100,7 +104,7 @@ Test Factory Boy Class with Subfactory and Existing Content
   Dictionary should contain item  ${book}  title  A People's History of the United States
   Dictionary Should Contain Key  ${book}  author
 
-Test Factory Boy Class with Subfactory and Existing Content with QuerySetLookup
+Factory Boy Keyword Should Work With Subfactory, Existing Content, and QuerySet Lookup
   Factory Boy  bookstore.factories.AuthorFactory  name=Howard Zinn
   ${authors}=  QuerySet  bookstore.models.Author  name=Howard Zinn
   ${author}=  Get From List  ${authors}  0
@@ -112,7 +116,7 @@ Test Factory Boy Class with Subfactory and Existing Content with QuerySetLookup
   Dictionary should contain item  ${book}  title  A People's History of the United States
   Dictionary Should Contain Key  ${book}  author
 
-Test Factory Boy Class with Subfactory and reuse of existing data
+Factory Boy Keyword Should Work With Subfactory And Reuse Of Existing Content
   # Ensure that exactly one Howard Zinn exists
   Factory Boy  bookstore.factories.AuthorFactory  name=Howard Zinn
   ${authors}=  QuerySet  bookstore.models.Author  name=Howard Zinn
@@ -131,26 +135,26 @@ Test Factory Boy Class with Subfactory and reuse of existing data
   ${authors}=  QuerySet  bookstore.models.Author  name=Howard Zinn
   Length Should Be    ${authors}    1
 
-Test Factory Boy with non-existing path raises Exception
+Factory Boy Keyword Should Raise an Exception If Path Does Not Exist
   ${expected_error}=  catenate  SEPARATOR=${SPACE}
   ...  HTTPError: Factory Boy class "Non.Existing.Path" could not be found
   Run Keyword and Expect Error  ${expected_error}  Factory Boy  Non.Existing.Path
 
-Test Factory Boy with broken class raises Exception
+Factory Boy Keyword Should Raise an Exception On Broken Class
   ${expected_error}=  catenate  SEPARATOR=${SPACE}
   ...  HTTPError: FactoryBoyClass
   ...  "DjangoLibrary.tests.factories.BrokenFactory"
   ...  could not be instantiated with args "{}"
   Run Keyword and Expect Error  ${expected_error}  Factory Boy  DjangoLibrary.tests.factories.BrokenFactory
 
-Test Factory Boy class without meta class
+Factory Boy Keyword Should Raise an Exception On Class Without Meta Class
   ${expected_error}=  catenate  SEPARATOR=${SPACE}
   ...  HTTPError: FactoryBoyClass
   ...  "DjangoLibrary.tests.factories.BrokenFactoryWithoutMetaClass"
   ...  could not be instantiated with args "{}"
   Run Keyword and Expect Error  ${expected_error}  Factory Boy  DjangoLibrary.tests.factories.BrokenFactoryWithoutMetaClass
 
-Test Factory Boy class does not inherit from DjangoModelFactory
+Factory Boy Keyword Should Raise an Exception If Class Does Not Inherit From DjangoModelFactory
   ${expected_error}=  catenate  SEPARATOR=${SPACE}
   ...  HTTPError: The FactoryBoyClass
   ...  "DjangoLibrary.tests.factories.BrokenFactoryClassDoesNotInheritFromDjangoModelFactory"
