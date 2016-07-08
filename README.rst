@@ -106,6 +106,19 @@ following content::
     Page Should Contain  Congratulations on your first Django-powered page.
 
 
+Contribute
+----------
+
+- `Source code at Github <https://github.com/kitconcept/robotframework-djangolibrary>`_
+- `Issue tracker at Github <https://github.com/kitconcept/robotframework-djangolibrary/issues>`_
+
+
+Support
+-------
+
+If you are having issues, `please let us know <https://github.com/kitconcept/robotframework-djangolibrary/issues>`_. If you require professional support feel free to contact us at `info@kitconcept.com. <mailto:info@kitconcept.com>`_
+
+
 Run Tests
 ---------
 
