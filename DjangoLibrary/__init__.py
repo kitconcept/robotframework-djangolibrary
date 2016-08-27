@@ -172,7 +172,7 @@ user.save()""".format(
 
     def start_django(self):
         """Start the Django server."""
-        self.clear_db()
+        self.manage_flush()
         self.manage_makemigrations()
         self.manage_migrate()
         logger.console("-" * 78)
