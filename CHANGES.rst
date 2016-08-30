@@ -2,7 +2,7 @@
 1.3 (unreleased)
 ----------------
 
-- Nothing changed yet.
+- Remove deprecated method from internal startup flow.
 
 
 1.2 (2016-07-08)
