@@ -2,6 +2,9 @@
 1.3 (unreleased)
 ----------------
 
+- LICENSE.txt added.
+  [timo]
+
 - Remove deprecated method from internal startup flow.
 
 
