@@ -6,6 +6,7 @@
   [timo]
 
 - Remove deprecated method from internal startup flow.
+- Use AUTH_MODEL to create user instead of django's default
 
 
 1.2 (2016-07-08)

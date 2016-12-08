@@ -133,8 +133,8 @@ class DjangoLibrary:
         "is_staff=True")."""
 
         to_run = """
-from django.contrib.auth.models import User
-user = User.objects.create_user(
+from django.contrib.auth import get_user_model
+user = get_user_model().objects.create_user(
     '{0}',
     email='{1}',
     password='{2}',
