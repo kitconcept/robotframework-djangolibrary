@@ -7,6 +7,7 @@
 
 - Remove deprecated method from internal startup flow.
 - Use AUTH_MODEL to create user instead of django's default
+- Upgrade FactoryBoy to version 2.8.1
 
 
 1.2 (2016-07-08)
