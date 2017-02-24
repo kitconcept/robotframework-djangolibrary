@@ -180,7 +180,7 @@ Install the requirements::
 
 Run Unit/Integration-Tests::
 
-  $ pytest mysite/
+  $ py.test mysite/
 
 Run Acceptance Tests::
 
