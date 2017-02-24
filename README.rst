@@ -182,6 +182,12 @@ Run Unit/Integration-Tests::
 
   $ pytest mysite/
 
+Note: if you get database connection errors, ensure that you can connect to
+PostgreSQL as user postgres without a password, either by editing the
+``pg_hba.conf`` or by adding this line to your [``~/.pgpass``](https://www.postgresql.org/docs/current/static/libpq-pgpass.html) file::
+
+   *:*:*:postgres:postgres
+
 Run Acceptance Tests::
 
   $ pybot DjangoLibrary/tests/
