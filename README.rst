@@ -182,11 +182,14 @@ Run Unit/Integration-Tests::
 
   $ pytest mysite/
 
-Note: if you get database connection errors, ensure that you can connect to
-PostgreSQL as user postgres without a password, either by editing the
-``pg_hba.conf`` or by adding this line to your [``~/.pgpass``](https://www.postgresql.org/docs/current/static/libpq-pgpass.html) file::
+Note: if you get the error `fe_sendauth: no password supplied`, ensure that you can connect to
+PostgreSQL as user postgres without a password. You can either edit the file
+``pg_hba.conf`` to add a trust auth-method for your user or you can set a
+password for user postgres and add a line to your
+[``~/.pgpass``](https://www.postgresql.org/docs/current/static/libpq-pgpass.html)
+file similar to this::
 
-   *:*:*:postgres:postgres
+   *:*:*:postgres:yourpassword
 
 Run Acceptance Tests::
 
