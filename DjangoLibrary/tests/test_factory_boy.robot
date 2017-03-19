@@ -8,7 +8,7 @@ ${BROWSER}              firefox
 
 Documentation   Testing Test Isolation
 Library         Selenium2Library  timeout=10  implicit_wait=0
-Library         DjangoLibrary  127.0.0.1  55001
+Library         DjangoLibrary  127.0.0.1  55001  settings=mysite.robotframework_settings
 Library         Collections
 Library         DebugLibrary
 Suite Setup     Start Django and Open Browser
