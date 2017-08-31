@@ -2,12 +2,24 @@
 1.3 (unreleased)
 ----------------
 
-- LICENSE.txt added.
-  [timo]
+Breaking Changes:
 
 - Remove deprecated method from internal startup flow.
+  [cdvv7788]
+
+New Features:
+
 - Use AUTH_MODEL to create user instead of django's default
+  [cdvv7788]
+
 - Upgrade FactoryBoy to version 2.8.1
+  [amarandon]
+
+- Add Django 1.10.7 and 1.11.1 support.
+  [timo]
+
+- LICENSE.txt added.
+  [timo]
 
 
 1.2 (2016-07-08)
