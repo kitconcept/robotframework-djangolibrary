@@ -1,12 +1,26 @@
+from collections import OrderedDict
 from django.contrib import auth
 from django.contrib.auth.middleware import AuthenticationMiddleware
-from django.forms.models import model_to_dict
 from django.db.models import ForeignKey
+from django.core import serializers
 from django.http import JsonResponse
 from pydoc import locate
 
 import base64
 import json
+
+
+def model_to_dict(model):
+    serialized_obj = serializers.serialize('python', [model])
+    serialized_obj = serialized_obj[0]
+    serialized_obj = dict(serialized_obj)
+    for key, value in serialized_obj.items():
+        if isinstance(value, OrderedDict):
+            serialized_obj[key] = dict(value)
+    serialized_obj = serialized_obj['fields']
+    serialized_obj['id'] = model.id
+    serialized_obj['pk'] = model.pk
+    return serialized_obj
 
 
 class AutologinAuthenticationMiddleware(AuthenticationMiddleware):
@@ -93,9 +107,7 @@ class FactoryBoyMiddleware():
                 },
                 status=400
             )
-        serialized_obj = model_to_dict(obj)
-        serialized_obj['pk'] = obj.pk
-        return JsonResponse(serialized_obj, status=201)
+        return JsonResponse(model_to_dict(obj), status=201)
 
 
 class QuerySetMiddleware():

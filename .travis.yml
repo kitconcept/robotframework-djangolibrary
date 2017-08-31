@@ -6,8 +6,10 @@ sudo: false
 env:
   - DJANGO_VERSION=1.8.12 DB=SQLite
   - DJANGO_VERSION=1.9.5 DB=SQLite
+  - DJANGO_VERSION=1.10.7 DB=SQLite
   - DJANGO_VERSION=1.8.12 DB=Postgres
   - DJANGO_VERSION=1.9.5 DB=Postgres
+  - DJANGO_VERSION=1.10.7 DB=Postgres
 services:
   – postgresql
 install:
