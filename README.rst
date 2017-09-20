@@ -17,6 +17,10 @@ A robot framework library for Django.
     :target: https://pypi.python.org/pypi/robotframework-djangolibrary/
     :alt: License
 
+.. image:: https://raw.githubusercontent.com/kitconcept/robotframework-djangolibrary/master/kitconcept.png
+   :alt: kitconcept
+   :target: https://kitconcept.com/
+
 
 Introduction
 ------------
@@ -100,6 +104,14 @@ following content::
     Wait until page contains element  id=explanation
     Page Should Contain  It worked!
     Page Should Contain  Congratulations on your first Django-powered page.
+
+
+License
+-------
+
+Copyright kitconcept GmbH.
+
+Distributed under the terms of the Apache License 2.0, robotframework-djangolibrary is free and Open Source software.
 
 
 Contribute
