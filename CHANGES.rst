@@ -1,5 +1,5 @@
 
-1.3 (unreleased)
+2.0 (2017-09-20)
 ----------------
 
 Breaking Changes:
