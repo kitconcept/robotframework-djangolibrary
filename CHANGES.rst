@@ -21,6 +21,14 @@ New Features:
 - LICENSE.txt added.
   [timo]
 
+Bugfixes / Minor Changes:
+
+- Move tests to use Chrome.
+  [timo]
+
+- Upgrade tests to Django 1.11.5, 1.10.8, 1.9.13, 1.8.18.
+  [timo]
+
 
 1.2 (2016-07-08)
 ----------------
