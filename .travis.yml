@@ -11,14 +11,14 @@ addons:
     packages:
       - google-chrome-stable
 env:
-  - DJANGO_VERSION=1.8.12 DB=SQLite
-  - DJANGO_VERSION=1.9.5 DB=SQLite
-  - DJANGO_VERSION=1.10.7 DB=SQLite
-  - DJANGO_VERSION=1.11.4 DB=SQLite
-  - DJANGO_VERSION=1.8.12 DB=Postgres
-  - DJANGO_VERSION=1.9.5 DB=Postgres
-  - DJANGO_VERSION=1.10.7 DB=Postgres
-  - DJANGO_VERSION=1.11.4 DB=Postgres
+  - DJANGO_VERSION=1.8.18 DB=SQLite
+  - DJANGO_VERSION=1.9.13 DB=SQLite
+  - DJANGO_VERSION=1.10.8 DB=SQLite
+  - DJANGO_VERSION=1.11.5 DB=SQLite
+  - DJANGO_VERSION=1.8.18 DB=Postgres
+  - DJANGO_VERSION=1.9.13 DB=Postgres
+  - DJANGO_VERSION=1.10.8 DB=Postgres
+  - DJANGO_VERSION=1.11.5 DB=Postgres
 services:
   – postgresql
 install:
