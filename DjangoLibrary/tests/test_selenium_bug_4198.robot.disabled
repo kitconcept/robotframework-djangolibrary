@@ -1,7 +1,7 @@
 *** Variables ***
 
 ${SERVER}               http://localhost:55001
-${BROWSER}              firefox
+${BROWSER}              chrome
 
 
 *** Settings ***
