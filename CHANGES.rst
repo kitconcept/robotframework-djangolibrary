@@ -29,6 +29,9 @@ Bugfixes / Minor Changes:
 - Upgrade tests to Django 1.11.5, 1.10.8, 1.9.13, 1.8.18.
   [timo]
 
+- Add Django 1.11 and 1.10 to setup.py.
+  [timo]
+
 
 1.2 (2016-07-08)
 ----------------
