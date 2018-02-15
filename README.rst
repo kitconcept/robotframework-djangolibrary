@@ -6,6 +6,8 @@ A robot framework library for Django.
    :alt: kitconcept
    :target: https://kitconcept.com/
 
+|br|
+
 .. image:: https://travis-ci.org/kitconcept/robotframework-djangolibrary.svg?branch=master
     :target: https://travis-ci.org/kitconcept/robotframework-djangolibrary
 
@@ -198,3 +200,7 @@ Run Acceptance Tests::
   $ pybot DjangoLibrary/tests/
 
 .. _`Robot Framework Django Library Keyword Documentation`: https://kitconcept.github.io/robotframework-djangolibrary/DjangoLibraryDocs.html
+
+.. |br| raw:: html
+
+   <br />
