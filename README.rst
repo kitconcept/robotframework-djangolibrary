@@ -2,12 +2,6 @@
 A robot framework library for Django.
 ==============================================================================
 
-.. image:: https://raw.githubusercontent.com/kitconcept/robotframework-djangolibrary/master/kitconcept.png
-   :alt: kitconcept
-   :target: https://kitconcept.com/
-
-|br|
-
 .. image:: https://travis-ci.org/kitconcept/robotframework-djangolibrary.svg?branch=master
     :target: https://travis-ci.org/kitconcept/robotframework-djangolibrary
 
@@ -22,6 +16,13 @@ A robot framework library for Django.
 .. image:: https://img.shields.io/pypi/l/robotframework-djangolibrary.svg
     :target: https://pypi.python.org/pypi/robotframework-djangolibrary/
     :alt: License
+
+|br|
+
+.. image:: https://raw.githubusercontent.com/kitconcept/robotframework-djangolibrary/master/kitconcept.png
+   :alt: kitconcept
+   :target: https://kitconcept.com/
+
 
 Introduction
 ------------
