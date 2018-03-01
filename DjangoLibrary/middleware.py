@@ -86,7 +86,7 @@ class FactoryBoyMiddleware():
         self._foreign_key_to_model(FactoryBoyClass, factory_boy_args)
         try:
             obj = FactoryBoyClass(**factory_boy_args)
-        except:
+        except:  # noqa
             return JsonResponse(
                 {
                     'error': 'FactoryBoyClass "{}" '.format(model_name) +

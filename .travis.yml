@@ -1,7 +1,7 @@
 language: python
 python:
   - 2.7
-  - 3.5
+  - 3.6
 sudo: false
 dist: trusty
 addons:
@@ -31,7 +31,7 @@ install:
   - pip install -q  --pre Django==$DJANGO_VERSION
 #  - python setup.py install
 before_script:
-  - wget "http://chromedriver.storage.googleapis.com/2.30/chromedriver_linux64.zip"
+  - wget "http://chromedriver.storage.googleapis.com/2.35/chromedriver_linux64.zip"
   - unzip chromedriver_linux64.zip
   - sudo mv chromedriver /usr/local/bin
   - "export DISPLAY=:99.0"
