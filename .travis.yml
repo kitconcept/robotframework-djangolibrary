@@ -15,10 +15,12 @@ env:
   - DJANGO_VERSION=1.9.13 DB=SQLite
   - DJANGO_VERSION=1.10.8 DB=SQLite
   - DJANGO_VERSION=1.11.5 DB=SQLite
+  - DJANGO_VERSION=2.0.2 DB=SQLite
   - DJANGO_VERSION=1.8.18 DB=Postgres
   - DJANGO_VERSION=1.9.13 DB=Postgres
   - DJANGO_VERSION=1.10.8 DB=Postgres
   - DJANGO_VERSION=1.11.5 DB=Postgres
+  - DJANGO_VERSION=2.0.2 DB=Postgres
 services:
   – postgresql
 install:
