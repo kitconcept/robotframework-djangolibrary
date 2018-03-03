@@ -200,7 +200,7 @@ Run Acceptance Tests::
 
   $ pybot DjangoLibrary/tests/
 
-.. _`Robot Framework Django Library Keyword Documentation`: https://kitconcept.github.io/robotframework-djangolibrary/DjangoLibraryDocs.html
+.. _`Robot Framework Django Library Keyword Documentation`: https://kitconcept.github.io/robotframework-djangolibrary/
 
 .. |br| raw:: html
 
