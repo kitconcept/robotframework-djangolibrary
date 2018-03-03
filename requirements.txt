@@ -3,8 +3,11 @@ robotframework-selenium2library
 robotframework-debuglibrary==0.4
 Selenium==2.53.1
 factory_boy==2.8.1
-requests==2.9.1
 pytest==2.9.1
 pytest-django==2.9.1
 psycopg2==2.7.4
 mock==2.0.0
+zest.releaser==6.12.4
+twine==1.9.1
+requests==2.18.4
+
