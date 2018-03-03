@@ -12,7 +12,7 @@ long_description = (
 setup(
     name='robotframework-djangolibrary',
     version=version,
-    description="A robot framework library for Django.",
+    description="A Robot Framework library for Django.",
     long_description=long_description,
     classifiers=[
         'Development Status :: 5 - Production/Stable',
@@ -33,7 +33,7 @@ setup(
     ],
     # Get strings from http://pypi.python.org/pypi?%3Aaction=list_classifiers
     keywords='robotframework django test',
-    author='Timo Stollenwerk',
+    author='kitconcept GmbH | Timo Stollenwerk',
     author_email='stollenwerk@kitconcept.com',
     url='https://kitconcept.com',
     license='Apache License 2.0',
