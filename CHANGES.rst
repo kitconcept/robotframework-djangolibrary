@@ -2,7 +2,10 @@
 2.0.1 (unreleased)
 ------------------
 
-- Nothing changed yet.
+Bugfixes / Minor Changes:
+
+- Fix outdated documentation.
+  [timo]
 
 
 2.0 (2017-09-20)
