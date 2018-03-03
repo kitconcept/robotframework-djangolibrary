@@ -22,6 +22,3 @@ test:
 	@echo "Run Tests"
 	bin/pybot DjangoLibrary
 
-test-phantomjs:
-	@echo "Run Tests"
-	bin/pybot --variable BROWSER:phantomjs DjangoLibrary
