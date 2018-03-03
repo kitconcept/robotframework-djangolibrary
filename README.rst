@@ -17,8 +17,6 @@ A robot framework library for Django.
     :target: https://pypi.python.org/pypi/robotframework-djangolibrary/
     :alt: License
 
-|br|
-
 .. image:: https://raw.githubusercontent.com/kitconcept/robotframework-djangolibrary/master/kitconcept.png
    :alt: kitconcept
    :target: https://kitconcept.com/
@@ -201,7 +199,3 @@ Run Acceptance Tests::
   $ pybot DjangoLibrary/tests/
 
 .. _`Robot Framework Django Library Keyword Documentation`: https://kitconcept.github.io/robotframework-djangolibrary/
-
-.. |br| raw:: html
-
-   <br />

@@ -2,7 +2,8 @@
 2.0.2 (unreleased)
 ------------------
 
-- Nothing changed yet.
+- Fix Pypi markup.
+  [timo]
 
 
 2.0.1 (2018-03-03)
