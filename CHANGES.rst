@@ -1,5 +1,5 @@
 
-2.0.1 (unreleased)
+2.0.1 (2018-03-03)
 ------------------
 
 Bugfixes / Minor Changes:
