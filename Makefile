@@ -22,3 +22,7 @@ test:
 	@echo "Run Tests"
 	bin/pybot DjangoLibrary
 
+build-docs:
+	@echo "Build Keyword Documentation"
+	bin/python -m robot.libdoc DjangoLibrary docs/index.html
+
