@@ -1,4 +1,12 @@
 *.pyc
+.Python
+.vscode/
+bin/
+include/
+lib/
+man/
+pip-selfcheck.json
+selenium/
 .env/
 log.html
 mysite/db.sqlite3
