@@ -19,11 +19,10 @@ services:
   – postgresql
 install:
   - pip install -r requirements.txt
-  - pip install . --no-dependencies
   - pip install -q flake8
   - pip install -q psycopg2
   - pip install -q  --pre Django==$DJANGO_VERSION
-#  - python setup.py install
+  - python setup.py install
 before_script:
   - wget "http://chromedriver.storage.googleapis.com/2.35/chromedriver_linux64.zip"
   - unzip chromedriver_linux64.zip
