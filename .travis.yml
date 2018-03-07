@@ -18,8 +18,6 @@ env:
 services:
   – postgresql
 install:
-  # for Python 3 we need robotframework-selenium2library 1.8.x
-  - if [ $TRAVIS_PYTHON_VERSION == 3.5 ]; then pip install -U https://github.com/HelioGuilherme66/robotframework-selenium2library/archive/v1.8.0b3.tar.gz; fi
   - pip install -r requirements.txt
   - pip install . --no-dependencies
   - pip install -q flake8
@@ -39,5 +37,3 @@ script:
   - flake8 DjangoLibrary
   - py.test mysite
   - pybot DjangoLibrary/tests/
-after_script:
-  - firefox --version
