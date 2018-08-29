@@ -1,6 +1,6 @@
 robotframework==3.0.4
 robotframework-selenium2library==3.0.0
-robotframework-debuglibrary==0.4
+robotframework-debuglibrary==1.1.4
 Selenium==2.53.1
 factory_boy==2.8.1
 pytest==2.9.1
