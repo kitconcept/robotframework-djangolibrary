@@ -8,6 +8,6 @@ pytest-django==3.4.3
 psycopg2==2.7.5
 mock==2.0.0
 zest.releaser==6.15.2
-twine==1.11.0
+twine==1.12.1
 requests==2.19.1
 
