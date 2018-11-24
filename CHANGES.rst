@@ -8,6 +8,8 @@
 2.0.2 (2018-03-03)
 ------------------
 
+Bugfixes / Minor Changes:
+
 - Fix Pypi markup.
   [timo]
 
