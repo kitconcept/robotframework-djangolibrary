@@ -35,13 +35,13 @@ class DjangoLibrary:
     """DjangoLibrary is a web testing library to test Django with Robot
     Framework.
 
-    It uses Selenium2Library to run tests against a real browser instance.
+    It uses SeleniumLibrary to run tests against a real browser instance.
 
     *Before running tests*
 
     Prior to running test cases using DjangoLibrary, DjangoLibrary must be
-    imported (together with Selenium2Library) into your Robot test suite
-    (see `importing` section), and the Selenium2Library 'Open Browser' keyword
+    imported (together with SeleniumLibrary) into your Robot test suite
+    (see `importing` section), and the SeleniumLibrary 'Open Browser' keyword
     must be used to open a browser to the desired location.
     """
 
@@ -72,7 +72,7 @@ class DjangoLibrary:
         `db` is deprecated. Please don't use it.
 
         Examples:
-        | Library | Selenium2Library | timeout=15        | implicit_wait=0.5  | # Sets default timeout to 15 seconds and the default implicit_wait to 0.5 seconds. |  # noqa
+        | Library | SeleniumLibrary | timeout=15        | implicit_wait=0.5  | # Sets default timeout to 15 seconds and the default implicit_wait to 0.5 seconds. |  # noqa
         | Library | DjangoLibrary    | 127.0.0.1         | 55001              | path=mysite/mysite | manage=mysite/manage.py | settings=mysite.settings | db=mysite/db.sqlite3 | # Sets default hostname to 127.0.0.1 and the default port to 55001.                |  # noqa
         """
         self.host = host
@@ -241,7 +241,7 @@ user.save()""".format(
             safe_bytes("%s:%s" % (username, password))
         )
 
-        selenium2lib = BuiltIn().get_library_instance('Selenium2Library')
+        selenium2lib = BuiltIn().get_library_instance('SeleniumLibrary')
         # XXX: The 'Add Cookie' keywords does not work with Firefox, therefore
         # we have to add the cookie with js here. A bug has been filed:
         # https://github.com/rtomac/robotframework-selenium2library/issues/273
@@ -271,7 +271,7 @@ user.save()""".format(
     def autologin_logout(self):
         """Logout a user that has been logged in by the autologin_as keyword.
         """
-        selenium2lib = BuiltIn().get_library_instance('Selenium2Library')
+        selenium2lib = BuiltIn().get_library_instance('SeleniumLibrary')
         selenium2lib.execute_javascript(
             "document.cookie = 'autologin=;path=/;domain=localhost;';"
         )
