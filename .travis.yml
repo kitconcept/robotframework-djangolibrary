@@ -17,6 +17,8 @@ env:
   - DJANGO_VERSION=1.11.16 DB=Postgres
 services:
   – postgresql
+addons:
+  postgresql: '9.6'
 install:
   - pip install -r requirements.txt
   - pip install -q flake8
