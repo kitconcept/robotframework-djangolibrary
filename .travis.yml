@@ -2,7 +2,6 @@ language: python
 python:
   - 2.7
   - 3.6
-  - 3.7
 sudo: false
 dist: trusty
 addons:
@@ -12,10 +11,10 @@ addons:
     packages:
       - google-chrome-stable
 env:
-  - DJANGO_VERSION=1.8.18 DB=SQLite
-  - DJANGO_VERSION=1.11.10 DB=SQLite
-  - DJANGO_VERSION=1.8.18 DB=Postgres
-  - DJANGO_VERSION=1.11.10 DB=Postgres
+  - DJANGO_VERSION=1.8.19 DB=SQLite
+  - DJANGO_VERSION=1.11.16 DB=SQLite
+  - DJANGO_VERSION=1.8.19 DB=Postgres
+  - DJANGO_VERSION=1.11.16 DB=Postgres
 services:
   – postgresql
 install:
