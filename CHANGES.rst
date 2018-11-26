@@ -12,7 +12,7 @@ Breaking Changes:
 
 New Features:
 
-- Python 3.6 support.
+- Python 3.6 support (earlier versions most likely do support Python 3.6 as well, we just did not test it so far).
   [timo]
 
 
