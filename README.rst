@@ -27,7 +27,7 @@ A robot framework library for Django.
 Introduction
 ------------
 
-DjangoLibrary is a web testing library to test Django with Robot Framework. It uses Selenium2Library to run tests against a real browser instance.
+DjangoLibrary is a web testing library to test Django with Robot Framework. It uses SeleniumLibrary to run tests against a real browser instance.
 
 The library will automatically start and stop your Django instance while running the tests. It also comes with serveral autologin keywords that allow you to login different users during your tests, without the need to actually access the login page.
 
@@ -68,7 +68,7 @@ your MIDDLEWARE_CLASSES in yoursettings.py::
 First Robot Test
 ----------------
 
-In order to write your first robot test, make sure that you include Selenium2Library and DjangoLibrary. Create a test.robot file with the
+In order to write your first robot test, make sure that you include SeleniumLibrary and DjangoLibrary. Create a test.robot file with the
 following content::
 
   *** Variables ***
@@ -82,7 +82,7 @@ following content::
   *** Settings ***
 
   Documentation   Django Robot Tests
-  Library         Selenium2Library  timeout=10  implicit_wait=0
+  Library         SeleniumLibrary  timeout=10  implicit_wait=0
   Library         DjangoLibrary  ${HOSTNAME}  ${PORT}  path=mysite/mysite  manage=mysite/manage.py  settings=mysite.settings
   Suite Setup     Start Django and open Browser
   Suite Teardown  Stop Django and close Browser
@@ -164,7 +164,7 @@ each test::
 
   *** Settings ***
 
-  Library         Selenium2Library  timeout=10  implicit_wait=0
+  Library         SeleniumLibrary  timeout=10  implicit_wait=0
   Library         DjangoLibrary  ${HOSTNAME}  ${PORT}  path=mysite/mysite  manage=mysite/manage.py  settings=mysite.settings  db=mysite/db.sqlite3
   Suite Setup     Start Django and open Browser
   Suite Teardown  Stop Django and close Browser

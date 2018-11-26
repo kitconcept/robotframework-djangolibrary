@@ -3,8 +3,8 @@ python:
   - 2.7
   - 3.6
   - 3.7
+sudo: false
 dist: xenial
-sudo: required
 addons:
   apt:
     sources:
@@ -18,6 +18,8 @@ env:
   - DJANGO_VERSION=1.11.16 DB=Postgres
 services:
   – postgresql
+addons:
+  postgresql: '9.6'
 install:
   - pip install -r requirements.txt
   - pip install -q flake8
