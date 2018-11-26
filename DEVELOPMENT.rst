@@ -19,7 +19,7 @@ Start 'MySite' Django application that is used to run the tests against::
 Run DjangoLibrary tests::
 
   $ python setup.py develop
-  $ pybot DjangoLibrary/tests/autologin.robot
+  $ robot DjangoLibrary/tests/autologin.robot
 
 
 Generate Documentation
