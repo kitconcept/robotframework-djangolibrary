@@ -1,5 +1,5 @@
 
-2.0.3 (unreleased)
+3.0.0 (2018-11-26)
 ------------------
 
 Breaking Changes:
