@@ -10,6 +10,11 @@ Breaking Changes:
   for details.
   [timo]
 
+New Features:
+
+- Python 3.6 support.
+  [timo]
+
 
 2.0.2 (2018-03-03)
 ------------------
