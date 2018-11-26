@@ -37,4 +37,4 @@ before_script:
 script:
   - flake8 DjangoLibrary
   - py.test mysite
-  - pybot DjangoLibrary/tests/
+  - robot DjangoLibrary/tests/

@@ -134,9 +134,9 @@ If you are having issues, `please let us know <https://github.com/kitconcept/rob
 Run Tests
 ---------
 
-Then you can run the test with pybot::
+Then you can run the test with robot::
 
-  $ pybot test.robot
+  $ robot test.robot
 
 The output should look like this::
 
@@ -200,6 +200,6 @@ Run Unit/Integration-Tests::
 
 Run Acceptance Tests::
 
-  $ pybot DjangoLibrary/tests/
+  $ robot DjangoLibrary/tests/
 
 .. _`Robot Framework Django Library Keyword Documentation`: https://kitconcept.github.io/robotframework-djangolibrary/
