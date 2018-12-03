@@ -1,8 +1,25 @@
 
-2.0.3 (unreleased)
+3.0.1 (unreleased)
 ------------------
 
 - Nothing changed yet.
+
+
+3.0.0 (2018-11-26)
+------------------
+
+Breaking Changes:
+
+- Depend on SeleniumLibrary instead of Selenium2Library.
+  The name changed from Selenium2Library to SeleniumLibrary.
+  See https://github.com/robotframework/SeleniumLibrary/blob/master/docs/SeleniumLibrary-3.0.0.rst#name-changed-from-selenium2library-to-seleniumlibrary
+  for details.
+  [timo]
+
+New Features:
+
+- Python 3.6 support (earlier versions most likely do support Python 3.6 as well, we just did not test it so far).
+  [timo]
 
 
 2.0.2 (2018-03-03)

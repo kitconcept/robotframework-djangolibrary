@@ -20,7 +20,7 @@ build:
 
 test:
 	@echo "Run Tests"
-	bin/pybot DjangoLibrary
+	bin/robot DjangoLibrary
 
 build-docs:
 	@echo "Build Keyword Documentation"
