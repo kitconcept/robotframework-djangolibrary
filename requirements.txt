@@ -1,4 +1,4 @@
-robotframework==3.0.4
+robotframework==3.1
 robotframework-seleniumlibrary==3.2.0
 robotframework-debuglibrary==1.1.4
 Selenium==3.141.0
