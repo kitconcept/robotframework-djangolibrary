@@ -2,6 +2,8 @@
 3.0.1 (unreleased)
 ------------------
 
+New Features:
+
 - Python 3.7 support.
   [timo]
 
