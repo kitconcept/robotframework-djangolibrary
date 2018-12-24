@@ -3,7 +3,7 @@ robotframework-seleniumlibrary==3.3.0
 robotframework-debuglibrary==1.1.4
 Selenium==3.141.0
 factory_boy==2.11.1
-pytest==4.0.1
+pytest==4.0.2
 pytest-django==3.4.4
 psycopg2==2.7.6.1
 mock==2.0.0
