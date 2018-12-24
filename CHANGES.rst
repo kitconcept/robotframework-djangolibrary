@@ -2,7 +2,8 @@
 3.0.1 (unreleased)
 ------------------
 
-- Nothing changed yet.
+- Python 3.7 support.
+  [timo]
 
 
 3.0.0 (2018-11-26)
