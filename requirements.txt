@@ -4,7 +4,7 @@ robotframework-debuglibrary==1.1.4
 Selenium==3.141.0
 factory_boy==2.11.1
 pytest==4.1.0
-pytest-django==3.4.4
+pytest-django==3.4.5
 psycopg2==2.7.6.1
 mock==2.0.0
 zest.releaser==6.15.3
