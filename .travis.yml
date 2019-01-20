@@ -33,7 +33,7 @@ before_script:
   - unzip chromedriver_linux64.zip
   - sudo mv chromedriver /usr/local/bin
   - "export DISPLAY=:99.0"
-  - "sh -e /etc/init.d/xvfb start"
+  - "sh -e service xvfb start"
   - psql -c 'create database travis_ci_test;' -U postgres
   - psql -c 'create database robotframework;' -U postgres
   # - django-admin startproject mysite
