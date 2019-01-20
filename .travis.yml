@@ -4,7 +4,6 @@ python:
   - 3.6
   - 3.7
 sudo: false
-dist: xenial
 addons:
   apt:
     sources:
