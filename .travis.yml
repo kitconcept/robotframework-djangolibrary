@@ -20,6 +20,8 @@ services:
   – postgresql
 addons:
   postgresql: '9.6'
+before_install:
+  - sudo apt-get install -y xvfb
 install:
   - pip install -r requirements.txt
   - pip install -q flake8
