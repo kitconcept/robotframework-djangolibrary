@@ -3,7 +3,8 @@ python:
   - 2.7
   - 3.6
   - 3.7
-sudo: false
+dist: xenial
+sudo: required
 addons:
   apt:
     sources:
