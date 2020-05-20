@@ -2,7 +2,9 @@
 3.1.1 (unreleased)
 ------------------
 
-- Nothing changed yet.
+Bug Fixes:
+
+- Support models that have a primary key called something other than "id".
 
 
 3.1.0 (2018-12-24)
