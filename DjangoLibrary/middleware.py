@@ -18,7 +18,7 @@ def model_to_dict(model):
         if isinstance(value, OrderedDict):
             serialized_obj[key] = dict(value)
     serialized_obj = serialized_obj['fields']
-    serialized_obj['id'] = model.id
+    serialized_obj[model._meta.pk.name] = model.pk
     serialized_obj['pk'] = model.pk
     return serialized_obj
 
