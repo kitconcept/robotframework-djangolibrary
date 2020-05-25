@@ -14,11 +14,11 @@ addons:
       - google-chrome-stable
 env:
   - DJANGO_VERSION=1.8.19 DB=SQLite
-  - DJANGO_VERSION=1.8.19 DB=Postgres
   - DJANGO_VERSION=1.11.29 DB=SQLite
   - DJANGO_VERSION=2.0.13 DB=SQLite
   - DJANGO_VERSION=2.1.15 DB=SQLite
   - DJANGO_VERSION=3.0.6 DB=SQLite
+  - DJANGO_VERSION=1.8.19 DB=Postgres
   - DJANGO_VERSION=1.11.29 DB=Postgres
   - DJANGO_VERSION=2.0.13 DB=Postgres
   - DJANGO_VERSION=2.1.15 DB=Postgres
