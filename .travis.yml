@@ -3,6 +3,7 @@ python:
   - 2.7
   - 3.6
   - 3.7
+  - 3.8
 dist: xenial
 sudo: required
 addons:
@@ -13,9 +14,15 @@ addons:
       - google-chrome-stable
 env:
   - DJANGO_VERSION=1.8.19 DB=SQLite
-  - DJANGO_VERSION=1.11.17 DB=SQLite
   - DJANGO_VERSION=1.8.19 DB=Postgres
-  - DJANGO_VERSION=1.11.17 DB=Postgres
+  - DJANGO_VERSION=1.11.29 DB=SQLite
+  - DJANGO_VERSION=2.0.13 DB=SQLite
+  - DJANGO_VERSION=2.1.15 DB=SQLite
+  - DJANGO_VERSION=3.0.6 DB=SQLite
+  - DJANGO_VERSION=1.11.29 DB=Postgres
+  - DJANGO_VERSION=2.0.13 DB=Postgres
+  - DJANGO_VERSION=2.1.15 DB=Postgres
+  - DJANGO_VERSION=3.0.6 DB=Postgres
 services:
   – postgresql
 addons:
