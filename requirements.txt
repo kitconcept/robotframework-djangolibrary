@@ -10,4 +10,4 @@ mock==2.0.0
 zest.releaser==6.18.1
 twine==1.12.1
 requests==2.21.0
-urllib3==1.24.1
+urllib3==1.26.4
